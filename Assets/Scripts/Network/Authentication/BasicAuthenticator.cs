@@ -3,7 +3,7 @@ using FishNet.Authenticating;
 using FishNet.Connection;
 using FishNet.Managing;
 
-namespace Network.Lobby
+namespace Network.Authentication
 {
     public class BasicAuthenticator : Authenticator
     {
@@ -12,18 +12,8 @@ namespace Network.Lobby
         public override event Action<NetworkConnection, bool> OnAuthenticationResult;
 
         public string Password { private get; set; }
-        private int PlayerCount { get; set; }
-
-        private LobbyNetworkManager _lobbyNetworkManager;
-        private LobbyNetworkManager LobbyNetworkManager
-        {
-            get
-            {
-                if (_lobbyNetworkManager == null)
-                    _lobbyNetworkManager = FindObjectOfType<LobbyNetworkManager>();
-                return _lobbyNetworkManager;
-            }
-        }
+        public UI.Lobby.Lobby Lobby { private get; set; }
+        private int PlayerCount { get; set; } // TODO find a way to decrease this value on disconnection
 
         public override void InitializeOnce(NetworkManager networkManager)
         {
@@ -33,6 +23,13 @@ namespace Network.Lobby
             
             networkManager.ServerManager
                 .RegisterBroadcast<BasicCredentialsBroadcast>(OnServerCredentialsBroadcast, false);
+        }
+
+        public override void OnRemoteConnection(NetworkConnection connection)
+        {
+            if (PlayerCount == 2)
+                // TODO send some reason message
+                connection.Disconnect(true);
         }
 
         private void OnServerCredentialsBroadcast(
@@ -46,18 +43,18 @@ namespace Network.Lobby
             }
             
             bool isPasswordCorrect = basicCredentialsBroadcast.Password == Password;
-            bool isMaxPlayersCountExceeded = PlayerCount >= MaxPlayerCount;
-            bool isUsernameBusy = basicCredentialsBroadcast.Username == LobbyNetworkManager.Username1
-                                  || basicCredentialsBroadcast.Username == LobbyNetworkManager.Username2;
-            bool authenticated = isPasswordCorrect && !isMaxPlayersCountExceeded && !isUsernameBusy;
+            bool isMaxPlayersCountReached = PlayerCount == MaxPlayerCount;
+            bool isUsernameBusy = basicCredentialsBroadcast.Username == Lobby.Username1
+                                  || basicCredentialsBroadcast.Username == Lobby.Username2;
+            bool authenticated = isPasswordCorrect && !isMaxPlayersCountReached && !isUsernameBusy;
             
             if (authenticated)
             {
                 PlayerCount++;
                 if (PlayerCount == 1)
-                    LobbyNetworkManager.Username1 = basicCredentialsBroadcast.Username;
+                    Lobby.Username1 = basicCredentialsBroadcast.Username;
                 else
-                    LobbyNetworkManager.Username2 = basicCredentialsBroadcast.Username;
+                    Lobby.Username2 = basicCredentialsBroadcast.Username;
             }
             
             OnAuthenticationResult?.Invoke(connection, authenticated);

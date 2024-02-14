@@ -1,11 +1,14 @@
 ﻿using FishNet;
 using FishNet.Transporting;
+using Network.Authentication;
 using UnityEngine;
 
-namespace Network.Lobby
+namespace Network
 {
-    public class LobbyNetworkService : MonoBehaviour
+    public class NetworkSetupManager : MonoBehaviour
     {
+        [SerializeField] private UI.Lobby.Lobby lobbyPrefab;
+        
         private string _username;
         private string _password;
 
@@ -33,10 +36,21 @@ namespace Network.Lobby
         {
             if (stateArgs.ConnectionState == LocalConnectionState.Started)
             {
-                BasicAuthenticator authenticator = FindObjectOfType<BasicAuthenticator>();
-                authenticator.Password = _password;
+                UI.Lobby.Lobby lobby = Instantiate(lobbyPrefab);
+                InstanceFinder.ServerManager.Spawn(lobby.NetworkObject);
 
-                InstanceFinder.ClientManager.StartConnection();
+                BasicAuthenticator authenticator = InstanceFinder.ServerManager.GetAuthenticator() as BasicAuthenticator;
+                if (authenticator != null)
+                {
+                    authenticator.Password = _password;
+                    authenticator.Lobby = lobby;
+                
+                    InstanceFinder.ClientManager.StartConnection();
+                }
+                else
+                {
+                    Debug.Log("Authenticator is missing"); // TODO change behavior
+                }
             }
         }
         

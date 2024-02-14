@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4489d77032a81ef42b0067acf2737d4d, type: 3}
-  m_Name: New SinglePrefabObjects
+  m_Script: {fileID: 11500000, guid: c0011418c9d75434988a06b6df93b283, type: 3}
+  m_Name: ParrelSyncProjectSettings
   m_EditorClassIdentifier: 
-  _prefabs:
-  - {fileID: 3959884820327966340, guid: 4b28da21f35a93f40bc16eaa4f4bd84e, type: 3}
-  - {fileID: 4291186724117108123, guid: a062f9894dc768d4cbf11aa340df4163, type: 3}
+  m_OptionalSymbolicLinkFolders: []

@@ -1,6 +1,6 @@
 ﻿using FishNet.Broadcast;
 
-namespace Network.Lobby
+namespace Network.Authentication
 {
     public struct BasicCredentialsBroadcast : IBroadcast
     {

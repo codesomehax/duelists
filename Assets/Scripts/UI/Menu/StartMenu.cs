@@ -2,7 +2,7 @@
 
 namespace UI.Menu
 {
-    public class StartMenuManager : MonoBehaviour
+    public class StartMenu : MonoBehaviour
     {
         [SerializeField] private GameObject lanMenu;
         

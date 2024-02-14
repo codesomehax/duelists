@@ -1,24 +1,23 @@
 ﻿using FishNet;
-using Network.Lobby;
+using Network;
 using TMPro;
 using UnityEngine;
 
 namespace UI.Menu
 {
-    [RequireComponent(typeof(LobbyNetworkService))]
-    public class LanMenuManager : MonoBehaviour
+    [RequireComponent(typeof(NetworkSetupManager))]
+    public class LanMenu : MonoBehaviour
     {
         [SerializeField] private TMP_InputField usernameInputField;
         [SerializeField] private TMP_InputField ipAddressInputField;
         [SerializeField] private TMP_InputField passwordInputField;
-        [SerializeField] private StartMenuManager startMenuManager;
-        [SerializeField] private LobbyManager lobbyManager;
+        [SerializeField] private StartMenu startMenu;
         
-        private LobbyNetworkService _lobbyNetworkService;
+        private NetworkSetupManager _networkSetupManager;
         
         private void Awake()
         {
-            _lobbyNetworkService = GetComponent<LobbyNetworkService>();
+            _networkSetupManager = GetComponent<NetworkSetupManager>();
             InstanceFinder.ClientManager.OnAuthenticated += OnClientAuthenticated;
         }
 
@@ -27,7 +26,7 @@ namespace UI.Menu
             string username = usernameInputField.text;
             string password = passwordInputField.text;
 
-            _lobbyNetworkService.HostGame(username, password);
+            _networkSetupManager.HostGame(username, password);
         }
 
         public void JoinGame()
@@ -36,20 +35,19 @@ namespace UI.Menu
             string ipAddress = ipAddressInputField.text;
             string password = passwordInputField.text;
 
-            _lobbyNetworkService.JoinGame(username, ipAddress, password);
+            _networkSetupManager.JoinGame(username, ipAddress, password);
         }
 
         private void OnClientAuthenticated()
         {
             Debug.Log("Hello, I am authenticated");
             gameObject.SetActive(false);
-            lobbyManager.gameObject.SetActive(true);
         }
 
         public void GoBackToStartMenu()
         {
             gameObject.SetActive(false);
-            startMenuManager.gameObject.SetActive(true);
+            startMenu.gameObject.SetActive(true);
         }
     }
 }
