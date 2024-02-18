@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace UI.Lobby
 {
-    [RequireComponent(typeof(LobbyUIService))]
     public class Lobby : NetworkBehaviour
     {
         [SerializeField] private PlayerPanel playerPanelPrefab;
@@ -12,14 +11,7 @@ namespace UI.Lobby
         public string Username1 { get; set; }
         public string Username2 { get; set; }
 
-        private LobbyUIService _lobbyUIService;
-
         private const string BackgroundObjectName = "Background";
-
-        private void Awake()
-        {
-            _lobbyUIService = GetComponent<LobbyUIService>();
-        }
 
         public override void OnStartServer()
         {

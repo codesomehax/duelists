@@ -1,13 +1,14 @@
 ﻿using FishNet;
 using FishNet.Transporting;
 using Network.Authentication;
+using UI.Lobby;
 using UnityEngine;
 
 namespace Network
 {
     public class NetworkSetupManager : MonoBehaviour
     {
-        [SerializeField] private UI.Lobby.Lobby lobbyPrefab;
+        [SerializeField] private Lobby lobbyPrefab;
         
         private string _username;
         private string _password;
@@ -36,7 +37,7 @@ namespace Network
         {
             if (stateArgs.ConnectionState == LocalConnectionState.Started)
             {
-                UI.Lobby.Lobby lobby = Instantiate(lobbyPrefab);
+                Lobby lobby = Instantiate(lobbyPrefab);
                 InstanceFinder.ServerManager.Spawn(lobby.NetworkObject);
 
                 BasicAuthenticator authenticator = InstanceFinder.ServerManager.GetAuthenticator() as BasicAuthenticator;

@@ -559,7 +559,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6944805008159468794}
-  - component: {fileID: 6589711242476844812}
   - component: {fileID: 8324808049635909478}
   - component: {fileID: 4291186724117108123}
   m_Layer: 5
@@ -593,20 +592,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6589711242476844812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4071077647752038837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2eccb7f2fa64a3ba5822430558da3aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftPlayerPanelContainer: {fileID: 8661314181969680586}
-  rightPlayerPanelContainer: {fileID: 8439215068530899530}
 --- !u!114 &8324808049635909478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,8 +626,7 @@ MonoBehaviour:
   _networkBehaviours:
   - {fileID: 8324808049635909478}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
-  <ChildNetworkObjects>k__BackingField:
-  - {fileID: 0}
+  <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: -0, y: -0, z: -0, w: 1}

@@ -1,24 +1,29 @@
 ﻿using FishNet;
 using Network;
 using TMPro;
+using UI.Lobby.Settings;
 using UnityEngine;
 
 namespace UI.Menu
 {
-    [RequireComponent(typeof(NetworkSetupManager))]
     public class LanMenu : MonoBehaviour
     {
         [SerializeField] private TMP_InputField usernameInputField;
         [SerializeField] private TMP_InputField ipAddressInputField;
         [SerializeField] private TMP_InputField passwordInputField;
         [SerializeField] private StartMenu startMenu;
-        
-        private NetworkSetupManager _networkSetupManager;
+        [SerializeField] private LobbySettingsMenu lobbySettingsMenu;
+        [SerializeField] private NetworkSetupManager networkSetupManager;
         
         private void Awake()
         {
-            _networkSetupManager = GetComponent<NetworkSetupManager>();
             InstanceFinder.ClientManager.OnAuthenticated += OnClientAuthenticated;
+        }
+
+        public void GotoSettings()
+        {
+            gameObject.SetActive(false);
+            lobbySettingsMenu.gameObject.SetActive(true);
         }
 
         public void HostGame()
@@ -26,7 +31,7 @@ namespace UI.Menu
             string username = usernameInputField.text;
             string password = passwordInputField.text;
 
-            _networkSetupManager.HostGame(username, password);
+            networkSetupManager.HostGame(username, password);
         }
 
         public void JoinGame()
@@ -35,7 +40,7 @@ namespace UI.Menu
             string ipAddress = ipAddressInputField.text;
             string password = passwordInputField.text;
 
-            _networkSetupManager.JoinGame(username, ipAddress, password);
+            networkSetupManager.JoinGame(username, ipAddress, password);
         }
 
         private void OnClientAuthenticated()
