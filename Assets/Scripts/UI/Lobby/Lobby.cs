@@ -1,38 +1,28 @@
-﻿using FishNet.Connection;
+﻿using System;
+using FishNet.Connection;
 using FishNet.Object;
+using Network;
+using UI.Menu;
 using UnityEngine;
 
 namespace UI.Lobby
 {
     public class Lobby : NetworkBehaviour
     {
-        [SerializeField] private PlayerPanel playerPanelPrefab;
-        
-        public string Username1 { get; set; }
-        public string Username2 { get; set; }
-
         private const string BackgroundObjectName = "Background";
 
-        public override void OnStartServer()
-        {
-            SceneManager.OnClientLoadedStartScenes += SpawnPlayerPanel;
-        }
+        private LanMenu _lanMenu;
+        private NetworkSetupManager _networkSetupManager;
 
-        private void SpawnPlayerPanel(NetworkConnection connection, bool asServer)
+        private void Awake()
         {
-            if (!asServer) return;
-            
-            PlayerPanel playerPanel = Instantiate(playerPanelPrefab);
-
-            string username = connection.IsHost ? Username1 : Username2;
-            playerPanel.Username = username;
-            
-            Spawn(playerPanel.NetworkObject, connection);
-            SceneManager.AddOwnerToDefaultScene(playerPanel.NetworkObject);
+            _lanMenu = FindObjectOfType<LanMenu>(true);
+            _networkSetupManager = FindObjectOfType<NetworkSetupManager>();
         }
 
         public override void OnStartClient()
         {
+            Debug.Log($"is null {_lanMenu} and {_networkSetupManager}");
             SetupParentLocally();
         }
 
@@ -40,6 +30,25 @@ namespace UI.Lobby
         {
             Transform backgroundTransform = GameObject.Find(BackgroundObjectName).transform;
             transform.SetParent(backgroundTransform, false);
+        }
+
+        public void LeaveLobby()
+        {
+            if (IsServer)
+                _networkSetupManager.LeaveAsHost();
+            else
+                _networkSetupManager.LeaveAsClient();
+        }
+
+        // public override void OnStopServer()
+        // {
+        //     SceneManager.OnClientLoadedStartScenes -= SpawnPlayerPanel;
+        // }
+
+        public override void OnStopClient()
+        {
+            gameObject.SetActive(false);
+            _lanMenu.gameObject.SetActive(true);
         }
     }
 }

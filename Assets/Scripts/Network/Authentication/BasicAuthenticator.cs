@@ -2,6 +2,7 @@
 using FishNet.Authenticating;
 using FishNet.Connection;
 using FishNet.Managing;
+using FishNet.Transporting;
 
 namespace Network.Authentication
 {
@@ -11,9 +12,10 @@ namespace Network.Authentication
         
         public override event Action<NetworkConnection, bool> OnAuthenticationResult;
 
+        public string Username1 { get; private set; }
+        public string Username2 { get; private set; }
         public string Password { private get; set; }
-        public UI.Lobby.Lobby Lobby { private get; set; }
-        private int PlayerCount { get; set; } // TODO find a way to decrease this value on disconnection
+        public int PlayerCount { get; set; }
 
         public override void InitializeOnce(NetworkManager networkManager)
         {
@@ -23,6 +25,26 @@ namespace Network.Authentication
             
             networkManager.ServerManager
                 .RegisterBroadcast<BasicCredentialsBroadcast>(OnServerCredentialsBroadcast, false);
+            networkManager.ServerManager.OnServerConnectionState += ResetSettings;
+            networkManager.ServerManager.OnRemoteConnectionState += DecreasePlayerCount;
+        }
+
+        private void ResetSettings(ServerConnectionStateArgs stateArgs)
+        {
+            if (stateArgs.ConnectionState == LocalConnectionState.Stopped)
+            {
+                Username1 = Username2 = Password = null;
+                PlayerCount = 0;
+            }
+        }
+
+        private void DecreasePlayerCount(NetworkConnection connection, RemoteConnectionStateArgs stateArgs)
+        {
+            if (stateArgs.ConnectionState == RemoteConnectionState.Stopped && connection.Authenticated)
+            {
+                PlayerCount--;
+                Username2 = null;
+            }
         }
 
         public override void OnRemoteConnection(NetworkConnection connection)
@@ -44,17 +66,17 @@ namespace Network.Authentication
             
             bool isPasswordCorrect = basicCredentialsBroadcast.Password == Password;
             bool isMaxPlayersCountReached = PlayerCount == MaxPlayerCount;
-            bool isUsernameBusy = basicCredentialsBroadcast.Username == Lobby.Username1
-                                  || basicCredentialsBroadcast.Username == Lobby.Username2;
+            bool isUsernameBusy = basicCredentialsBroadcast.Username == Username1
+                                  || basicCredentialsBroadcast.Username == Username2;
             bool authenticated = isPasswordCorrect && !isMaxPlayersCountReached && !isUsernameBusy;
             
             if (authenticated)
             {
                 PlayerCount++;
                 if (PlayerCount == 1)
-                    Lobby.Username1 = basicCredentialsBroadcast.Username;
+                    Username1 = basicCredentialsBroadcast.Username;
                 else
-                    Lobby.Username2 = basicCredentialsBroadcast.Username;
+                    Username2 = basicCredentialsBroadcast.Username;
             }
             
             OnAuthenticationResult?.Invoke(connection, authenticated);

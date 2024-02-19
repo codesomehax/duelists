@@ -13696,6 +13696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyPrefab: {fileID: 8324808049635909478, guid: a062f9894dc768d4cbf11aa340df4163, type: 3}
+  playerPanelPrefab: {fileID: -6015566469398619846, guid: 4b28da21f35a93f40bc16eaa4f4bd84e, type: 3}
 --- !u!4 &2129658674
 Transform:
   m_ObjectHideFlags: 0

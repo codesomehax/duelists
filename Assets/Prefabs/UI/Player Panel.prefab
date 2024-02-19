@@ -1344,11 +1344,11 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField:
   - {fileID: 5214686694271441000}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 258263369383278603}
+  - {fileID: 6788696254348062714}
+  - {fileID: 1576967095756730404}
+  - {fileID: 777890775216714820}
+  - {fileID: 6431605116341635375}
   SerializedTransformProperties:
     Position: {x: -960, y: -540, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1872,6 +1872,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <IsNested>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ComponentIndex>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ParentNetworkObject>k__BackingField
+      value: 
+      objectReference: {fileID: 3959884820327966340}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.y
+      value: 90.70815
+      objectReference: {fileID: 0}
     - target: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1977,6 +1997,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+--- !u!114 &6788696254348062714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+  m_PrefabInstance: {fileID: 159302048201545003}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7440789085518496271 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
@@ -2038,6 +2069,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <IsNested>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ComponentIndex>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ParentNetworkObject>k__BackingField
+      value: 
+      objectReference: {fileID: 3959884820327966340}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.y
+      value: -90.92354
+      objectReference: {fileID: 0}
     - target: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2143,6 +2194,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+--- !u!114 &6431605116341635375 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+  m_PrefabInstance: {fileID: 378893763757192190}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6932468919407944922 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
@@ -2380,6 +2442,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <IsNested>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ComponentIndex>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ParentNetworkObject>k__BackingField
+      value: 
+      objectReference: {fileID: 3959884820327966340}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.y
+      value: 30.16426
+      objectReference: {fileID: 0}
     - target: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2485,6 +2567,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+--- !u!114 &1576967095756730404 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+  m_PrefabInstance: {fileID: 5323602411358800629}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3212814970531143121 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
@@ -2546,6 +2639,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <IsNested>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ComponentIndex>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ParentNetworkObject>k__BackingField
+      value: 
+      objectReference: {fileID: 3959884820327966340}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.y
+      value: -30.379654
+      objectReference: {fileID: 0}
     - target: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2651,6 +2764,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+--- !u!114 &777890775216714820 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+  m_PrefabInstance: {fileID: 6253283893800275605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3728745812441143729 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
@@ -2708,6 +2832,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <IsNested>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ComponentIndex>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: <ParentNetworkObject>k__BackingField
+      value: 
+      objectReference: {fileID: 3959884820327966340}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+      propertyPath: SerializedTransformProperties.Position.y
+      value: 151.25204
+      objectReference: {fileID: 0}
     - target: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2813,6 +2957,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+--- !u!114 &258263369383278603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6630353186546481873, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}
+  m_PrefabInstance: {fileID: 6887752271001453274}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4242738487596029438 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7311323646069610276, guid: f90ae4a990153a946ae87b035960bcd7, type: 3}

@@ -1,4 +1,5 @@
 ﻿using FishNet;
+using FishNet.Connection;
 using FishNet.Transporting;
 using Network.Authentication;
 using UI.Lobby;
@@ -9,6 +10,7 @@ namespace Network
     public class NetworkSetupManager : MonoBehaviour
     {
         [SerializeField] private Lobby lobbyPrefab;
+        [SerializeField] private PlayerPanel playerPanelPrefab;
         
         private string _username;
         private string _password;
@@ -16,10 +18,14 @@ namespace Network
         private const int MaxUsernameLength = 32;
         private const int MaxPasswordLength = 32;
 
+        private BasicAuthenticator _authenticator;
+
         private void Awake()
         {
+            _authenticator = InstanceFinder.ServerManager.GetAuthenticator() as BasicAuthenticator;
             InstanceFinder.ServerManager.OnServerConnectionState += SetupAuthenticatorAndConnectAsHost;
             InstanceFinder.ClientManager.OnClientConnectionState += Authenticate;
+            InstanceFinder.SceneManager.OnClientLoadedStartScenes += SpawnPlayerPanel;
         }
         
         public void HostGame(string username, string password)
@@ -40,18 +46,10 @@ namespace Network
                 Lobby lobby = Instantiate(lobbyPrefab);
                 InstanceFinder.ServerManager.Spawn(lobby.NetworkObject);
 
-                BasicAuthenticator authenticator = InstanceFinder.ServerManager.GetAuthenticator() as BasicAuthenticator;
-                if (authenticator != null)
-                {
-                    authenticator.Password = _password;
-                    authenticator.Lobby = lobby;
-                
-                    InstanceFinder.ClientManager.StartConnection();
-                }
-                else
-                {
-                    Debug.Log("Authenticator is missing"); // TODO change behavior
-                }
+                _authenticator.PlayerCount = 0;
+                _authenticator.Password = _password;
+            
+                InstanceFinder.ClientManager.StartConnection();
             }
         }
         
@@ -77,6 +75,30 @@ namespace Network
             _password = password;
 
             InstanceFinder.ClientManager.StartConnection(ipAddress);
+        }
+        
+        private void SpawnPlayerPanel(NetworkConnection connection, bool asServer)
+        {
+            if (!asServer) return;
+            
+            PlayerPanel playerPanel = Instantiate(playerPanelPrefab);
+
+            string username = connection.IsHost ? _authenticator.Username1 : _authenticator.Username2;
+            playerPanel.Username = username;
+            
+            InstanceFinder.ServerManager.Spawn(playerPanel.NetworkObject, connection);
+            InstanceFinder.SceneManager.AddOwnerToDefaultScene(playerPanel.NetworkObject);
+        }
+
+        public void LeaveAsHost()
+        {
+            LeaveAsClient();
+            InstanceFinder.ServerManager.StopConnection(true);
+        }
+
+        public void LeaveAsClient()
+        {
+            InstanceFinder.ClientManager.StopConnection();
         }
     }
 }
