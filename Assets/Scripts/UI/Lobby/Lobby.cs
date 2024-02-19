@@ -1,13 +1,11 @@
-﻿using System;
-using FishNet.Connection;
-using FishNet.Object;
+﻿using FishNet.Object;
 using Network;
 using UI.Menu;
 using UnityEngine;
 
 namespace UI.Lobby
 {
-    public class Lobby : NetworkBehaviour
+    public partial class Lobby : NetworkBehaviour
     {
         private const string BackgroundObjectName = "Background";
 
@@ -22,8 +20,9 @@ namespace UI.Lobby
 
         public override void OnStartClient()
         {
-            Debug.Log($"is null {_lanMenu} and {_networkSetupManager}");
             SetupParentLocally();
+            if (!IsHost)
+                DisableStartGameButton();
         }
 
         private void SetupParentLocally()
@@ -34,16 +33,11 @@ namespace UI.Lobby
 
         public void LeaveLobby()
         {
-            if (IsServer)
+            if (IsHost)
                 _networkSetupManager.LeaveAsHost();
             else
                 _networkSetupManager.LeaveAsClient();
         }
-
-        // public override void OnStopServer()
-        // {
-        //     SceneManager.OnClientLoadedStartScenes -= SpawnPlayerPanel;
-        // }
 
         public override void OnStopClient()
         {
