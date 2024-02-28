@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.65
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.65
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.65
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42.01949
+      value: 45.727
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000071525574
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.683582
+      value: 22.468
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_Name
-      value: Dwarf Idle
+      value: Guardian New
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: ca7dbbf0d0d15cd42b72f7262022ec92, type: 3}
       propertyPath: m_Controller

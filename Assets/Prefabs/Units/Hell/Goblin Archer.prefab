@@ -9,16 +9,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.147324
+      value: 46.466
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000023841858
+      value: 0.00000071525574
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.20261
+      value: 23.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_Name
-      value: goblin_d_shareyko
+      value: Goblin Archer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
