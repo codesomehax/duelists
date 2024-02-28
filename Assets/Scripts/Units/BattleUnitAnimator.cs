@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 namespace Units
@@ -6,54 +7,38 @@ namespace Units
     [RequireComponent(typeof(Animator))]
     public class BattleUnitAnimator : MonoBehaviour
     {
-        private static readonly int IdleAnimationSpeedParameter = Animator.StringToHash("Idle Speed");
-        private static readonly int RunAnimationSpeedParameter = Animator.StringToHash("Run Speed");
-        private static readonly int AttackMeleeAnimationSpeedParameter = Animator.StringToHash("Attack Melee Speed");
-        private static readonly int AttackRangedAnimationSpeedParameter = Animator.StringToHash("Attack Ranged Speed");
-        private static readonly int HurtAnimationSpeedParameter = Animator.StringToHash("Hurt Speed");
-        private static readonly int DeathAnimationSpeedParameter = Animator.StringToHash("Death Speed");
+        private static readonly IDictionary<AnimationType, int> AnimationSpeedOverridesHashes;
+
+        static BattleUnitAnimator()
+        {
+            AnimationSpeedOverridesHashes = new Dictionary<AnimationType, int>(6);
+            AnimationSpeedOverridesHashes[AnimationType.Idle] = Animator.StringToHash("Idle Speed");
+            AnimationSpeedOverridesHashes[AnimationType.Run] = Animator.StringToHash("Run Speed");
+            AnimationSpeedOverridesHashes[AnimationType.AttackMelee] = Animator.StringToHash("Attack Melee Speed");
+            AnimationSpeedOverridesHashes[AnimationType.AttackRanged] = Animator.StringToHash("Attack Ranged Speed");
+            AnimationSpeedOverridesHashes[AnimationType.Hurt] = Animator.StringToHash("Hurt Speed");
+            AnimationSpeedOverridesHashes[AnimationType.Death] = Animator.StringToHash("Death Speed");
+        }
         
-        [SerializeField] private AnimatorOverrideController animatorOverrideController;
-        [SerializeField] private float idleAnimationSpeed = 1f;
-        [SerializeField] private float runAnimationSpeed = 1f;
-        [SerializeField] private float attackMeleeAnimationSpeed = 1f;
-        [SerializeField] private float attackRangedAnimationSpeed = 1f;
-        [SerializeField] private float hurtAnimationSpeed = 1f;
-        [SerializeField] private float deathAnimationSpeed = 1f;
+        [SerializeField]
+        [SerializedDictionary(keyName: "Animation type", valueName: "Animator")]
+        private SerializedDictionary<AnimationType, Animator> customAnimators;
+
+        [SerializeField]
+        [SerializedDictionary(keyName: "Animation type", valueName: "Speed override")] 
+        private SerializedDictionary<AnimationType, int> speedOverrides;
 
         private Animator _animator;
-        
+        private Animator _animatorCache;
+
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            _animator.runtimeAnimatorController = animatorOverrideController;
-            _animator.SetFloat(IdleAnimationSpeedParameter, idleAnimationSpeed);
-            _animator.SetFloat(RunAnimationSpeedParameter, runAnimationSpeed);
-            _animator.SetFloat(AttackMeleeAnimationSpeedParameter, attackMeleeAnimationSpeed);
-            _animator.SetFloat(AttackRangedAnimationSpeedParameter, attackRangedAnimationSpeed);
-            _animator.SetFloat(HurtAnimationSpeedParameter, hurtAnimationSpeed);
-            _animator.SetFloat(DeathAnimationSpeedParameter, deathAnimationSpeed);
-        }
-        
-        public void Play(AnimationType animationType)
-        {
-            switch (animationType)
+            foreach (KeyValuePair<AnimationType, int> speedOverride in speedOverrides)
             {
-                case AnimationType.Idle:
-                    break;
-                case AnimationType.Run:
-                    break;
-                case AnimationType.AttackMelee:
-                    break;
-                case AnimationType.AttackRanged:
-                    break;
-                case AnimationType.Hurt:
-                    break;
-                case AnimationType.Death:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null);
+                _animator.SetFloat(AnimationSpeedOverridesHashes[speedOverride.Key], speedOverride.Value);
             }
+            _animatorCache = _animator;
         }
     }
 }
