@@ -12443,6 +12443,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lanMenu: {fileID: 1098389048}
+  generalSettingsPanel: {fileID: 497536509}
+  factionSettingsList:
+  - {fileID: 279044362}
+  - {fileID: 554558809}
 --- !u!1 &1923538560
 GameObject:
   m_ObjectHideFlags: 0

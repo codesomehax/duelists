@@ -10,26 +10,27 @@ namespace UI.Lobby
     {
         [SerializeField] private UnitType unitType;
 
-        [SyncVar(OnChange = nameof(SyncUnitName))]
-        [NonSerialized]
-        public string UnitName;
+        public event Action OnCountChangedServerside;
 
-        [SyncVar(OnChange = nameof(SyncCount))]
-        [NonSerialized]
-        private int _count;
+        [SyncVar] [NonSerialized] public int CostPerUnit;
+        [SyncVar(OnChange = nameof(SyncUnitName))] [NonSerialized] public string UnitName;
+        [SyncVar(OnChange = nameof(SyncCount))] [NonSerialized] private int _count;
+        [SyncVar(OnChange = nameof(SyncMaxCount))] [NonSerialized] private int _maxCount;
+        public int TotalCost => Count * CostPerUnit;
+        
         public int Count
         {
             get => _count;
-            set
+            private set
             {
                 if (value >= 0 && value <= MaxCount)
+                {
                     _count = value;
+                    OnCountChangedServerside?.Invoke();
+                }
             }
         }
-
-        [SyncVar(OnChange = nameof(SyncMaxCount))]
-        [NonSerialized]
-        private int _maxCount;
+        
         public int MaxCount
         {
             get => _maxCount;

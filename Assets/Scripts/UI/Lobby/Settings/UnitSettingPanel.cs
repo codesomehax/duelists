@@ -1,6 +1,4 @@
-﻿using System;
-using Factions;
-using TMPro;
+﻿using TMPro;
 using Units;
 using UnityEngine;
 
@@ -18,7 +16,8 @@ namespace UI.Lobby.Settings
             UnitName = unitInputData.Name,
             MaxCount = string.IsNullOrEmpty(unitMaxCountInputField.text)
                 ? unitInputData.DefaultMaxCount
-                : int.Parse(unitMaxCountInputField.text)
+                : int.Parse(unitMaxCountInputField.text),
+            Cost = unitInputData.Cost
         };
             
         private void Awake()
@@ -32,5 +31,6 @@ namespace UI.Lobby.Settings
     {
         public string UnitName;
         public int MaxCount;
+        public int Cost;
     }
 }

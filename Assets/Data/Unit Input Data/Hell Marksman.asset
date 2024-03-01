@@ -16,3 +16,4 @@ MonoBehaviour:
   unitType: 1
   faction: 1
   defaultMaxCount: 200
+  cost: 20

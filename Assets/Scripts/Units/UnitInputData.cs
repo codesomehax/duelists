@@ -10,10 +10,12 @@ namespace Units
         [SerializeField] private UnitType unitType;
         [SerializeField] private Faction faction;
         [SerializeField] private int defaultMaxCount;
+        [SerializeField] private int cost;
 
         public string Name => name;
         public UnitType UnitType => unitType;
         public Faction Faction => faction;
         public int DefaultMaxCount => defaultMaxCount;
+        public int Cost => cost;
     }
 }

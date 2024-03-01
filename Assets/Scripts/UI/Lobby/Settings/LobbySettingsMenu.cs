@@ -10,14 +10,14 @@ namespace UI.Lobby.Settings
     public class LobbySettingsMenu : MonoBehaviour
     {
         [SerializeField] private LanMenu lanMenu;
+        [SerializeField] private GeneralSettingsPanel generalSettingsPanel;
+        [SerializeField] private List<FactionSettingsPanel> factionSettingsList;
 
-        private FactionSettingsPanel[] _factionSettingsList;
-        private FactionSettingsPanel[] FactionSettingsList => _factionSettingsList ??= 
-            FindObjectsByType<FactionSettingsPanel>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        public int MaxGold => generalSettingsPanel.Gold;
 
         public IDictionary<UnitType, UnitSetting> GetSettingsByFaction(Faction faction)
         {
-            return FactionSettingsList
+            return factionSettingsList
                 .First(factionSettings => factionSettings.Faction == faction)
                 .GetAllSettings();
         }

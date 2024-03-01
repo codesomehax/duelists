@@ -2,8 +2,6 @@
 using Factions;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
-using TMPro;
-using UnityEngine;
 
 namespace UI.Lobby
 {
@@ -12,13 +10,13 @@ namespace UI.Lobby
         [SyncVar(OnChange = nameof(UpdateDropdownUI))]
         private Faction _faction = Faction.Heaven;
 
-        public event Action<Faction> OnFactionChanged;
+        public event Action<Faction> OnFactionChangedServerside;
 
         [ServerRpc]
         private void SetFactionServerRpc(Faction faction)
         {
             _faction = faction;
-            OnFactionChanged?.Invoke(faction);
+            OnFactionChangedServerside?.Invoke(faction);
         }
 
         public override void OnStartClient()

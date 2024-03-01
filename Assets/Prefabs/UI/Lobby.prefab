@@ -753,7 +753,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 4291186724117108123}
   _networkObjectCache: {fileID: 4291186724117108123}
-  playerPanelPrefab: {fileID: -6015566469398619846, guid: 4b28da21f35a93f40bc16eaa4f4bd84e, type: 3}
+  startGameButton: {fileID: 3667498663051218548}
 --- !u!114 &4291186724117108123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,7 +772,8 @@ MonoBehaviour:
   _networkBehaviours:
   - {fileID: 8324808049635909478}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
-  <ChildNetworkObjects>k__BackingField: []
+  <ChildNetworkObjects>k__BackingField:
+  - {fileID: 0}
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
