@@ -15,15 +15,24 @@ namespace UI.Lobby
         private const string LeftPlayerPanelContainerName = "Left Player Panel Container";
         private const string RightPlayerPanelContainerName = "Right Player Panel Container";
         private const Faction DefaultFaction = Faction.Heaven;
-        
-        [SerializeField] private FactionDropdown factionDropdown;
-        [SerializeField] private GoldCountIndicator goldCountIndicator;
 
         [SyncVar(OnChange = nameof(SetUsernameText))] [NonSerialized] public string Username;
+        public int Gold => goldCountIndicator.AvailableGold;
+        public Faction Faction => factionDropdown.Faction;
+        public IDictionary<UnitType, int> UnitCounts => GetUnitCounts();
 
+        [SerializeField] private FactionDropdown factionDropdown;
+        [SerializeField] private GoldCountIndicator goldCountIndicator;
         private UnitInputPanel[] _unitInputPanels;
         private LobbySettingsMenu _lobbySettingsMenu;
 
+        private IDictionary<UnitType, int> GetUnitCounts()
+        {
+            return _unitInputPanels.ToDictionary(
+                unitInputPanel => unitInputPanel.UnitType,
+                unitInputPanel => unitInputPanel.Count);
+        }
+        
         private void Awake()
         {
             _lobbySettingsMenu = FindObjectOfType<LobbySettingsMenu>(true);
