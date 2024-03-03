@@ -7,9 +7,9 @@ namespace UI.Lobby
     {
         [SerializeField] private Button startGameButton;
 
-        private void DisableStartGameButton()
+        private void DestroyStartGameButton()
         {
-            startGameButton.enabled = false;
+            Destroy(startGameButton.gameObject);
         }
     }
 }

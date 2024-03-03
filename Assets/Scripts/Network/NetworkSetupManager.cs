@@ -79,6 +79,7 @@ namespace Network
         
         private void SpawnPlayerPanel(NetworkConnection connection, bool asServer)
         {
+            Debug.Log("Bonjour");
             if (!asServer) return;
             
             PlayerPanel playerPanel = Instantiate(playerPanelPrefab);
@@ -99,6 +100,13 @@ namespace Network
         public void LeaveAsClient()
         {
             InstanceFinder.ClientManager.StopConnection();
+        }
+
+        private void OnDestroy()
+        {
+            InstanceFinder.ServerManager.OnServerConnectionState -= SetupAuthenticatorAndConnectAsHost;
+            InstanceFinder.ClientManager.OnClientConnectionState -= Authenticate;
+            InstanceFinder.SceneManager.OnClientLoadedStartScenes -= SpawnPlayerPanel;
         }
     }
 }
