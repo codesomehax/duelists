@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace Battle
@@ -6,52 +7,60 @@ namespace Battle
     [RequireComponent(typeof(Tilemap))]
     public class ActionTilemapManager : MonoBehaviour
     {
-        // Dimensions of the tilemap:
-        // Left bottom: (5, -5)
-        // Left top: (-4, -5)
-        // Right bottom: (5, 6)
-        // Right top: (-4, 6)
-        private static readonly Vector3Int LeftBottom = new(5, -5);
-        private static readonly Vector3Int LeftTop = new(-4, -5);
-        private static readonly Vector3Int RightBottom = new(5, 6);
-        private static readonly Vector3Int RightTop = new(-4, 6);
+        private static readonly Vector3Int LeftTop = new(-6, -5); // origin
+        private static readonly Vector3Int RightTop = new(5, -5);
+        private static readonly Vector3Int LeftBottom = new(-6, 4);
+        private static readonly Vector3Int RightBottom = new(5, 4);
 
-        private const int UpDirection = -1;
-        private const int RightDirection = 1;
-        
+        private const int RightDirectionX = 1; // to the right
+        private const int DownDirectionY = 1; // to the down
+
+        [SerializeField] private TileBase placeholderTile;
         [SerializeField] private TileBase greenTile;
+        [SerializeField] private TileBase redTile;
 
         private Tilemap _tilemap;
+
+        private bool _isPlacingUnits;
+        private bool _isHost;
 
         private void Awake()
         {
             _tilemap = GetComponent<Tilemap>();
         }
 
-        // private void SpawnBattleManager(ClientPresenceChangeEventArgs args)
-        // {
-        //     if (!args.QueueData.AsServer) return;
-        //
-        //     if (args.QueueData.SceneLoadData.Params.ServerParams[0] is not ArmyData[] armyDataCollection) return;
-        //     
-        //     int hostId = InstanceFinder.ClientManager.Connection.ClientId;
-        //     ArmyData hostArmyData = armyDataCollection.First(WithClientId(hostId));
-        //     ArmyData clientArmyData = armyDataCollection.First(WithDifferentClientId(hostId));
-        //     
-        //     BattleManager battleManager = Instantiate(battleManagerPrefab);
-        //     battleManager.HostArmyData = hostArmyData;
-        //     battleManager.ClientArmyData = clientArmyData;
-        //     InstanceFinder.ServerManager.Spawn(battleManager.NetworkObject);
-        // }
+        public void StartPlacingUnits(bool isHost)
+        {
+            _isPlacingUnits = true;
+            _isHost = isHost;
+            HighlightAvailablePlacingSpots(isHost);
+        }
 
-        // private static Func<ArmyData, bool> WithClientId(int clientId) 
-        //     => armyData => armyData.Connection.ClientId == clientId;
-        // private static Func<ArmyData, bool> WithDifferentClientId(int clientId) 
-        //     => armyData => armyData.Connection.ClientId != clientId;
+        private void HighlightAvailablePlacingSpots(bool isHost)
+        {
+            Vector3Int leftTop;
+            if (isHost)
+                leftTop = LeftTop;
+            else
+            {
+                leftTop = RightTop;
+                leftTop.x -= RightDirectionX;
+            }
+            Vector3Int size = new(2, 10, 1);
+            BoundsInt bounds = new BoundsInt(leftTop, size);
+            TileBase[] newTiles = _tilemap
+                .GetTilesBlock(bounds)
+                .Select(tile => tile == placeholderTile ? placeholderTile : greenTile)
+                .ToArray();
+            _tilemap.SetTilesBlock(bounds, newTiles);
+        }
 
-        // public void StartPlacingLocalArmy(ArmyData armyData)
-        // {
-        //     _tilemap.BoxFill(LeftBottom, greenTile, -10, -10, 10, 10);
-        // }
+        private void Update()
+        {
+            if (_isPlacingUnits) // and mouse button
+            {
+                
+            }
+        }
     }
 }

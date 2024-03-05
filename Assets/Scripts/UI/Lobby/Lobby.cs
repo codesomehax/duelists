@@ -117,7 +117,7 @@ namespace UI.Lobby
                 {
                     PlayerManager playerManager = Instantiate(playerManagerPrefab);
                     playerManager.Faction = army.Faction;
-                    playerManager.UnitCounts = army.UnitCounts;
+                    playerManager.UnitCounts.AddRange(army.UnitCounts);
                     InstanceFinder.ServerManager.Spawn(playerManager.NetworkObject, army.Connection);
                 }
             }
