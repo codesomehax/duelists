@@ -79,7 +79,6 @@ namespace Network
         
         private void SpawnPlayerPanel(NetworkConnection connection, bool asServer)
         {
-            Debug.Log("Bonjour");
             if (!asServer) return;
             
             PlayerPanel playerPanel = Instantiate(playerPanelPrefab);
