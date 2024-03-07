@@ -462,8 +462,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileTemplate: {fileID: 5218657460507582164, guid: cd6e3679a77cb6b458aa07c282b18316, type: 3}
   placeholderTileColor: {r: 1, g: 1, b: 1, a: 0.2509804}
-  greenTileColor: {r: 0, g: 1, b: 0, a: 0.2509804}
-  redTileColor: {r: 1, g: 0, b: 0, a: 0.2509804}
+  greenTileColor: {r: 0, g: 1, b: 0, a: 0.3764706}
+  redTileColor: {r: 1, g: 0, b: 0, a: 0.3764706}
+  yellowTileColor: {r: 1, g: 1, b: 0, a: 0.3764706}
 --- !u!1 &2090553487
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   m_MaxRayIntersections: 0
 --- !u!1 &2143989889
 GameObject:

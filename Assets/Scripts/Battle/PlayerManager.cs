@@ -25,7 +25,7 @@ namespace Battle
             SceneManager.OnLoadEnd -= PlaceUnits;
             _gridManager = FindObjectOfType<GridManager>();
             
-            // _gridManager.(IsHost);
+            _gridManager.HighlightAvailablePlacingSpots(IsHost);
         }
     }
 }
