@@ -460,9 +460,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a0afea79b34a618c36abbdbf799504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeholderTile: {fileID: 5218657460507582164, guid: cd6e3679a77cb6b458aa07c282b18316, type: 3}
-  greenTile: {fileID: 7118561216463095376, guid: e3040d81ab619334b92c728cc7acd76f, type: 3}
-  redTile: {fileID: 7212526069558154911, guid: c846505c8cf4b284faffaa2059a7c254, type: 3}
+  tileTemplate: {fileID: 5218657460507582164, guid: cd6e3679a77cb6b458aa07c282b18316, type: 3}
+  placeholderTileColor: {r: 1, g: 1, b: 1, a: 0.2509804}
+  greenTileColor: {r: 0, g: 1, b: 0, a: 0.2509804}
+  redTileColor: {r: 1, g: 0, b: 0, a: 0.2509804}
 --- !u!1 &2090553487
 GameObject:
   m_ObjectHideFlags: 0

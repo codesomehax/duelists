@@ -4,13 +4,19 @@ using UnityEngine.EventSystems;
 
 namespace Battle
 {
-    public class ActionTile3D : MonoBehaviour, IEquatable<ActionTile3D>
+    public class ActionTile3D : MonoBehaviour
     {
-        [SerializeField] private new string name;
-        
-        public bool Equals(ActionTile3D other)
+        public Color Color
         {
-            return other != null && name == other.name;
+            get => _meshRenderer.material.color;
+            set => _meshRenderer.material.color = value;
+        }
+
+        private MeshRenderer _meshRenderer;
+
+        private void Awake()
+        {
+            _meshRenderer = GetComponent<MeshRenderer>();
         }
     }
 }

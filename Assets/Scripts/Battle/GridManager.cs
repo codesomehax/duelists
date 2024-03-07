@@ -21,9 +21,10 @@ namespace Battle
         private const int DownDirectionY = 1; // to the down
 
         [Header("Tiles")] 
-        [SerializeField] private ActionTile3D placeholderTile;
-        [SerializeField] private ActionTile3D greenTile;
-        [SerializeField] private ActionTile3D redTile;
+        [SerializeField] private ActionTile3D tileTemplate;
+        [SerializeField] private Color placeholderTileColor;
+        [SerializeField] private Color greenTileColor;
+        [SerializeField] private Color redTileColor;
 
         private Grid _grid;
 
@@ -41,22 +42,14 @@ namespace Battle
         {
             BoundsInt bounds = new(LeftTop, BattlefieldSize);
             foreach (Vector3Int cellPosition in bounds.allPositionsWithin)
-                SetTile(cellPosition, placeholderTile);
-        }
-
-        private void SetTile(Vector3Int cellPosition, ActionTile3D tile)
-        {
-            if (_actionTilemap.TryGetValue(cellPosition, out ActionTile3D existingTile))
             {
-                Destroy(existingTile.gameObject);
-                _actionTilemap[cellPosition] = null;
+                Vector3 worldPosition = _grid.CellToWorld(cellPosition);
+                worldPosition.x += 0.5f;
+                worldPosition.z += 0.5f;
+                ActionTile3D newTile = Instantiate(tileTemplate, worldPosition, tileTemplate.transform.rotation);
+                newTile.Color = placeholderTileColor;
+                _actionTilemap[cellPosition] = newTile;
             }
-            
-            Vector3 worldPosition = _grid.CellToWorld(cellPosition);
-            worldPosition.x += 0.5f;
-            worldPosition.z += 0.5f;
-            ActionTile3D newTile = Instantiate(tile, worldPosition, tile.transform.rotation);
-            _actionTilemap[cellPosition] = newTile;
         }
 
         private void HighlightAvailablePlacingSpots(bool isHost)
@@ -65,9 +58,14 @@ namespace Battle
             foreach (Vector3Int cellPosition in availablePlacingSpots.allPositionsWithin)
             {
                 ActionTile3D currentTile = _actionTilemap[cellPosition];
-                if (currentTile.Equals(placeholderTile)) 
-                    SetTile(cellPosition, greenTile);
+                if (currentTile.Color.Equals(placeholderTileColor))
+                    SetTileColor(cellPosition, greenTileColor);
             }
+        }
+
+        private void SetTileColor(Vector3Int cellPosition, Color color)
+        {
+            _actionTilemap[cellPosition].Color = color;
         }
 
         private static BoundsInt GetAvailablePlacingSpots(bool isHost)
