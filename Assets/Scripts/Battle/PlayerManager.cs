@@ -12,7 +12,7 @@ namespace Battle
         [SyncVar] [NonSerialized] public Faction Faction;
         [SyncObject] public readonly SyncDictionary<UnitType, int> UnitCounts = new();
 
-        private ActionTilemapManager _actionTilemapManager;
+        private GridManager _gridManager;
 
         public override void OnStartClient()
         {
@@ -23,9 +23,9 @@ namespace Battle
         private void PlaceUnits(SceneLoadEndEventArgs args)
         {
             SceneManager.OnLoadEnd -= PlaceUnits;
-            _actionTilemapManager = FindObjectOfType<ActionTilemapManager>();
+            _gridManager = FindObjectOfType<GridManager>();
             
-            _actionTilemapManager.StartPlacingUnits(IsHost);
+            // _gridManager.(IsHost);
         }
     }
 }
