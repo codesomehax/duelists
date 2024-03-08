@@ -4,10 +4,11 @@ using UnityEngine.EventSystems;
 
 namespace Battle
 {
-    public class ActionTile3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class ActionTile3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         public static event Action<ActionTile3D> OnMouseEnter;
-        public static event Action<ActionTile3D> OnMouseExit; 
+        public static event Action<ActionTile3D> OnMouseExit;
+        public static event Action<ActionTile3D> OnClick;
 
         public Color Color
         {
@@ -18,6 +19,8 @@ namespace Battle
                 _meshRenderer.material.color = value;
             }
         }
+
+        public bool Occupied { get; set; }
 
         private MeshRenderer _meshRenderer;
 
@@ -42,6 +45,11 @@ namespace Battle
         public void OnPointerExit(PointerEventData eventData)
         {
             OnMouseExit?.Invoke(this);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            OnClick?.Invoke(this);
         }
     }
 }
