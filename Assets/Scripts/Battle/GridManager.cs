@@ -19,10 +19,6 @@ namespace Battle
 
         [Header("Tiles")] 
         [SerializeField] private ActionTile3D tileTemplate;
-        [SerializeField] private Color placeholderTileColor;
-        [SerializeField] private Color greenTileColor;
-        [SerializeField] private Color redTileColor;
-        [SerializeField] private Color yellowTileColor;
 
         private Grid _grid;
 
@@ -33,19 +29,7 @@ namespace Battle
             _grid = GetComponent<Grid>();
             
             PlacePlaceholderTiles();
-            
-            ActionTile3D.OnMouseEnter += HighlightTile;
-            ActionTile3D.OnMouseExit += UnhighlightTile;
-        }
-
-        private void HighlightTile(ActionTile3D actionTile)
-        {
-            actionTile.Color = yellowTileColor;
-        }
-
-        private void UnhighlightTile(ActionTile3D actionTile)
-        {
-            actionTile.SetPreviousColor();
+            HighlightAvailablePlacingSpots(true);
         }
 
         private void PlacePlaceholderTiles()
@@ -57,7 +41,7 @@ namespace Battle
                 worldPosition.x += 0.5f;
                 worldPosition.z += 0.5f;
                 ActionTile3D newTile = Instantiate(tileTemplate, worldPosition, tileTemplate.transform.rotation);
-                newTile.Color = placeholderTileColor;
+                newTile.ActionTileState = ActionTileState.Placeholder;
                 _actionTilemap[cellPosition] = newTile;
             }
         }
@@ -68,8 +52,8 @@ namespace Battle
             foreach (Vector3Int cellPosition in availablePlacingSpots.allPositionsWithin)
             {
                 ActionTile3D currentTile = _actionTilemap[cellPosition];
-                if (currentTile.Color.Equals(placeholderTileColor))
-                    _actionTilemap[cellPosition].Color = greenTileColor;
+                if (currentTile.ActionTileState == ActionTileState.Placeholder)
+                    _actionTilemap[cellPosition].ActionTileState = ActionTileState.Available;
             }
         }
 
@@ -85,12 +69,6 @@ namespace Battle
             }
             Vector3Int size = new(2, 10, 1);
             return new BoundsInt(leftTop, size);
-        }
-
-        private void OnDestroy()
-        {
-            ActionTile3D.OnMouseEnter -= HighlightTile;
-            ActionTile3D.OnMouseExit -= UnhighlightTile;
         }
     }
 }

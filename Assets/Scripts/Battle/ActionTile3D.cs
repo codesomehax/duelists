@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,50 +7,61 @@ namespace Battle
 {
     public class ActionTile3D : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        public static event Action<ActionTile3D> OnMouseEnter;
-        public static event Action<ActionTile3D> OnMouseExit;
         public static event Action<ActionTile3D> OnClick;
 
-        public Color Color
+        [SerializeField] private Color placeholderColor;
+        [SerializeField] private Color availableColor;
+        [SerializeField] private Color attackColor;
+        [SerializeField] private Color highlightColor;
+
+        private readonly IDictionary<ActionTileState, Color> _colors = new Dictionary<ActionTileState, Color>(4);
+
+        private ActionTileState _actionTileState;
+        private ActionTileState _previousActionTileState;
+        public ActionTileState ActionTileState
         {
-            get => _meshRenderer.material.color;
+            get => _actionTileState;
             set
             {
-                _previousColor = Color;
-                _meshRenderer.material.color = value;
+                _meshRenderer.material.color = _colors[value];
+                _actionTileState = value;
             }
         }
-
         public bool Occupied { get; set; }
 
         private MeshRenderer _meshRenderer;
-
-        private Color _previousColor;
-
+        
         private void Awake()
         {
             _meshRenderer = GetComponent<MeshRenderer>();
-            _previousColor = Color;
-        }
-
-        public void SetPreviousColor()
-        {
-            Color = _previousColor;
+            _colors[ActionTileState.Placeholder] = placeholderColor;
+            _colors[ActionTileState.Available] = availableColor;
+            _colors[ActionTileState.Attack] = attackColor;
+            _colors[ActionTileState.Highlighted] = highlightColor;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            OnMouseEnter?.Invoke(this);
+            _previousActionTileState = ActionTileState;
+            ActionTileState = ActionTileState.Highlighted;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            OnMouseExit?.Invoke(this);
+            ActionTileState = _previousActionTileState;
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
             OnClick?.Invoke(this);
         }
+    }
+
+    public enum ActionTileState
+    {
+        Placeholder,
+        Available,
+        Attack,
+        Highlighted
     }
 }
