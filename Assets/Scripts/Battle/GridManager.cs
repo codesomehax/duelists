@@ -29,7 +29,6 @@ namespace Battle
             _grid = GetComponent<Grid>();
             
             PlacePlaceholderTiles();
-            HighlightAvailablePlacingSpots(true);
         }
 
         private void PlacePlaceholderTiles()

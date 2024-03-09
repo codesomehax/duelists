@@ -117,7 +117,7 @@ namespace UI.Lobby
                 {
                     PlayerManager playerManager = Instantiate(playerManagerPrefab);
                     playerManager.Faction = army.Faction;
-                    playerManager.UnitCounts.AddRange(army.UnitCounts);
+                    playerManager.AvailableUnits.AddRange(army.UnitCounts);
                     InstanceFinder.ServerManager.Spawn(playerManager.NetworkObject, army.Connection);
                 }
             }
@@ -133,12 +133,5 @@ namespace UI.Lobby
             playerPanels.Any(playerPanel => playerPanel.Gold < 0);
         private static bool AnyNoUnitsSelected(PlayerPanel[] playerPanels) =>
             playerPanels.Any(playerPanel => playerPanel.UnitCounts.Values.Sum() == 0);
-    }
-
-    public struct Army
-    {
-        public NetworkConnection Connection;
-        public Faction Faction;
-        public Dictionary<UnitType, int> UnitCounts;
     }
 }

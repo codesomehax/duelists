@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Battle.UI;
 using Factions;
 using FishNet.Managing.Scened;
 using FishNet.Object;
@@ -10,10 +13,15 @@ namespace Battle
     public class PlayerManager : NetworkBehaviour
     {
         [SyncVar] [NonSerialized] public Faction Faction;
-        [SyncObject] public readonly SyncDictionary<UnitType, int> UnitCounts = new();
-        [SyncVar] [NonSerialized] private PlayerState _playerState = PlayerState.PlacingUnits;
+        [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
 
+        #region RuntimeDependencies
         private GridManager _gridManager;
+        private BattleUIManager _battleUIManager;
+        private UnitsManager _unitsManager;
+        #endregion
+        
+        private PlayerState _playerState = PlayerState.PlacingUnits;
 
         public override void OnStartClient()
         {
@@ -25,6 +33,8 @@ namespace Battle
         {
             SceneManager.OnLoadEnd -= Setup;
             _gridManager = FindObjectOfType<GridManager>();
+            _battleUIManager = FindObjectOfType<BattleUIManager>();
+            _unitsManager = FindObjectOfType<UnitsManager>();
             ActionTile3D.OnClick += TileSelected;
             
             _gridManager.HighlightAvailablePlacingSpots(IsHost);
@@ -49,7 +59,15 @@ namespace Battle
         private void TryPlaceUnit(ActionTile3D actionTile)
         {
             if (actionTile.Occupied) return;
-            
+            ICollection<BattleUnitData> units = _unitsManager.GetUnitsByFaction(Faction);
+            IDictionary<UnitType, PlaceUnitData> placeUnitData = units.ToDictionary(
+                unit => unit.UnitType,
+                unit => new PlaceUnitData()
+                {
+                    Name = unit.Name,
+                    Count = AvailableUnits[unit.UnitType]
+                });
+            _battleUIManager.ShowPlaceUnitWindow(placeUnitData);
         }
 
         private void OnDestroy()
