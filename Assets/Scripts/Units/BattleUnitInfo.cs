@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Units
 {
     [CreateAssetMenu(fileName = "BattleUnitData", menuName = "Duelists/BattleUnitData", order = 1)]
-    public class BattleUnitData : ScriptableObject
+    public class BattleUnitInfo : ScriptableObject
     {
         [SerializeField] private new string name;
         [SerializeField] private Faction faction;

@@ -28,6 +28,7 @@ namespace Battle
             }
         }
         public bool Occupied { get; set; }
+        public Vector3Int GridPosition { get; set; }
 
         private MeshRenderer _meshRenderer;
         

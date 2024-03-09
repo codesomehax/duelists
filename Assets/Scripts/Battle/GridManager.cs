@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Units;
 using UnityEngine;
 
 namespace Battle
@@ -16,6 +17,9 @@ namespace Battle
         private static readonly Vector3Int RightBottom = new(11, 9);
         private const int RightDirectionX = 1; // to the right
         private const int DownDirectionY = 1; // to the down
+        
+        private static readonly Quaternion HostUnitsRotation = Quaternion.identity;
+        private static readonly Quaternion ClientUnitsRotation = Quaternion.Euler(0, 180, 0);
 
         [Header("Tiles")] 
         [SerializeField] private ActionTile3D tileTemplate;
@@ -41,6 +45,7 @@ namespace Battle
                 worldPosition.z += 0.5f;
                 ActionTile3D newTile = Instantiate(tileTemplate, worldPosition, tileTemplate.transform.rotation);
                 newTile.ActionTileState = ActionTileState.Placeholder;
+                newTile.GridPosition = cellPosition;
                 _actionTilemap[cellPosition] = newTile;
             }
         }
@@ -68,6 +73,15 @@ namespace Battle
             }
             Vector3Int size = new(2, 10, 1);
             return new BoundsInt(leftTop, size);
+        }
+
+        public void PlaceUnit(BattleUnit unit, Vector3Int actionTileCellPosition, bool ownerIsHost)
+        {
+            Quaternion rotation = ownerIsHost ? HostUnitsRotation : ClientUnitsRotation;
+            Transform unitTransform = unit.transform;
+            ActionTile3D actionTile3D = _actionTilemap[actionTileCellPosition];
+            unitTransform.position = actionTile3D.transform.position;
+            unitTransform.rotation = rotation;
         }
     }
 }

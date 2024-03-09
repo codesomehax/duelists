@@ -269,7 +269,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 48146495}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 954155742}
+        m_TargetAssemblyTypeName: Battle.UI.PlaceUnitWindow, Assembly-CSharp
+        m_MethodName: Accept
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &48146495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b18747bff2b4522a0c402c9158b865c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  units:
+  unitInfos:
   - {fileID: 11400000, guid: 82dd0001b8a5a7845b09f7084ddf38d6, type: 2}
   - {fileID: 11400000, guid: f9e9f03ad2ebb5748926f9431ef99873, type: 2}
   - {fileID: 11400000, guid: e3ff18b1e092ae642812ab081e3989a4, type: 2}
@@ -348,6 +360,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fd013a2ab49e465408784890af15e03e, type: 2}
   - {fileID: 11400000, guid: ce67cc525a1569044b114b8b129950f6, type: 2}
   - {fileID: 11400000, guid: 2ebd9c24ca3c08a428755ee9d3d7920f, type: 2}
+  units:
+  - {fileID: 3243523436937969613, guid: 36a99c5c8a461d8469aaa295065be912, type: 3}
 --- !u!4 &131006907
 Transform:
   m_ObjectHideFlags: 0
@@ -1035,7 +1049,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 527342485}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 954155742}
+        m_TargetAssemblyTypeName: Battle.UI.PlaceUnitWindow, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &527342485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1932,6 +1958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a23137ae4b4f1b84d460af684f3f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitCountInputField: {fileID: 1353669267}
 --- !u!1 &988610187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,6 +1970,8 @@ GameObject:
   - component: {fileID: 988610188}
   - component: {fileID: 988610190}
   - component: {fileID: 988610189}
+  - component: {fileID: 988610192}
+  - component: {fileID: 988610191}
   m_Layer: 5
   m_Name: Defenders Unit Count
   m_TagString: Untagged
@@ -2012,6 +2041,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &988610191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988610187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &988610192
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988610187}
+  m_CullTransparentMesh: 1
 --- !u!1 &1002866979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,6 +2914,8 @@ GameObject:
   - component: {fileID: 1687214743}
   - component: {fileID: 1687214745}
   - component: {fileID: 1687214744}
+  - component: {fileID: 1687214747}
+  - component: {fileID: 1687214746}
   m_Layer: 5
   m_Name: Assault Units Unit Count
   m_TagString: Untagged
@@ -2916,6 +2985,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1687214746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687214742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1687214747
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687214742}
+  m_CullTransparentMesh: 1
 --- !u!1 &1696148813
 GameObject:
   m_ObjectHideFlags: 0
@@ -3311,6 +3418,8 @@ GameObject:
   - component: {fileID: 1937853278}
   - component: {fileID: 1937853280}
   - component: {fileID: 1937853279}
+  - component: {fileID: 1937853282}
+  - component: {fileID: 1937853281}
   m_Layer: 5
   m_Name: Marksmen Unit Count
   m_TagString: Untagged
@@ -3380,6 +3489,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1937853281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937853277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1937853282
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937853277}
+  m_CullTransparentMesh: 1
 --- !u!1 &1938365364
 GameObject:
   m_ObjectHideFlags: 0
@@ -3469,6 +3616,8 @@ GameObject:
   - component: {fileID: 1988855344}
   - component: {fileID: 1988855345}
   - component: {fileID: 1988855346}
+  - component: {fileID: 1988855348}
+  - component: {fileID: 1988855347}
   m_Layer: 5
   m_Name: Infantry Unit Count
   m_TagString: Untagged
@@ -3538,6 +3687,44 @@ MonoBehaviour:
   unitType: 0
   unitNameText: {fileID: 1002866981}
   unitCountText: {fileID: 2027086183}
+--- !u!114 &1988855347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988855343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1988855348
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988855343}
+  m_CullTransparentMesh: 1
 --- !u!1 &2027086181
 GameObject:
   m_ObjectHideFlags: 0
@@ -3741,6 +3928,8 @@ GameObject:
   - component: {fileID: 2059051811}
   - component: {fileID: 2059051813}
   - component: {fileID: 2059051812}
+  - component: {fileID: 2059051815}
+  - component: {fileID: 2059051814}
   m_Layer: 5
   m_Name: Mages Unit Count
   m_TagString: Untagged
@@ -3810,6 +3999,44 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2059051814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059051810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2059051815
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059051810}
+  m_CullTransparentMesh: 1
 --- !u!1 &2062345435
 GameObject:
   m_ObjectHideFlags: 0

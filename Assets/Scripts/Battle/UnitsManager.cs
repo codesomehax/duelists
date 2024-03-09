@@ -9,15 +9,19 @@ namespace Battle
 {
     public class UnitsManager : MonoBehaviour
     {
-        [SerializeField] private List<BattleUnitData> units;
+        [SerializeField] private List<BattleUnitInfo> unitInfos;
+        [SerializeField] private List<BattleUnit> units;
 
-        public IReadOnlyCollection<BattleUnitData> Units => units.AsReadOnly();
-
-        public ICollection<BattleUnitData> GetUnitsByFaction(Faction faction)
+        public ICollection<BattleUnitInfo> GetUnitsInfoByFaction(Faction faction)
         {
-            return units
+            return unitInfos
                 .Where(unit => unit.Faction == faction)
                 .AsReadOnlyCollection();
+        }
+
+        public BattleUnit GetUnitPrefabByFactionAndType(Faction faction, UnitType unitType)
+        {
+            return units.First(unit => unit.Faction == faction && unit.UnitType == unitType);
         }
     }
 }

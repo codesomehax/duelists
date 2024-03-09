@@ -6,8 +6,10 @@ using UnityEngine;
 
 namespace Battle.UI
 {
-    public class PlaceUnitWindow : MonoBehaviour
+    public partial class PlaceUnitWindow : MonoBehaviour
     {
+        public event Action<UnitType, int> OnUnitPlaced;
+        
         private PlaceUnitOption[] _unitTypeOptions;
         
         public void Activate(IDictionary<UnitType, PlaceUnitData> placeUnitDataDictionary)
@@ -16,8 +18,8 @@ namespace Battle.UI
             foreach (PlaceUnitOption unitTypeOption in _unitTypeOptions)
             {
                 PlaceUnitData placeUnitData = placeUnitDataDictionary[unitTypeOption.UnitType];
-                unitTypeOption.SetUnitNameText(placeUnitData.Name);
-                unitTypeOption.SetUnitCountText(placeUnitData.Count);
+                unitTypeOption.UnitName = placeUnitData.Name;
+                unitTypeOption.AvailableCount = placeUnitData.Count;
             }
         }
 
