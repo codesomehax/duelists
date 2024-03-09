@@ -13,6 +13,8 @@ namespace Battle
 {
     public class PlayerManager : NetworkBehaviour
     {
+        private const int MaxBattleUnitsCount = 10;
+        
         [SyncVar] [NonSerialized] public Faction Faction;
         [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
         [SyncObject(ReadPermissions = ReadPermission.OwnerOnly)] 
@@ -70,7 +72,9 @@ namespace Battle
         {
             // Checks if it is occupied
             // TODO add remove functionality if matches
+            if (actionTile.ActionTileState != ActionTileState.Available) return;
             if (_battleUnits.Any(battleUnit => battleUnit.CellPosition == actionTile.CellPosition)) return;
+            if (_battleUnits.Count == MaxBattleUnitsCount) return;
             
             ICollection<BattleUnitInfo> units = _unitsManager.GetUnitsInfoByFaction(Faction);
             Debug.Log(units);
@@ -102,6 +106,12 @@ namespace Battle
             if (unitCount <= 0)
             {
                 Debug.LogWarning("Unit cannot be placed: provided unitCount is too low");
+                return;
+            }
+
+            if (_battleUnits.Count == MaxBattleUnitsCount)
+            {
+                Debug.LogWarning($"Unit cannot be placed: already {MaxBattleUnitsCount} units present");
                 return;
             }
 
