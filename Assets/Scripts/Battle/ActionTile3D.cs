@@ -27,8 +27,7 @@ namespace Battle
                 _actionTileState = value;
             }
         }
-        public bool Occupied { get; set; }
-        public Vector3Int GridPosition { get; set; }
+        public Vector3Int CellPosition { get; set; }
 
         private MeshRenderer _meshRenderer;
         

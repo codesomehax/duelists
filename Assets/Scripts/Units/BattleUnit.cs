@@ -9,6 +9,7 @@ namespace Units
     public class BattleUnit : NetworkBehaviour
     {
         [SyncVar] [NonSerialized] public int Count;
+        [SyncVar] [NonSerialized] public Vector3Int CellPosition;
 
         public string Name => battleUnitInfo.Name;
         public Faction Faction => battleUnitInfo.Faction;

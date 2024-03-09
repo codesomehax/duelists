@@ -45,7 +45,7 @@ namespace Battle
                 worldPosition.z += 0.5f;
                 ActionTile3D newTile = Instantiate(tileTemplate, worldPosition, tileTemplate.transform.rotation);
                 newTile.ActionTileState = ActionTileState.Placeholder;
-                newTile.GridPosition = cellPosition;
+                newTile.CellPosition = cellPosition;
                 _actionTilemap[cellPosition] = newTile;
             }
         }
@@ -82,6 +82,11 @@ namespace Battle
             ActionTile3D actionTile3D = _actionTilemap[actionTileCellPosition];
             unitTransform.position = actionTile3D.transform.position;
             unitTransform.rotation = rotation;
+        }
+
+        public void MarkTileAsOccupied(Vector3Int cellPosition)
+        {
+            _actionTilemap[cellPosition].ActionTileState = ActionTileState.Placeholder;
         }
     }
 }

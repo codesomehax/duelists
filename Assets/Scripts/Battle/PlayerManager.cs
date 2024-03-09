@@ -15,6 +15,8 @@ namespace Battle
     {
         [SyncVar] [NonSerialized] public Faction Faction;
         [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
+        [SyncObject(ReadPermissions = ReadPermission.OwnerOnly)] 
+        private readonly SyncHashSet<BattleUnit> _battleUnits = new();
 
         #region RuntimeDependencies
         private GridManager _gridManager;
@@ -39,19 +41,57 @@ namespace Battle
 
             if (args.QueueData.AsServer) return;
             
+            if (IsOwner)
+                _battleUnits.OnChange += MarkTileAsOccupied;
+
             ActionTile3D.OnClick += TileSelected;
             _battleUIManager.OnUnitPlaced += PlaceUnit;
             
             _gridManager.HighlightAvailablePlacingSpots(IsHost);
         }
 
+        private void TileSelected(ActionTile3D actionTile)
+        {
+            switch (_playerState)
+            {
+                case PlayerState.PlacingUnits:
+                    StartPlacingUnit(actionTile);
+                    break;
+                case PlayerState.Waiting:
+                    break;
+                case PlayerState.Acting:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void StartPlacingUnit(ActionTile3D actionTile)
+        {
+            // Checks if it is occupied
+            // TODO add remove functionality if matches
+            if (_battleUnits.Any(battleUnit => battleUnit.CellPosition == actionTile.CellPosition)) return;
+            
+            ICollection<BattleUnitInfo> units = _unitsManager.GetUnitsInfoByFaction(Faction);
+            Debug.Log(units);
+            IDictionary<UnitType, PlaceUnitData> placeUnitData = units.ToDictionary(
+                unit => unit.UnitType,
+                unit => new PlaceUnitData()
+                {
+                    Name = unit.Name,
+                    Count = AvailableUnits[unit.UnitType]
+                });
+            _currentActionTile = actionTile;
+            _battleUIManager.ShowPlaceUnitWindow(placeUnitData);
+        }
+
         private void PlaceUnit(UnitType unitType, int unitCount)
         {
-            PlaceUnitServerRpc(_currentActionTile.GridPosition, unitType, unitCount);
+            PlaceUnitServerRpc(_currentActionTile.CellPosition, unitType, unitCount);
         }
 
         [ServerRpc]
-        private void PlaceUnitServerRpc(Vector3Int actionTileCellPosition, UnitType unitType, int unitCount)
+        private void PlaceUnitServerRpc(Vector3Int cellPosition, UnitType unitType, int unitCount)
         {
             if (unitCount > AvailableUnits[unitType])
             {
@@ -65,45 +105,30 @@ namespace Battle
                 return;
             }
 
-            AvailableUnits[unitType] -= unitCount;
+            if (_battleUnits.Any(battleUnit => battleUnit.CellPosition == cellPosition))
+            {
+                Debug.LogWarning("Unit cannot be placed: the tile is already occupied");
+                return;
+            }
+
             
             BattleUnit unitPrefab = _unitsManager.GetUnitPrefabByFactionAndType(Faction, unitType);
             BattleUnit unit = Instantiate(unitPrefab);
             unit.Count = unitCount;
-            _gridManager.PlaceUnit(unit, actionTileCellPosition, Owner.IsHost);
+            unit.CellPosition = cellPosition;
+            _gridManager.PlaceUnit(unit, cellPosition, Owner.IsHost);
             Spawn(unit.NetworkObject, Owner);
+            
+            _battleUnits.Add(unit);
+            AvailableUnits[unitType] -= unitCount;
         }
 
-        private void TileSelected(ActionTile3D actionTile)
+        private void MarkTileAsOccupied(SyncHashSetOperation operation, BattleUnit battleUnit, bool asServer)
         {
-            switch (_playerState)
+            if (operation == SyncHashSetOperation.Add && !asServer && IsOwner)
             {
-                case PlayerState.PlacingUnits:
-                    TryPlaceUnit(actionTile);
-                    break;
-                case PlayerState.Waiting:
-                    break;
-                case PlayerState.Acting:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                _gridManager.MarkTileAsOccupied(battleUnit.CellPosition);
             }
-        }
-
-        private void TryPlaceUnit(ActionTile3D actionTile)
-        {
-            if (actionTile.Occupied) return; // TODO add functionality to remove
-            ICollection<BattleUnitInfo> units = _unitsManager.GetUnitsInfoByFaction(Faction);
-            Debug.Log(units);
-            IDictionary<UnitType, PlaceUnitData> placeUnitData = units.ToDictionary(
-                unit => unit.UnitType,
-                unit => new PlaceUnitData()
-                {
-                    Name = unit.Name,
-                    Count = AvailableUnits[unit.UnitType]
-                });
-            _currentActionTile = actionTile;
-            _battleUIManager.ShowPlaceUnitWindow(placeUnitData);
         }
 
         private void OnDestroy()
