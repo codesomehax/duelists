@@ -31,6 +31,9 @@ namespace Battle
         private void Awake()
         {
             _grid = GetComponent<Grid>();
+
+            BattleUnit.OnUnitPlaced += MarkTileAsOccupied;
+            BattleUnit.OnUnitRemoval += MarkTileAsAvailable;
             
             PlacePlaceholderTiles();
         }
@@ -84,9 +87,20 @@ namespace Battle
             unitTransform.rotation = rotation;
         }
 
-        public void MarkTileAsOccupied(Vector3Int cellPosition)
+        private void MarkTileAsOccupied(Vector3Int cellPosition)
         {
             _actionTilemap[cellPosition].ActionTileState = ActionTileState.Placeholder;
+        }
+
+        private void MarkTileAsAvailable(Vector3Int cellPosition)
+        {
+            _actionTilemap[cellPosition].ActionTileState = ActionTileState.Available;
+        }
+
+        private void OnDestroy()
+        {
+            BattleUnit.OnUnitPlaced -= MarkTileAsOccupied;
+            BattleUnit.OnUnitRemoval -= MarkTileAsAvailable;
         }
     }
 }

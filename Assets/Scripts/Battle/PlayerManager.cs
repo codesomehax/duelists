@@ -7,6 +7,7 @@ using FishNet.Managing.Scened;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Units;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Battle
@@ -17,8 +18,11 @@ namespace Battle
         
         [SyncVar] [NonSerialized] public Faction Faction;
         [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
-        [SyncObject(ReadPermissions = ReadPermission.OwnerOnly)] 
-        private readonly SyncHashSet<BattleUnit> _battleUnits = new();
+
+        private ICollection<BattleUnit> BattleUnitsCollection => Owner.Objects
+            .Select(nob => nob != null ? nob.gameObject.GetComponent<BattleUnit>() : null)
+            .NotNull()
+            .AsReadOnlyCollection();
 
         #region RuntimeDependencies
         private GridManager _gridManager;
@@ -42,12 +46,10 @@ namespace Battle
             _unitsManager = FindObjectOfType<UnitsManager>();
 
             if (args.QueueData.AsServer) return;
-            
-            if (IsOwner)
-                _battleUnits.OnChange += MarkTileAsOccupied;
 
             ActionTile3D.OnClick += TileSelected;
             _battleUIManager.OnUnitPlaced += PlaceUnit;
+            _battleUIManager.OnUnitRemovalConfirmed += RemoveUnit;
             
             _gridManager.HighlightAvailablePlacingSpots(IsHost);
         }
@@ -72,9 +74,24 @@ namespace Battle
         {
             // Checks if it is occupied
             // TODO add remove functionality if matches
-            if (actionTile.ActionTileState != ActionTileState.Available) return;
-            if (_battleUnits.Any(battleUnit => battleUnit.CellPosition == actionTile.CellPosition)) return;
-            if (_battleUnits.Count == MaxBattleUnitsCount) return;
+            if (BattleUnitsCollection.Any(battleUnit => battleUnit.CellPosition == actionTile.CellPosition))
+            {
+                _currentActionTile = actionTile;
+                _battleUIManager.AskRemoveUnit();
+                return;
+            }
+
+            if (BattleUnitsCollection.Count == MaxBattleUnitsCount)
+            {
+                Debug.Log($"No more than {MaxBattleUnitsCount} units can be placed");
+                return;
+            }
+
+            if (actionTile.ActionTileState != ActionTileState.Available)
+            {
+                Debug.Log("This tile is already occupied");
+                return;
+            }
             
             ICollection<BattleUnitInfo> units = _unitsManager.GetUnitsInfoByFaction(Faction);
             Debug.Log(units);
@@ -109,13 +126,13 @@ namespace Battle
                 return;
             }
 
-            if (_battleUnits.Count == MaxBattleUnitsCount)
+            if (BattleUnitsCollection.Count == MaxBattleUnitsCount)
             {
                 Debug.LogWarning($"Unit cannot be placed: already {MaxBattleUnitsCount} units present");
                 return;
             }
 
-            if (_battleUnits.Any(battleUnit => battleUnit.CellPosition == cellPosition))
+            if (BattleUnitsCollection.Any(battleUnit => battleUnit.CellPosition == cellPosition))
             {
                 Debug.LogWarning("Unit cannot be placed: the tile is already occupied");
                 return;
@@ -128,17 +145,20 @@ namespace Battle
             unit.CellPosition = cellPosition;
             _gridManager.PlaceUnit(unit, cellPosition, Owner.IsHost);
             Spawn(unit.NetworkObject, Owner);
-            
-            _battleUnits.Add(unit);
             AvailableUnits[unitType] -= unitCount;
         }
 
-        private void MarkTileAsOccupied(SyncHashSetOperation operation, BattleUnit battleUnit, bool asServer)
+        private void RemoveUnit()
         {
-            if (operation == SyncHashSetOperation.Add && !asServer && IsOwner)
-            {
-                _gridManager.MarkTileAsOccupied(battleUnit.CellPosition);
-            }
+            RemoveUnitServerRpc(_currentActionTile.CellPosition);
+        }
+
+        [ServerRpc]
+        private void RemoveUnitServerRpc(Vector3Int cellPosition)
+        {
+            BattleUnit battleUnit = BattleUnitsCollection.First(unit => unit.CellPosition == cellPosition);
+            AvailableUnits[battleUnit.UnitType] += battleUnit.Count;
+            Despawn(battleUnit.NetworkObject);
         }
 
         private void OnDestroy()

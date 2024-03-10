@@ -17,13 +17,12 @@ namespace Battle
         private readonly IDictionary<ActionTileState, Color> _colors = new Dictionary<ActionTileState, Color>(4);
 
         private ActionTileState _actionTileState;
-        private ActionTileState _previousActionTileState;
         public ActionTileState ActionTileState
         {
             get => _actionTileState;
             set
             {
-                _meshRenderer.material.color = _colors[value];
+                SetColorByState(value);
                 _actionTileState = value;
             }
         }
@@ -37,18 +36,26 @@ namespace Battle
             _colors[ActionTileState.Placeholder] = placeholderColor;
             _colors[ActionTileState.Available] = availableColor;
             _colors[ActionTileState.Attack] = attackColor;
-            _colors[ActionTileState.Highlighted] = highlightColor;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _previousActionTileState = ActionTileState;
-            ActionTileState = ActionTileState.Highlighted;
+            Highlight();
+        }
+
+        private void Highlight()
+        {
+            _meshRenderer.material.color = highlightColor;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            ActionTileState = _previousActionTileState;
+            SetColorByState(ActionTileState);
+        }
+
+        private void SetColorByState(ActionTileState state)
+        {
+            _meshRenderer.material.color = _colors[state];
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -61,7 +68,6 @@ namespace Battle
     {
         Placeholder,
         Available,
-        Attack,
-        Highlighted
+        Attack
     }
 }
