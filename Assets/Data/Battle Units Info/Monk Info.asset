@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0ab56ce9fe3494f91eded1ad4cf09f1, type: 3}
-  m_Name: Demon Data
+  m_Name: Monk Info
   m_EditorClassIdentifier: 
-  name: Demon
-  faction: 1
-  unitType: 0
+  name: Monk
+  faction: 0
+  unitType: 3
