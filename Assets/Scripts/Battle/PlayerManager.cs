@@ -45,7 +45,7 @@ namespace Battle
             _battleUIManager = FindObjectOfType<BattleUIManager>();
             _unitsManager = FindObjectOfType<UnitsManager>();
 
-            if (args.QueueData.AsServer) return;
+            if (args.QueueData.AsServer || !IsOwner) return;
 
             ActionTile3D.OnClick += TileSelected;
             _battleUIManager.OnUnitPlaced += PlaceUnit;
