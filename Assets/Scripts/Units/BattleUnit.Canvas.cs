@@ -7,8 +7,6 @@ namespace Units
 {
     public partial class BattleUnit
     {
-        private static readonly Vector3 HostCanvasPosition = new(0.3f, 0.5f, -0.3f);
-        private static readonly Vector3 ClientCanvasPosition = new(-0.3f, 0.5f, -0.3f);
         private static readonly Color HostImageColor = new(140f / 255f, 22f / 255f, 22f / 255f);
         private static readonly Color ClientImageColor = new(22f / 255f, 22f / 255f, 140f / 255f);
         
@@ -21,7 +19,12 @@ namespace Units
 
         private void AwakeCanvas()
         {
-            canvasTransform.localPosition = IsHost ? HostCanvasPosition : ClientCanvasPosition;
+            if (!IsHost)
+            {
+                Vector3 localPosition = canvasTransform.localPosition;
+                canvasTransform.localPosition = new Vector3(-localPosition.x, localPosition.y, localPosition.z);
+            }
+            
             image.color = IsHost ? HostImageColor : ClientImageColor;
         }
 
