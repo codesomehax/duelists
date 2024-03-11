@@ -20,7 +20,6 @@ namespace UI.Lobby
         private const string BackgroundObjectName = "Background";
         private const string BattlefieldSceneName = "Forest";
 
-        [SerializeField] private BattleManager battleManagerPrefab;
         [SerializeField] private PlayerManager playerManagerPrefab;
         
         private LanMenu _lanMenu;
@@ -100,16 +99,13 @@ namespace UI.Lobby
                     ServerParams = new object[] { armies }
                 }
             };
-            SceneManager.OnLoadEnd += SpawnBattleManager;
+            SceneManager.OnLoadEnd += SpawnPlayerManagers;
             SceneManager.LoadConnectionScenes(connections, sld);
         }
 
-        private void SpawnBattleManager(SceneLoadEndEventArgs args)
+        private void SpawnPlayerManagers(SceneLoadEndEventArgs args)
         {
-            InstanceFinder.SceneManager.OnLoadEnd -= SpawnBattleManager;
-            
-            BattleManager battleManager = Instantiate(battleManagerPrefab);
-            InstanceFinder.ServerManager.Spawn(battleManager.NetworkObject);
+            InstanceFinder.SceneManager.OnLoadEnd -= SpawnPlayerManagers;
 
             if (args.QueueData.SceneLoadData.Params.ServerParams[0] is Army[] armies)
             {

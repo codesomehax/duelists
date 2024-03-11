@@ -1,5 +1,6 @@
 ﻿using System;
 using Factions;
+using FishNet.Component.Observing;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UnityEngine;
@@ -33,8 +34,10 @@ namespace Units
 
         public override void OnStartClient()
         {
-            StartCanvasClient();
-            OnUnitPlaced?.Invoke(CellPosition);
+            Debug.Log($"Running as {LocalConnection} with Owner of unit {Owner}");
+            ShowCanvas();
+            if (IsOwner)
+                OnUnitPlaced?.Invoke(CellPosition);
         }
 
         private void Update()

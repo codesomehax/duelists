@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using FishNet.Connection;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,15 +23,16 @@ namespace Units
                 canvasTransform.gameObject.SetActive(false);
         }
 
-        private void StartCanvasClient()
+        private void ShowCanvas()
         {
-            if (!IsHost)
+            canvasTransform.gameObject.SetActive(true);
+            bool isOwnerHost = Owner.IsHost || (!IsHost && Owner != LocalConnection);
+            if (!isOwnerHost)
             {
                 Vector3 localPosition = canvasTransform.localPosition;
                 canvasTransform.localPosition = new Vector3(-localPosition.x, localPosition.y, localPosition.z);
             }
-            
-            image.color = IsHost ? HostImageColor : ClientImageColor;
+            image.color = isOwnerHost ? HostImageColor : ClientImageColor;
         }
 
         // TODO make the size of the image constant regardless of the distance to the camera
