@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +16,13 @@ namespace Units
         
         private Transform _cameraTransform;
 
-        private void AwakeCanvas()
+        private void DisableClientCanvasOnHost()
+        {
+            if (!Owner.IsHost)
+                canvasTransform.gameObject.SetActive(false);
+        }
+
+        private void StartCanvasClient()
         {
             if (!IsHost)
             {

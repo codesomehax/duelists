@@ -26,9 +26,14 @@ namespace Units
             _cameraTransform = FindObjectOfType<Camera>().transform;
         }
 
+        public override void OnStartServer()
+        {
+            DisableClientCanvasOnHost();
+        }
+
         public override void OnStartClient()
         {
-            AwakeCanvas();
+            StartCanvasClient();
             OnUnitPlaced?.Invoke(CellPosition);
         }
 
