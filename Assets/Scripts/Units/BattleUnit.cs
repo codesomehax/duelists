@@ -1,6 +1,5 @@
 ﻿using System;
 using Factions;
-using FishNet.Component.Observing;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UnityEngine;
