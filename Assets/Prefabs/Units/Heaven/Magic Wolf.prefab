@@ -398,6 +398,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2992965379326918855}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -380421889102231352}
   m_SourcePrefab: {fileID: 100100000, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
 --- !u!1 &7131220049809230795 stripped
 GameObject:
@@ -539,6 +542,27 @@ MonoBehaviour:
   _updateHostVisibility: 1
   _observerConditions:
   - {fileID: 11400000, guid: bcf92670d91dbb74dad77c56b9b8712e, type: 2}
+--- !u!114 &-380421889102231352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7131220049809230795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 3819234206476839523}
+  _networkObjectCache: {fileID: 0}
+  IgnoredParameters: []
+  _animator: {fileID: 4427946957533613839}
+  _smoothFloats: 1
+  _interpolation: 2
+  _clientAuthoritative: 1
+  _sendToOwner: 0
 --- !u!4 &7619244455160549745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
