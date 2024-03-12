@@ -322,15 +322,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.92271
+      value: 38.519333
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000009536743
+      value: 0.0000014305115
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.1846
+      value: 40.42961
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       propertyPath: m_LocalRotation.w
@@ -373,6 +373,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3471709062130051659}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 7527870967481271300}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       insertIndex: -1
@@ -389,6 +392,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
   m_PrefabInstance: {fileID: 2154689719869942446}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &3471709062130051659
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236122871223654399}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
+  m_Controller: {fileID: 9100000, guid: 5ab92f4a7cd602140badf90c353e9f6e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &7527870967481271300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,7 +453,7 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 36.92271, y: -0.0000009536743, z: 36.1846}
+    Position: {x: 38.519333, y: 0.0000014305115, z: 40.42961}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1, y: 1, z: 1}
   _isNetworked: 1
