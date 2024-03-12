@@ -334,15 +334,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f97253b297a78c74383e0731d74a51cb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.04916
+      value: 38.532806
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f97253b297a78c74383e0731d74a51cb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000011920929
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f97253b297a78c74383e0731d74a51cb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.504196
+      value: 40.147972
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f97253b297a78c74383e0731d74a51cb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -375,6 +375,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f97253b297a78c74383e0731d74a51cb, type: 3}
       propertyPath: m_Name
       value: Demon
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f97253b297a78c74383e0731d74a51cb, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a5bcb8ec558ec7f4c94002d1d3639e63, type: 2}
+    - target: {fileID: 5866666021909216657, guid: f97253b297a78c74383e0731d74a51cb, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -441,7 +449,7 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 40.04916, y: 0.0000011920929, z: 35.504196}
+    Position: {x: 38.532806, y: -0.0000009536743, z: 40.147972}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 8, y: 8, z: 8}
   _isNetworked: 1
@@ -451,7 +459,7 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 0
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 0
+  _scenePathHash: 3991001759
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 15474163869864990745
 --- !u!114 &691251908850167655
