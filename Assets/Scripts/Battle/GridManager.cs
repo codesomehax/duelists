@@ -17,9 +17,6 @@ namespace Battle
         private static readonly Vector3Int RightBottom = new(11, 9);
         private const int RightDirectionX = 1; // to the right
         private const int DownDirectionY = 1; // to the down
-        
-        private static readonly Quaternion HostUnitsRotation = Quaternion.identity;
-        private static readonly Quaternion ClientUnitsRotation = Quaternion.Euler(0, 180, 0);
 
         [Header("Tiles")] 
         [SerializeField] private ActionTile3D tileTemplate;
@@ -78,13 +75,10 @@ namespace Battle
             return new BoundsInt(leftTop, size);
         }
 
-        public void PlaceUnit(BattleUnit unit, Vector3Int actionTileCellPosition, bool ownerIsHost)
+        public void PlaceUnit(BattleUnit unit, Vector3Int actionTileCellPosition)
         {
-            Quaternion rotation = ownerIsHost ? HostUnitsRotation : ClientUnitsRotation;
-            Transform unitTransform = unit.transform;
             ActionTile3D actionTile3D = _actionTilemap[actionTileCellPosition];
-            unitTransform.position = actionTile3D.transform.position;
-            unitTransform.rotation = rotation;
+            unit.transform.position = actionTile3D.transform.position;
         }
 
         private void MarkTileAsOccupied(Vector3Int cellPosition)

@@ -84,7 +84,7 @@ namespace Battle
             BattleUnit unit = Instantiate(unitPrefab);
             unit.Count = unitCount;
             unit.CellPosition = cellPosition;
-            _gridManager.PlaceUnit(unit, cellPosition, Owner.IsHost);
+            _gridManager.PlaceUnit(unit, cellPosition);
             Spawn(unit.NetworkObject, Owner);
             AvailableUnits[unitType] -= unitCount;
         }

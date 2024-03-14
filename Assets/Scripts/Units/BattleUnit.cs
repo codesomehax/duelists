@@ -52,6 +52,7 @@ namespace Units
         public override void OnStartServer()
         {
             DisableClientCanvasOnHost();
+            RotateTowardsEnemy();
             IncrementTimelinePosition();
         }
 

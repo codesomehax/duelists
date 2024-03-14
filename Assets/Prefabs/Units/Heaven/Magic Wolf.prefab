@@ -697,10 +697,10 @@ PrefabInstance:
       addedObject: {fileID: 3819234206476839523}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7879039373043534534}
+      addedObject: {fileID: 2992965379326918855}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2992965379326918855}
+      addedObject: {fileID: 8030315002928815612}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: -380421889102231352}
@@ -718,7 +718,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7131220049809230795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c7ae2d62a2a20c041b6eb940f69debd3, type: 2}
   m_CullingMode: 0
@@ -768,7 +768,7 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
   - {fileID: 6971656840913213363}
-  - {fileID: 7879039373043534534}
+  - {fileID: 8030315002928815612}
   - {fileID: -380421889102231352}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
@@ -783,10 +783,26 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 7
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 3991001759
+  _scenePathHash: 0
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 18074277984681742075
---- !u!114 &7879039373043534534
+--- !u!114 &2992965379326918855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7131220049809230795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71fd7f855ec523429999fc4e14a1928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _overrideType: 1
+  _updateHostVisibility: 1
+  _observerConditions:
+  - {fileID: 11400000, guid: bcf92670d91dbb74dad77c56b9b8712e, type: 2}
+--- !u!114 &8030315002928815612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -831,22 +847,6 @@ MonoBehaviour:
     X: 0
     Y: 0
     Z: 0
---- !u!114 &2992965379326918855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7131220049809230795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c71fd7f855ec523429999fc4e14a1928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _overrideType: 1
-  _updateHostVisibility: 1
-  _observerConditions:
-  - {fileID: 11400000, guid: bcf92670d91dbb74dad77c56b9b8712e, type: 2}
 --- !u!114 &-380421889102231352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,7 +854,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7131220049809230795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
   m_Name: 
