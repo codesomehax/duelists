@@ -29,6 +29,7 @@ namespace Battle
         private void ReadyButtonHandler()
         {
             _playerUI.ReadyButton.gameObject.SetActive(false);
+            _gridManager.SetAllToPlaceholder();
             SetPlayerReadyServerRpc();
         }
     }

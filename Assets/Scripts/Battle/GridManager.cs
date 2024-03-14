@@ -7,16 +7,17 @@ namespace Battle
     [RequireComponent(typeof(Grid))]
     public class GridManager : MonoBehaviour
     {
-        private const int BattlefieldWidth = 10;
-        private const int BattlefieldLength = 12;
-        private static readonly Vector3Int BattlefieldSize = new(BattlefieldLength, BattlefieldWidth, 1); 
-        
         private static readonly Vector3Int LeftTop = new(0, 0); // origin
         private static readonly Vector3Int RightTop = new(11, 0);
         private static readonly Vector3Int LeftBottom = new(0, 9);
         private static readonly Vector3Int RightBottom = new(11, 9);
         private const int RightDirectionX = 1; // to the right
         private const int DownDirectionY = 1; // to the down
+        
+        private const int BattlefieldWidth = 10;
+        private const int BattlefieldLength = 12;
+        private static readonly Vector3Int BattlefieldSize = new(BattlefieldLength, BattlefieldWidth, 1);
+        private static readonly BoundsInt BattlefieldBounds = new(LeftTop, BattlefieldSize);
 
         [Header("Tiles")] 
         [SerializeField] private ActionTile3D tileTemplate;
@@ -37,8 +38,7 @@ namespace Battle
 
         private void PlacePlaceholderTiles()
         {
-            BoundsInt bounds = new(LeftTop, BattlefieldSize);
-            foreach (Vector3Int cellPosition in bounds.allPositionsWithin)
+            foreach (Vector3Int cellPosition in BattlefieldBounds.allPositionsWithin)
             {
                 Vector3 worldPosition = _grid.CellToWorld(cellPosition);
                 worldPosition.x += 0.5f;
@@ -73,6 +73,12 @@ namespace Battle
             }
             Vector3Int size = new(2, 10, 1);
             return new BoundsInt(leftTop, size);
+        }
+
+        public void SetAllToPlaceholder()
+        {
+            foreach (Vector3Int cellPosition in BattlefieldBounds.allPositionsWithin)
+                _actionTilemap[cellPosition].ActionTileState = ActionTileState.Placeholder;
         }
 
         public void PlaceUnit(BattleUnit unit, Vector3Int actionTileCellPosition)

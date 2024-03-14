@@ -16,6 +16,7 @@ namespace Battle
 
         [SyncVar] [NonSerialized] public Faction Faction;
         [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
+        [SyncVar] [NonSerialized] public PlayerState PlayerState = PlayerState.PlacingUnits;
 
         public ICollection<BattleUnit> BattleUnitsCollection => Owner.Objects
             .Select(nob => nob != null ? nob.gameObject.GetComponent<BattleUnit>() : null)
@@ -27,7 +28,6 @@ namespace Battle
         private UnitsManager _unitsManager;
         #endregion
         
-        private PlayerState _playerState = PlayerState.PlacingUnits;
         private ActionTile3D _currentActionTile;
 
         public override void OnStartNetwork()
@@ -51,7 +51,7 @@ namespace Battle
 
         private void TileSelected(ActionTile3D actionTile)
         {
-            switch (_playerState)
+            switch (PlayerState)
             {
                 case PlayerState.PlacingUnits:
                     StartPlacingUnit(actionTile);

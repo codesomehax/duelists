@@ -19,6 +19,7 @@ namespace Battle
         private void SetPlayerReady(PlayerManager playerManager)
         {
             _playerManagers[playerManager.Owner] = playerManager;
+            playerManager.PlayerState = PlayerState.Waiting;
             if (_playerManagers.Count == 2)
                 StartGame();
         }
