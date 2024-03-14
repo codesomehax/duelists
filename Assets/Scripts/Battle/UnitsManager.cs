@@ -9,10 +9,10 @@ namespace Battle
 {
     public class UnitsManager : MonoBehaviour
     {
-        [SerializeField] private List<BattleUnitInfo> unitInfos;
+        [SerializeField] private List<BattleUnitData> unitInfos;
         [SerializeField] private List<BattleUnit> units;
 
-        public ICollection<BattleUnitInfo> GetUnitsInfoByFaction(Faction faction)
+        public ICollection<BattleUnitData> GetUnitsInfoByFaction(Faction faction)
         {
             return unitInfos
                 .Where(unit => unit.Faction == faction)

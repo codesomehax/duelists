@@ -15,3 +15,8 @@ MonoBehaviour:
   name: Ogre
   faction: 1
   unitType: 2
+  strength: 0
+  agility: 9
+  intelligence: 0
+  physicalDefense: 0
+  magicDefense: 0

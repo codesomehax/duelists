@@ -15,3 +15,8 @@ MonoBehaviour:
   name: Knight
   faction: 0
   unitType: 2
+  strength: 0
+  agility: 6
+  intelligence: 0
+  physicalDefense: 0
+  magicDefense: 0

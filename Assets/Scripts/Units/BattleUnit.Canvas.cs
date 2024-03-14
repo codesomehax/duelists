@@ -1,5 +1,4 @@
-﻿using FishNet.Connection;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,6 +47,7 @@ namespace Units
         {
             if (asServer) return;
             unitCountText.text = next.ToString();
+            UnitIcon.UnitCount = next;
         }
     }
 }

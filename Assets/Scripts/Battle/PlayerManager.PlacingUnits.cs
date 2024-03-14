@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Battle.UI;
-using FishNet.Connection;
 using FishNet.Object;
 using Units;
 using UnityEngine;
@@ -36,8 +35,7 @@ namespace Battle
                 return;
             }
             
-            ICollection<BattleUnitInfo> units = _unitsManager.GetUnitsInfoByFaction(Faction);
-            Debug.Log(units);
+            ICollection<BattleUnitData> units = _unitsManager.GetUnitsInfoByFaction(Faction);
             IDictionary<UnitType, PlaceUnitData> placeUnitData = units.ToDictionary(
                 unit => unit.UnitType,
                 unit => new PlaceUnitData()

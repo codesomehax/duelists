@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Battle.UI;
 using Factions;
 using FishNet.Managing.Scened;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Units;
 using Unity.VisualScripting;
-using UnityEngine;
 
 namespace Battle
 {
@@ -19,7 +17,7 @@ namespace Battle
         [SyncVar] [NonSerialized] public Faction Faction;
         [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
 
-        private ICollection<BattleUnit> BattleUnitsCollection => Owner.Objects
+        public ICollection<BattleUnit> BattleUnitsCollection => Owner.Objects
             .Select(nob => nob != null ? nob.gameObject.GetComponent<BattleUnit>() : null)
             .NotNull()
             .AsReadOnlyCollection();

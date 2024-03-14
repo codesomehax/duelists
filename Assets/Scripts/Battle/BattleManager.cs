@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using FishNet.Component.Observing;
 using FishNet.Connection;
 using FishNet.Object;
-using Units;
-using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Battle
 {
-    public class BattleManager : NetworkBehaviour
+    public partial class BattleManager : NetworkBehaviour
     {
         private readonly IDictionary<NetworkConnection, PlayerManager> _playerManagers =
             new Dictionary<NetworkConnection, PlayerManager>(2);
@@ -28,14 +25,10 @@ namespace Battle
 
         private void StartGame()
         {
-            foreach (NetworkConnection connection in _playerManagers.Keys)
-            {
-                IEnumerable<BattleUnit> battleUnits = connection.Objects
-                    .Select(nob => nob != null ? nob.gameObject.GetComponent<BattleUnit>() : null)
-                    .NotNull();
-                foreach (BattleUnit battleUnit in battleUnits)
-                    battleUnit.NetworkObserver.GetObserverCondition<OwnerOnlyCondition>().SetIsEnabled(false);
-            }
+            MakeUnitsObservableAndListed();
+            SetupIconsTransformObserversRpc();
+            Vector3Int[] sortedCellPositions = _sortedTurnList.Values.Select(battleUnit => battleUnit.CellPosition).ToArray();
+            ArrangeUnitIconsObserversRpc(sortedCellPositions);
         }
 
         private void OnDestroy()

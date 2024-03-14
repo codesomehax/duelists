@@ -15,3 +15,8 @@ MonoBehaviour:
   name: Hellhound
   faction: 1
   unitType: 4
+  strength: 0
+  agility: 5
+  intelligence: 0
+  physicalDefense: 0
+  magicDefense: 0
