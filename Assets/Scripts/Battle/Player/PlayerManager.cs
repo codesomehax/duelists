@@ -19,6 +19,7 @@ namespace Battle.Player
         [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
         [SyncVar(OnChange = nameof(StartTurn))] [NonSerialized] public PlayerState PlayerState = PlayerState.PlacingUnits;
         [SyncVar] [NonSerialized] public BattleUnit ActingUnit;
+        [SyncVar] private bool _playerMoved;
 
         public ICollection<BattleUnit> BattleUnitsCollection => Owner.Objects
             .Select(nob => nob != null ? nob.gameObject.GetComponent<BattleUnit>() : null)

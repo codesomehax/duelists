@@ -108,5 +108,23 @@ namespace Units.Battle
             return pathToPosition.Where(position => position.Value.Count <= battleUnit.Speed)
                 .ToDictionary(pair => pair.Key, pair => pair.Value);
         }
+
+        public static ISet<Vector3Int> GetUnitsInAttackRangeFor(BattleUnit battleUnit)
+        {
+            ISet<Vector3Int> resultSet = new HashSet<Vector3Int>();
+
+            BattleUnit[] otherUnits = Object.FindObjectsOfType<BattleUnit>();
+            foreach (BattleUnit otherUnit in otherUnits)
+            {
+                if (otherUnit.CellPosition == battleUnit.CellPosition || otherUnit.Owner == battleUnit.Owner) continue;
+                
+                Vector3Int distanceVector = otherUnit.CellPosition - battleUnit.CellPosition;
+                int distance = Math.Abs(distanceVector.x) + Math.Abs(distanceVector.y);
+                if (distance <= battleUnit.AttackRange)
+                    resultSet.Add(otherUnit.CellPosition);
+            }
+
+            return resultSet;
+        }
     }
 }

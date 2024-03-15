@@ -34,6 +34,7 @@ namespace Units.Battle
         public uint PhysicalDefense => battleUnitData.PhysicalDefense;
         public uint MagicDefense => battleUnitData.MagicDefense;
         public int Speed => battleUnitData.Speed;
+        public int AttackRange => battleUnitData.AttackRange;
         #endregion
 
         #region Internal

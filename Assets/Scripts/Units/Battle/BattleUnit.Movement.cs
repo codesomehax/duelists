@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using FishNet.Connection;
 using FishNet.Object;
 using UnityEngine;
 
@@ -10,6 +12,9 @@ namespace Units.Battle
         private static readonly Quaternion ClientUnitsRotation = Quaternion.Euler(0, 180, 0);
 
         private const float RotationSpeed = 10f;
+
+        public event Action<NetworkConnection> OnDestinationReached;
+        
         private float MovementSpeed => battleUnitData.MovementSpeed;
 
         [Header("Movement")]
@@ -60,6 +65,7 @@ namespace Units.Battle
             {
                 _isMoving = false;
                 Animate(AnimationType.Idle);
+                OnDestinationReached?.Invoke(Owner);
             }
         }
     }
