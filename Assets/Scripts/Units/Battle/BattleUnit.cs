@@ -68,6 +68,7 @@ namespace Units.Battle
         private void Update()
         {
             RotateCanvasToCamera();
+            MoveUpdate();
         }
 
         public void IncrementTimelinePosition() => TimelinePosition += Period;

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Units.Battle;
 using UnityEngine;
-using Utils;
 
 namespace Battle.Player
 {
@@ -19,6 +19,18 @@ namespace Battle.Player
 
             _reachablePositions = BattleUnitPathfinder.GetReachablePositions(ActingUnit);
             _gridManager.MarkPositionsAs(_reachablePositions.Keys, ActionTileState.Available);
+        }
+
+        [ServerRpc]
+        private void MoveActingUnitToPositionServerRpc(Vector3Int position)
+        {
+            _reachablePositions ??= BattleUnitPathfinder.GetReachablePositions(ActingUnit);
+            
+            IList<Vector3Int> tilePath = _reachablePositions[position];
+            IList<Vector3> worldPath = tilePath.Select(tile => _gridManager.CellPositionToWorld(tile)).ToList();
+            ActingUnit.FollowPath(worldPath);
+
+            _reachablePositions = null; // TODO only if moved!
         }
     }
 }

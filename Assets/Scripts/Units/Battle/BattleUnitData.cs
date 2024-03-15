@@ -18,6 +18,7 @@ namespace Units.Battle
         [SerializeField] private uint physicalDefense;
         [SerializeField] private uint magicDefense;
         [SerializeField] private int speed;
+        [SerializeField] private float movementSpeed;
 
         public string Name => name;
         public Faction Faction => faction;
@@ -28,5 +29,6 @@ namespace Units.Battle
         public uint PhysicalDefense => physicalDefense;
         public uint MagicDefense => magicDefense;
         public int Speed => speed;
+        public float MovementSpeed => movementSpeed;
     }
 }

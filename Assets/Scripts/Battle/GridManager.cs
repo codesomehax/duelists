@@ -114,5 +114,13 @@ namespace Battle
         {
             _actionTilemap[cellPosition].ActionTileState = actionTileState;
         }
+
+        public Vector3 CellPositionToWorld(Vector3Int cellPosition)
+        {
+            Vector3 worldPosition = _grid.CellToWorld(cellPosition);
+            worldPosition.x += 0.5f;
+            worldPosition.z += 0.5f;
+            return worldPosition;
+        }
     }
 }

@@ -312,6 +312,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &4823937533419668831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9120052341066177291}
+  m_Layer: 0
+  m_Name: Movement Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9120052341066177291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4823937533419668831}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.183, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2121189156876174783}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5360308346015028468
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,15 +743,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 41.085403
+      value: 37.18257
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000019073486
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39.119854
+      value: 43.543762
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       propertyPath: m_LocalRotation.w
@@ -771,6 +802,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8433925671541236493}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9120052341066177291}
     - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2285389291649208765}
@@ -821,6 +855,7 @@ MonoBehaviour:
   unitCountText: {fileID: 7369494652366916098}
   battleUnitData: {fileID: 11400000, guid: 2ebd9c24ca3c08a428755ee9d3d7920f, type: 2}
   unitIcon: {fileID: 347852035589836882}
+  movementTransform: {fileID: 9120052341066177291}
 --- !u!114 &8394240848284910916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,7 +878,7 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 41.085403, y: 0.0000019073486, z: 39.119854}
+    Position: {x: 37.18257, y: -0.0000009536743, z: 43.543762}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   _isNetworked: 1
