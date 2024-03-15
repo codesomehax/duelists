@@ -2,7 +2,7 @@
 using Battle.UI;
 using Units;
 
-namespace Battle
+namespace Battle.Player
 {
     public partial class PlayerManager
     {

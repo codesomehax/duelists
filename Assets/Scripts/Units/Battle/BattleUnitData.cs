@@ -1,8 +1,7 @@
-﻿using Battle.UI.Elements;
-using Factions;
+﻿using Factions;
 using UnityEngine;
 
-namespace Units
+namespace Units.Battle
 {
     [CreateAssetMenu(fileName = "BattleUnitData", menuName = "Duelists/Battle Unit Data", order = 1)]
     public class BattleUnitData : ScriptableObject
@@ -18,6 +17,7 @@ namespace Units
         [SerializeField] private uint intelligence;
         [SerializeField] private uint physicalDefense;
         [SerializeField] private uint magicDefense;
+        [SerializeField] private int speed;
 
         public string Name => name;
         public Faction Faction => faction;
@@ -27,5 +27,6 @@ namespace Units
         public uint Intelligence => intelligence;
         public uint PhysicalDefense => physicalDefense;
         public uint MagicDefense => magicDefense;
+        public int Speed => speed;
     }
 }

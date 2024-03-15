@@ -6,9 +6,10 @@ using FishNet.Managing.Scened;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Units;
+using Units.Battle;
 using Unity.VisualScripting;
 
-namespace Battle
+namespace Battle.Player
 {
     public partial class PlayerManager : NetworkBehaviour
     {
@@ -16,7 +17,7 @@ namespace Battle
 
         [SyncVar] [NonSerialized] public Faction Faction;
         [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
-        [SyncVar] [NonSerialized] public PlayerState PlayerState = PlayerState.PlacingUnits;
+        [SyncVar(OnChange = nameof(StartTurn))] [NonSerialized] public PlayerState PlayerState = PlayerState.PlacingUnits;
 
         public ICollection<BattleUnit> BattleUnitsCollection => Owner.Objects
             .Select(nob => nob != null ? nob.gameObject.GetComponent<BattleUnit>() : null)

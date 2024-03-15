@@ -1,8 +1,7 @@
-﻿using System;
-using Battle.UI.Elements;
+﻿using Battle.UI.Elements;
 using UnityEngine;
 
-namespace Units
+namespace Units.Battle
 {
     public partial class BattleUnit
     {

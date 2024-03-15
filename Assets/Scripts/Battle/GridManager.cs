@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Units;
+using Units.Battle;
 using UnityEngine;
 
 namespace Battle
@@ -17,7 +18,7 @@ namespace Battle
         private const int BattlefieldWidth = 10;
         private const int BattlefieldLength = 12;
         private static readonly Vector3Int BattlefieldSize = new(BattlefieldLength, BattlefieldWidth, 1);
-        private static readonly BoundsInt BattlefieldBounds = new(LeftTop, BattlefieldSize);
+        public static BoundsInt BattlefieldBounds = new(LeftTop, BattlefieldSize);
 
         [Header("Tiles")] 
         [SerializeField] private ActionTile3D tileTemplate;
@@ -101,6 +102,17 @@ namespace Battle
         {
             BattleUnit.OnUnitPlaced -= MarkTileAsOccupied;
             BattleUnit.OnUnitRemoval -= MarkTileAsAvailable;
+        }
+
+        public void MarkPositionsAs(ICollection<Vector3Int> cellPositions, ActionTileState actionTileState)
+        {
+            foreach (Vector3Int cellPosition in cellPositions)
+                MarkPositionAs(cellPosition, actionTileState);
+        }
+
+        public void MarkPositionAs(Vector3Int cellPosition, ActionTileState actionTileState)
+        {
+            _actionTilemap[cellPosition].ActionTileState = actionTileState;
         }
     }
 }

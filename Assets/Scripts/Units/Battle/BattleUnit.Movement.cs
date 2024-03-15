@@ -1,7 +1,7 @@
 ﻿using FishNet.Object;
 using UnityEngine;
 
-namespace Units
+namespace Units.Battle
 {
     public partial class BattleUnit
     {

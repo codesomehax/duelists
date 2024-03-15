@@ -4,9 +4,10 @@ using System.Linq;
 using Battle.UI;
 using FishNet.Object;
 using Units;
+using Units.Battle;
 using UnityEngine;
 
-namespace Battle
+namespace Battle.Player
 {
     public partial class PlayerManager
     {

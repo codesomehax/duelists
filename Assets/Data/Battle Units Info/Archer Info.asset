@@ -20,3 +20,4 @@ MonoBehaviour:
   intelligence: 0
   physicalDefense: 0
   magicDefense: 0
+  speed: 4

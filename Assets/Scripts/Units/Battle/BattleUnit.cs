@@ -4,7 +4,7 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UnityEngine;
 
-namespace Units
+namespace Units.Battle
 {
     public partial class BattleUnit : NetworkBehaviour
     {
@@ -33,6 +33,7 @@ namespace Units
         public uint Intelligence => battleUnitData.Intelligence;
         public uint PhysicalDefense => battleUnitData.PhysicalDefense;
         public uint MagicDefense => battleUnitData.MagicDefense;
+        public int Speed => battleUnitData.Speed;
         #endregion
 
         #region Internal

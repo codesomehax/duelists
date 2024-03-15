@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Battle.Player;
 using FishNet.Component.Observing;
 using Units;
+using Units.Battle;
+using UnityEngine;
 
 namespace Battle
 {
@@ -13,7 +17,7 @@ namespace Battle
         
         private void MakeUnitsObservableAndListed()
         {
-            foreach (PlayerManager playerManager in _playerManagers.Values)
+            foreach (PlayerManager playerManager in _playerManagers)
             {
                 foreach (BattleUnit battleUnit in playerManager.BattleUnitsCollection)
                 {
@@ -21,6 +25,14 @@ namespace Battle
                     _sortedTurnList.Add(battleUnit, battleUnit);
                 }
             }
+        }
+
+        private void NextTurn()
+        {
+            BattleUnit battleUnit = _sortedTurnList.Values[0];
+            PlayerManager playerManager = _playerManagers.First(pm => pm.Owner == battleUnit.Owner);
+            playerManager.ActingUnit = battleUnit;
+            playerManager.PlayerState = PlayerState.Acting;
         }
     }
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using Factions;
 using Units;
+using Units.Battle;
 using Unity.VisualScripting;
 using UnityEngine;
 

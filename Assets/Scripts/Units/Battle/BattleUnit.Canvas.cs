@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Units
+namespace Units.Battle
 {
     public partial class BattleUnit
     {

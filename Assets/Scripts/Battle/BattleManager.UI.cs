@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FishNet.Object;
 using Units;
+using Units.Battle;
 using UnityEngine;
 
 namespace Battle
