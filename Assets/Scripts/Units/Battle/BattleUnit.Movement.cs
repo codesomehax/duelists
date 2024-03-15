@@ -32,6 +32,7 @@ namespace Units.Battle
             _movementPath = new Queue<Vector3>(path);
             MoveToNextPosition();
             _isMoving = true;
+            Animate(AnimationType.Run);
         }
 
         private void MoveToNextPosition()
@@ -56,7 +57,10 @@ namespace Units.Battle
             else if (_movementPath.Count != 0)
                 MoveToNextPosition();
             else
+            {
                 _isMoving = false;
+                Animate(AnimationType.Idle);
+            }
         }
     }
 }

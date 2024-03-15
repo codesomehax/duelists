@@ -21,4 +21,4 @@ MonoBehaviour:
   physicalDefense: 0
   magicDefense: 0
   speed: 5
-  movementSpeed: 2
+  movementSpeed: 3

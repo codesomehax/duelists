@@ -48,6 +48,7 @@ namespace Units.Battle
         private void Awake()
         {
             _cameraTransform = FindObjectOfType<Camera>().transform;
+            _animator = GetComponent<Animator>();
         }
 
         public override void OnStartServer()
