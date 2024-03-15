@@ -11,7 +11,8 @@ namespace Battle.Player
     public partial class PlayerManager
     {
         [SyncVar] [NonSerialized] public BattleUnit ActingUnit;
-        private IDictionary<Vector3Int, List<Vector3Int>> _reachablePositions;
+        
+        private IDictionary<Vector3Int, IList<Vector3Int>> _reachablePositions;
 
         private void StartTurn(PlayerState prev, PlayerState next, bool asServer)
         {
@@ -25,12 +26,15 @@ namespace Battle.Player
         private void MoveActingUnitToPositionServerRpc(Vector3Int position)
         {
             _reachablePositions ??= BattleUnitPathfinder.GetReachablePositions(ActingUnit);
-            
-            IList<Vector3Int> tilePath = _reachablePositions[position];
-            IList<Vector3> worldPath = tilePath.Select(tile => _gridManager.CellPositionToWorld(tile)).ToList();
-            ActingUnit.FollowPath(worldPath);
 
-            _reachablePositions = null; // TODO only if moved!
+            if (_reachablePositions.TryGetValue(position, out IList<Vector3Int> tilePath))
+            {
+                ActingUnit.CellPosition = position;
+                IList<Vector3> worldPath = tilePath.Select(tile => _gridManager.CellPositionToWorld(tile)).ToList();
+                ActingUnit.FollowPath(worldPath);
+
+                _reachablePositions = null; // TODO only if moved!
+            }
         }
     }
 }

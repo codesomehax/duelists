@@ -10,7 +10,7 @@ namespace Units.Battle
 {
     public static class BattleUnitPathfinder
     {
-        public static IDictionary<Vector3Int, List<Vector3Int>> GetReachablePositions(BattleUnit battleUnit)
+        public static IDictionary<Vector3Int, IList<Vector3Int>> GetReachablePositions(BattleUnit battleUnit)
         {
             // by speed only
             Vector3Int startPosition = battleUnit.CellPosition;
@@ -88,7 +88,7 @@ namespace Units.Battle
             } while (unvisitedPositions.Count != 0);
 
             // Path construction
-            IDictionary<Vector3Int, List<Vector3Int>> pathToPosition = new Dictionary<Vector3Int, List<Vector3Int>>();
+            IDictionary<Vector3Int, IList<Vector3Int>> pathToPosition = new Dictionary<Vector3Int, IList<Vector3Int>>();
             foreach (KeyValuePair<Vector3Int, Vector3Int> positions in previousPositions)
             {
                 Vector3Int position = positions.Key;
