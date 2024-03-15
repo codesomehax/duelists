@@ -376,6 +376,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCountText: {fileID: 1607837296347854114}
+--- !u!1 &4394141391213035761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7723357033002864400}
+  m_Layer: 0
+  m_Name: Movement Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7723357033002864400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4394141391213035761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.426, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1903975491312143685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5399028153338167421
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +653,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.924744
+      value: 38.017597
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       propertyPath: m_LocalPosition.y
@@ -630,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40.300587
+      value: 41.293407
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       propertyPath: m_LocalRotation.w
@@ -673,6 +704,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6672446165572805907}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7723357033002864400}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b4130eb76ff4dff4dab116f83434e175, type: 3}
       insertIndex: -1
@@ -739,6 +773,7 @@ MonoBehaviour:
   unitCountText: {fileID: 7751220724581279527}
   battleUnitData: {fileID: 11400000, guid: e3ff18b1e092ae642812ab081e3989a4, type: 2}
   unitIcon: {fileID: 7886291917151020806}
+  movementTransform: {fileID: 7723357033002864400}
 --- !u!114 &6336222713627951495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,7 +796,7 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 37.924744, y: 0.0000009536743, z: 40.300587}
+    Position: {x: 38.017597, y: 0.0000009536743, z: 41.293407}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1, y: 1, z: 1}
   _isNetworked: 1

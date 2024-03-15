@@ -268,6 +268,37 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &3064398623358733116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2927743917897437129}
+  m_Layer: 0
+  m_Name: Movement Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2927743917897437129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3064398623358733116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.94, z: 0.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7619244455160549745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4385919402274338031
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,15 +665,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.38794
+      value: 36.60605
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000047683716
+      value: -0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 37.023773
+      value: 42.0487
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -685,6 +716,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1540517439256170773}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2927743917897437129}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85ce986b32e45254eb916f3f9221bb4d, type: 3}
       insertIndex: -1
@@ -718,7 +752,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7131220049809230795}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c7ae2d62a2a20c041b6eb940f69debd3, type: 2}
   m_CullingMode: 0
@@ -751,6 +785,7 @@ MonoBehaviour:
   unitCountText: {fileID: 6899555053837731897}
   battleUnitData: {fileID: 11400000, guid: 335c95307447eaa44aa5bea59a6f0f6a, type: 2}
   unitIcon: {fileID: 6875862916049622829}
+  movementTransform: {fileID: 2927743917897437129}
 --- !u!114 &3819234206476839523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,7 +808,7 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 40.38794, y: 0.00000047683716, z: 37.023773}
+    Position: {x: 36.60605, y: -0.00000023841858, z: 42.0487}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   _isNetworked: 1
@@ -783,7 +818,7 @@ MonoBehaviour:
   NetworkObserver: {fileID: 0}
   <PrefabId>k__BackingField: 7
   <SpawnableCollectionId>k__BackingField: 0
-  _scenePathHash: 0
+  _scenePathHash: 3991001759
   <SceneId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 18074277984681742075
 --- !u!114 &2992965379326918855
@@ -854,7 +889,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7131220049809230795}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
   m_Name: 
