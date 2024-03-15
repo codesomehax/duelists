@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FishNet.Object;
-using FishNet.Object.Synchronizing;
 using Units.Battle;
 using UnityEngine;
 
@@ -10,8 +8,6 @@ namespace Battle.Player
 {
     public partial class PlayerManager
     {
-        [SyncVar] [NonSerialized] public BattleUnit ActingUnit;
-        
         private IDictionary<Vector3Int, IList<Vector3Int>> _reachablePositions;
 
         private void StartTurn(PlayerState prev, PlayerState next, bool asServer)
@@ -33,7 +29,7 @@ namespace Battle.Player
                 IList<Vector3> worldPath = tilePath.Select(tile => _gridManager.CellPositionToWorld(tile)).ToList();
                 ActingUnit.FollowPath(worldPath);
 
-                _reachablePositions = null; // TODO only if moved!
+                _reachablePositions = null;
             }
         }
     }
