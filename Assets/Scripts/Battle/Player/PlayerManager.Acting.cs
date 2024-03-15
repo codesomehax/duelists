@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FishNet.Connection;
 using FishNet.Object;
 using Units.Battle;
 using UnityEngine;
@@ -25,12 +26,18 @@ namespace Battle.Player
 
             if (_reachablePositions.TryGetValue(position, out IList<Vector3Int> tilePath))
             {
+                UnmarkMovementPositionsTargetRpc(Owner);
                 ActingUnit.CellPosition = position;
                 IList<Vector3> worldPath = tilePath.Select(tile => _gridManager.CellPositionToWorld(tile)).ToList();
                 ActingUnit.FollowPath(worldPath);
-
-                _reachablePositions = null;
             }
+        }
+
+        [TargetRpc]
+        private void UnmarkMovementPositionsTargetRpc(NetworkConnection connection)
+        {
+            _gridManager.MarkPositionsAs(_reachablePositions.Keys, ActionTileState.Placeholder);
+            _reachablePositions = null;
         }
     }
 }

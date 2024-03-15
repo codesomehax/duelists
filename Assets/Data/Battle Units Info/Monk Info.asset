@@ -20,5 +20,5 @@ MonoBehaviour:
   intelligence: 0
   physicalDefense: 0
   magicDefense: 0
-  speed: 20
+  speed: 5
   movementSpeed: 3
