@@ -91,19 +91,16 @@ namespace Battle.Player
         [ServerRpc]
         private void AttackUnitAtPositionServerRpc(Vector3Int position)
         {
-            Vector3Int distanceVector = position - ActingUnit.CellPosition;
-            int distance = Math.Abs(distanceVector.x) + Math.Abs(distanceVector.y);
+            int distance = GridManager.DistanceBetweenPositions(position, ActingUnit.CellPosition);
             if (distance > ActingUnit.AttackRange) return;
 
             BattleUnit enemyUnit = EnemyUnitsCollection.FirstOrDefault(unit => unit.CellPosition == position);
             if (enemyUnit == null) return;
-            
-            // TODO math logic etc
 
             UnmarkMovementAndAttackPositionsTargetRpc(Owner);
             Vector3 enemyUnitWorldPosition = _gridManager.CellPositionToWorld(enemyUnit.CellPosition);
             AnimationType animationType = distance == 1 ? AnimationType.AttackMelee : AnimationType.AttackRanged;
-            ActingUnit.AttackUnitAtPosition(enemyUnitWorldPosition, animationType);
+            ActingUnit.AttackUnitAtPosition(enemyUnit, enemyUnitWorldPosition, animationType);
         }
     }
 }

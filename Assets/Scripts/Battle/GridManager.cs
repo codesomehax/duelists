@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Units;
 using Units.Battle;
 using UnityEngine;
@@ -121,6 +122,12 @@ namespace Battle
             worldPosition.x += 0.5f;
             worldPosition.z += 0.5f;
             return worldPosition;
+        }
+
+        public static int DistanceBetweenPositions(Vector3Int pos1, Vector3Int pos2)
+        {
+            Vector3Int distanceVector = pos2 - pos1;
+            return Math.Abs(distanceVector.x) + Math.Abs(distanceVector.y);
         }
     }
 }

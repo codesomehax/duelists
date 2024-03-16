@@ -38150,7 +38150,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.4980206
-    functionName: Hit
+    functionName: AnimationEvent_HitMelee
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -38164,7 +38164,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.1333334
-    functionName: AnimatorEvent_AttackFinished
+    functionName: AnimationEvent_AttackFinished
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

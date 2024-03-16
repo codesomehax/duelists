@@ -850,12 +850,12 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 8394240848284910916}
   _networkObjectCache: {fileID: 8394240848284910916}
+  movementTransform: {fileID: 9120052341066177291}
   canvasTransform: {fileID: 1419337794146873417}
   image: {fileID: 8417336399390490908}
   unitCountText: {fileID: 7369494652366916098}
   battleUnitData: {fileID: 11400000, guid: 2ebd9c24ca3c08a428755ee9d3d7920f, type: 2}
   unitIcon: {fileID: 347852035589836882}
-  movementTransform: {fileID: 9120052341066177291}
 --- !u!114 &8394240848284910916
 MonoBehaviour:
   m_ObjectHideFlags: 0

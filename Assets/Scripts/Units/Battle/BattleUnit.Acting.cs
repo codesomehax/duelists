@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using FishNet.Connection;
 using FishNet.Object;
 using UnityEngine;
@@ -72,8 +73,11 @@ namespace Units.Battle
             }
         }
 
-        public void AttackUnitAtPosition(Vector3 unitPosition, AnimationType attackAnimationType)
+        private BattleUnit _enemyUnit;
+        
+        public void AttackUnitAtPosition(BattleUnit enemyUnit, Vector3 unitPosition, AnimationType attackAnimationType)
         {
+            _enemyUnit = enemyUnit;
             StartCoroutine(AttackCoroutine(unitPosition, attackAnimationType));
         }
 
@@ -87,10 +91,48 @@ namespace Units.Battle
             Animate(attackAnimationType);
         }
         
-        private void AnimatorEvent_AttackFinished()
+        private void AnimationEvent_AttackFinished()
         {
             if (!IsHost) return;
             StartCoroutine(SetRotationCoroutine(Owner.IsHost ? HostUnitsRotation : ClientUnitsRotation));
+        }
+
+        private void AnimationEvent_HitMelee()
+        {
+            if (IsOwner)
+                DealDamageServerRpc();
+        }
+
+        [ServerRpc]
+        private void DealDamageServerRpc()
+        {
+            int distance = GridManager.DistanceBetweenPositions(CellPosition, _enemyUnit.CellPosition);
+            AttackType attackType = distance == 1 ? MeleeAttackType : RangedAttackType;
+            int damage = attackType == AttackType.Physical ? PhysicalDamage : MagicDamage;
+            _enemyUnit.TakeDamage(damage, attackType);
+        }
+        
+        private void TakeDamage(int damage, AttackType attackType)
+        {
+            int reducedDamage;
+            if (attackType == AttackType.Physical)
+                reducedDamage = Mathf.CeilToInt(damage * (float)(100 - PhysicalDefense) / 100);
+            else
+                reducedDamage = Mathf.CeilToInt(damage * (float)(100 - MagicDefense) / 100);
+            
+            Health -= reducedDamage;
+            int remainingCount = Mathf.CeilToInt((float)Health / SingleUnitHealth);
+            Count = remainingCount;
+
+            if (remainingCount > 0)
+                Animate(AnimationType.Hurt);
+            else
+                Die();
+        }
+
+        private void Die()
+        {
+            Animate(AnimationType.Death);
         }
     }
 }

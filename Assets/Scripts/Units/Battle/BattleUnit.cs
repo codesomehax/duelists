@@ -12,8 +12,6 @@ namespace Units.Battle
         public static event Action<Vector3Int> OnUnitPlaced;
         public static event Action<Vector3Int> OnUnitRemoval;
 
-        private const uint MaxAgility = 99;
-
         #region Synchronized
         [SyncVar(OnChange = nameof(SyncUnitCount))] [NonSerialized] public int Count;
         [SyncVar] [NonSerialized] public Vector3Int CellPosition;
@@ -27,19 +25,29 @@ namespace Units.Battle
         #endregion
 
         #region Stats
-        // TODO temporary values, they need to be affected by hero etc
-        // TODO these values need to be synchronized!!!
-        public uint Strength => battleUnitData.Strength;
+        
+        public int SingleUnitHealth => battleUnitData.SingleUnitHealth;
+        public int BaseDamage => battleUnitData.BaseDamage;
+        public int Strength => battleUnitData.Strength;
         public uint Agility => battleUnitData.Agility;
-        public uint Intelligence => battleUnitData.Intelligence;
-        public uint PhysicalDefense => battleUnitData.PhysicalDefense;
-        public uint MagicDefense => battleUnitData.MagicDefense;
+        public int Intelligence => battleUnitData.Intelligence;
+        public int PhysicalDefense => battleUnitData.PhysicalDefense;
+        public int MagicDefense => battleUnitData.MagicDefense;
         public int Speed => battleUnitData.Speed;
         public int AttackRange => battleUnitData.AttackRange;
+
+        public AttackType MeleeAttackType => battleUnitData.MeleeAttackType;
+        public AttackType RangedAttackType => battleUnitData.RangedAttackType;
+        
+        // Computed
+        public int Health { get; set; }
+        private int PhysicalDamage => Mathf.CeilToInt(BaseDamage * Count * ((float)(100 + Strength) / 100));
+        private int MagicDamage => Mathf.CeilToInt(BaseDamage * Count * ((float)(100 + Intelligence) / 100));
+        
         #endregion
 
         #region Internal
-        private uint Period => MaxAgility + 1 - Agility;
+        private uint Period => BattleUnitData.MaxAgility + 1 - Agility;
         #endregion
 
         #region Serialized
