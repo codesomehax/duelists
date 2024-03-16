@@ -57,10 +57,19 @@ namespace Units.Battle
             }
             
             Animate(AnimationType.Idle);
-                
-            // TODO rotate towards rotation
-                
+            StartCoroutine(SetRotationCoroutine(Owner.IsHost ? HostUnitsRotation : ClientUnitsRotation));
+
             OnDestinationReached?.Invoke(Owner);
+        }
+
+        private IEnumerator SetRotationCoroutine(Quaternion rotation)
+        { 
+            bool LookingAtRotation() => Quaternion.Angle(transform.rotation, rotation) < 0.1f;
+            while (!LookingAtRotation())
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * RotationSpeed);
+                yield return null;
+            }
         }
 
         public void AttackUnitAtPosition(Vector3 unitPosition, AnimationType attackAnimationType)
@@ -102,23 +111,8 @@ namespace Units.Battle
         {
             if (!IsOwner) return;
             
-            _isRotatingTowardsRotation = true;
-            _rotationDestination = IsHost ? HostUnitsRotation : ClientUnitsRotation;
-        }
-        #endregion
-        
-        #region RotateTowardsRotationUpdate
-        private bool _isRotatingTowardsRotation;
-        private Quaternion _rotationDestination;
-        
-        private bool LookingAtRotation => Quaternion.Angle(transform.rotation, _rotationDestination) < 0.1f;
-
-        private void RotateTowardsRotationUpdate()
-        {
-            if (!_isRotatingTowardsRotation) return;
-            transform.rotation = Quaternion.Slerp(transform.rotation, _rotationDestination, Time.deltaTime * RotationSpeed);
-
-            if (LookingAtRotation) _isRotatingTowardsRotation = false;
+            // _isRotatingTowardsRotation = true;
+            // _rotationDestination = IsHost ? HostUnitsRotation : ClientUnitsRotation;
         }
         #endregion
     }
