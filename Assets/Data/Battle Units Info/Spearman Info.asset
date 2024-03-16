@@ -20,7 +20,7 @@ MonoBehaviour:
   strength: 50
   agility: 10
   intelligence: 0
-  physicalDefense: 0
+  physicalDefense: 20
   magicDefense: 0
   speed: 20
   movementSpeed: 5

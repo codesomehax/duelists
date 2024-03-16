@@ -59,6 +59,8 @@ namespace Battle.Player
 
         private void UnmarkPositionsInAttackRange()
         {
+            if (_positionsInAttackRange == null) return;
+            
             _gridManager.MarkPositionsAs(_positionsInAttackRange, ActionTileState.Placeholder);
             _positionsInAttackRange = null;
         }

@@ -18,7 +18,9 @@ namespace Units.Battle
         private const float RotationSpeed = 10f;
 
         public event Action<NetworkConnection> OnDestinationReached;
-        
+
+        public BattleUnit EnemyUnit { get; private set; }
+        public Transform MovementTransform => movementTransform;
         private float MovementSpeed => battleUnitData.MovementSpeed;
 
         [Header("Movement")]
@@ -74,12 +76,10 @@ namespace Units.Battle
                 yield return null;
             }
         }
-
-        private BattleUnit _enemyUnit;
         
         public void AttackUnitAtPosition(BattleUnit enemyUnit, Vector3 unitPosition, AnimationType attackAnimationType)
         {
-            _enemyUnit = enemyUnit;
+            EnemyUnit = enemyUnit;
             StartCoroutine(AttackCoroutine(unitPosition, attackAnimationType));
         }
 
@@ -92,7 +92,7 @@ namespace Units.Battle
             
             Animate(attackAnimationType);
         }
-        
+
         private void AnimationEvent_AttackFinished()
         {
             if (!IsHost) return;
@@ -105,13 +105,18 @@ namespace Units.Battle
                 DealDamageServerRpc();
         }
 
-        [ServerRpc]
-        private void DealDamageServerRpc()
+        public void DealDamage()
         {
-            int distance = GridManager.DistanceBetweenPositions(CellPosition, _enemyUnit.CellPosition);
+            int distance = GridManager.DistanceBetweenPositions(CellPosition, EnemyUnit.CellPosition);
             AttackType attackType = distance == 1 ? MeleeAttackType : RangedAttackType;
             int damage = attackType == AttackType.Physical ? PhysicalDamage : MagicDamage;
-            _enemyUnit.TakeDamage(damage, attackType);
+            EnemyUnit.TakeDamage(damage, attackType);
+        }
+
+        [ServerRpc]
+        public void DealDamageServerRpc()
+        {
+            DealDamage();
         }
         
         private void TakeDamage(int damage, AttackType attackType)
