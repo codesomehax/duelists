@@ -831,15 +831,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.905197
+      value: 41.532284
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000026226044
+      value: 0.00000047683716
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.39766
+      value: 44.020695
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -900,6 +900,9 @@ PrefabInstance:
       addedObject: {fileID: 2091388681606120939}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 5214937776528860890}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 6250105894903396508}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ef0a1f63534f6646bfd91c053eeebfd, type: 3}
       insertIndex: -1
@@ -957,12 +960,26 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6250105894903396508}
   _networkObjectCache: {fileID: 6250105894903396508}
+  movementTransform: {fileID: 622846893824538771}
   canvasTransform: {fileID: 6817399284271246700}
   image: {fileID: 4926306636013896958}
   unitCountText: {fileID: 120131064582627356}
   battleUnitData: {fileID: 11400000, guid: fa8f7bdaf55b3e546b72ae054e40faa2, type: 2}
   unitIcon: {fileID: 2791974952126215274}
-  movementTransform: {fileID: 622846893824538771}
+--- !u!114 &5214937776528860890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6997153577780271634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1508e7858c6543c798b912a3e9b8a0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileInHand: {fileID: 2401590238386047617}
+  projectilePrefab: {fileID: 6414175704454774566, guid: 190e23fdeb8cde34eb62b712d84b5627, type: 3}
 --- !u!114 &6250105894903396508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,7 +1002,7 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 37.905197, y: 0.0000026226044, z: 41.39766}
+    Position: {x: 41.532284, y: 0.00000047683716, z: 44.020695}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   _isNetworked: 1
