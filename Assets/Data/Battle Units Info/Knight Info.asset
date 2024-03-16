@@ -15,10 +15,15 @@ MonoBehaviour:
   name: Knight
   faction: 0
   unitType: 2
-  strength: 0
-  agility: 6
+  singleUnitHealth: 180
+  baseDamage: 40
+  strength: 50
+  agility: 20
   intelligence: 0
-  physicalDefense: 0
-  magicDefense: 0
-  speed: 5
-  movementSpeed: 3
+  physicalDefense: 50
+  magicDefense: 35
+  speed: 4
+  movementSpeed: 5
+  attackRange: 1
+  meleeAttackType: 0
+  rangedAttackType: 0

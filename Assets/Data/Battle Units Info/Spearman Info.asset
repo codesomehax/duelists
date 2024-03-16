@@ -15,15 +15,15 @@ MonoBehaviour:
   name: Spearman
   faction: 0
   unitType: 0
-  singleUnitHealth: 10
+  singleUnitHealth: 30
   baseDamage: 10
   strength: 50
-  agility: 10
+  agility: 25
   intelligence: 0
-  physicalDefense: 20
-  magicDefense: 0
-  speed: 20
-  movementSpeed: 5
+  physicalDefense: 30
+  magicDefense: 30
+  speed: 5
+  movementSpeed: 7
   attackRange: 1
   meleeAttackType: 0
   rangedAttackType: 0

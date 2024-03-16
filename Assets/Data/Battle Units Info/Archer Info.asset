@@ -15,15 +15,15 @@ MonoBehaviour:
   name: Archer
   faction: 0
   unitType: 1
-  singleUnitHealth: 12
-  baseDamage: 100
-  strength: 20
-  agility: 1
+  singleUnitHealth: 25
+  baseDamage: 10
+  strength: 50
+  agility: 25
   intelligence: 0
   physicalDefense: 20
-  magicDefense: 0
+  magicDefense: 40
   speed: 5
   movementSpeed: 3
-  attackRange: 20
+  attackRange: 10
   meleeAttackType: 0
   rangedAttackType: 0

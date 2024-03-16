@@ -15,11 +15,15 @@ MonoBehaviour:
   name: Monk
   faction: 0
   unitType: 3
-  strength: 0
-  agility: 8
-  intelligence: 0
-  physicalDefense: 0
-  magicDefense: 0
-  speed: 20
+  singleUnitHealth: 100
+  baseDamage: 30
+  strength: 20
+  agility: 25
+  intelligence: 50
+  physicalDefense: 15
+  magicDefense: 60
+  speed: 3
   movementSpeed: 3
-  attackRange: 20
+  attackRange: 10
+  meleeAttackType: 0
+  rangedAttackType: 1

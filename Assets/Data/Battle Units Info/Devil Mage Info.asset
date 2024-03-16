@@ -15,10 +15,15 @@ MonoBehaviour:
   name: Devil Mage
   faction: 1
   unitType: 3
+  singleUnitHealth: 120
+  baseDamage: 45
   strength: 0
-  agility: 3
-  intelligence: 0
-  physicalDefense: 0
-  magicDefense: 0
+  agility: 20
+  intelligence: 50
+  physicalDefense: 30
+  magicDefense: 30
   speed: 5
-  movementSpeed: 3
+  movementSpeed: 5
+  attackRange: 7
+  meleeAttackType: 1
+  rangedAttackType: 1

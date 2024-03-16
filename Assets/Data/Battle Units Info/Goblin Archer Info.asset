@@ -15,10 +15,15 @@ MonoBehaviour:
   name: Goblin Archer
   faction: 1
   unitType: 1
-  strength: 0
-  agility: 4
+  singleUnitHealth: 20
+  baseDamage: 8
+  strength: 50
+  agility: 20
   intelligence: 0
-  physicalDefense: 0
-  magicDefense: 0
-  speed: 5
-  movementSpeed: 3
+  physicalDefense: 10
+  magicDefense: 10
+  speed: 4
+  movementSpeed: 5
+  attackRange: 8
+  meleeAttackType: 0
+  rangedAttackType: 0

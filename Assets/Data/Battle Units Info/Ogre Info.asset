@@ -15,10 +15,15 @@ MonoBehaviour:
   name: Ogre
   faction: 1
   unitType: 2
-  strength: 0
-  agility: 9
+  singleUnitHealth: 300
+  baseDamage: 60
+  strength: 60
+  agility: 15
   intelligence: 0
-  physicalDefense: 0
-  magicDefense: 0
-  speed: 5
-  movementSpeed: 3
+  physicalDefense: 60
+  magicDefense: 30
+  speed: 3
+  movementSpeed: 5
+  attackRange: 1
+  meleeAttackType: 0
+  rangedAttackType: 0

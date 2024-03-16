@@ -15,10 +15,15 @@ MonoBehaviour:
   name: Hellhound
   faction: 1
   unitType: 4
-  strength: 0
-  agility: 5
+  singleUnitHealth: 120
+  baseDamage: 30
+  strength: 50
+  agility: 40
   intelligence: 0
-  physicalDefense: 0
-  magicDefense: 0
-  speed: 5
-  movementSpeed: 3
+  physicalDefense: 15
+  magicDefense: 15
+  speed: 8
+  movementSpeed: 10
+  attackRange: 1
+  meleeAttackType: 0
+  rangedAttackType: 0

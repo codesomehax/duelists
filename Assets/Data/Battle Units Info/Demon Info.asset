@@ -15,10 +15,15 @@ MonoBehaviour:
   name: Demon
   faction: 1
   unitType: 0
-  strength: 0
-  agility: 2
+  singleUnitHealth: 35
+  baseDamage: 12
+  strength: 50
+  agility: 25
   intelligence: 0
-  physicalDefense: 0
-  magicDefense: 0
+  physicalDefense: 30
+  magicDefense: 30
   speed: 5
-  movementSpeed: 3
+  movementSpeed: 6
+  attackRange: 1
+  meleeAttackType: 0
+  rangedAttackType: 0

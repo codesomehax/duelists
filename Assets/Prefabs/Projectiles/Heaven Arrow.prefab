@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1318285788171452544}
   - component: {fileID: 6118488586064098468}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: Heaven Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 3991001759
   <SceneId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 13911802589490378158
+  <AssetPathHash>k__BackingField: 6453430295405650286
 --- !u!114 &6118488586064098468
 MonoBehaviour:
   m_ObjectHideFlags: 0
