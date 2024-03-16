@@ -71,7 +71,6 @@ namespace Units.Battle
         private void Update()
         {
             RotateCanvasToCamera();
-            MoveUpdate();
             RotateTowardsPositionAndAttackUpdate();
             RotateTowardsRotationUpdate();
         }

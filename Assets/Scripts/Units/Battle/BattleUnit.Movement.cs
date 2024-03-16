@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FishNet.Connection;
 using FishNet.Object;
@@ -28,61 +29,48 @@ namespace Units.Battle
 
         public void FollowPath(IList<Vector3> path)
         {
-            _movementPath = new Queue<Vector3>(path);
-            MoveToNextPosition();
-            _isMoving = true;
-            Animate(AnimationType.Run);
+            StartCoroutine(MoveCoroutine(new Queue<Vector3>(path)));
         }
 
-        private void MoveToNextPosition()
+        private IEnumerator MoveCoroutine(Queue<Vector3> path)
         {
-            _flatMovementDestination = _movementPath.Dequeue();
-            _flatMovementDestination.y = 0f;
+            Animate(AnimationType.Run);
+            while (path.Count != 0)
+            {
+                Vector3 flatMovementDestination = path.Dequeue();
+                flatMovementDestination.y = 0f;
+                
+                Vector3 FlatMovementTransformPosition() => new(movementTransform.position.x, 0f, movementTransform.position.z);
+                bool CurrentDestinationReached() => (FlatMovementTransformPosition() - flatMovementDestination).magnitude < 0.1f;
+                
+                while (!CurrentDestinationReached())
+                {
+                    Vector3 direction = (flatMovementDestination - FlatMovementTransformPosition()).normalized;
+                    Vector3 movementPerFrame = direction * (MovementSpeed * Time.deltaTime);
+                    transform.position += movementPerFrame;
+
+                    Quaternion lookRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * RotationSpeed);
+
+                    yield return null;
+                }
+            }
+            
+            Animate(AnimationType.Idle);
+                
+            // TODO rotate towards rotation
+                
+            OnDestinationReached?.Invoke(Owner);
         }
 
         public void AttackUnitAtPosition(Vector3 unitPosition, AnimationType attackAnimationType)
         {
-            _flatRotateDirection = new Vector3(unitPosition.x, 0f, unitPosition.z) 
-                                   - FlatMovementTransformPosition;
-            _attackAnimationType = attackAnimationType;
-            _isRotatingTowardsPosition = true;
-            _isAttacking = true;
+            // _flatRotateDirection = new Vector3(unitPosition.x, 0f, unitPosition.z) 
+            //                        - FlatMovementTransformPosition;
+            // _attackAnimationType = attackAnimationType;
+            // _isRotatingTowardsPosition = true;
+            // _isAttacking = true;
         }
-
-        #region MoveUpdate
-        private bool _isMoving;
-        private Vector3 _flatMovementDestination;
-        private Queue<Vector3> _movementPath = new();
-        private Vector3 FlatMovementTransformPosition => new(movementTransform.position.x, 0f, movementTransform.position.z);
-        private bool CurrentDestinationReached => (FlatMovementTransformPosition - _flatMovementDestination).magnitude < 0.1f;
-
-        private void MoveUpdate()
-        {
-            if (!_isMoving) return;
-
-            if (!CurrentDestinationReached)
-            {
-                Vector3 direction = (_flatMovementDestination - FlatMovementTransformPosition).normalized;
-                Vector3 movementPerFrame = direction * (MovementSpeed * Time.deltaTime);
-                transform.position += movementPerFrame;
-
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * RotationSpeed);
-            }
-            else if (_movementPath.Count != 0)
-                MoveToNextPosition();
-            else
-            {
-                _isMoving = false;
-                Animate(AnimationType.Idle);
-                
-                _isRotatingTowardsRotation = true;
-                _rotationDestination = IsHost ? HostUnitsRotation : ClientUnitsRotation;
-                
-                OnDestinationReached?.Invoke(Owner);
-            }
-        }
-        #endregion
 
         #region RotateTowardsPositionAndAttackUpdate
         private bool _isRotatingTowardsPosition;
