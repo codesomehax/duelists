@@ -12,6 +12,7 @@ namespace Battle.Player
     public partial class PlayerManager
     {
         private IDictionary<Vector3Int, IList<Vector3Int>> _reachablePositions;
+        private ISet<Vector3Int> _positionsInAttackRange;
 
         private void StartTurn(PlayerState prev, PlayerState next, bool asServer)
         {
@@ -24,8 +25,7 @@ namespace Battle.Player
             
             if (asServer || !IsOwner || next != PlayerState.Acting) return;
 
-            _reachablePositions = BattleUnitPathfinder.GetReachablePositions(ActingUnit);
-            _gridManager.MarkPositionsAs(_reachablePositions.Keys, ActionTileState.Available);
+            MarkReachablePositions();
             MarkPositionsInAttackRange();
         }
 
@@ -34,22 +34,43 @@ namespace Battle.Player
             _playerMoved = true;
         }
 
+        private void MarkReachablePositions()
+        {
+            _reachablePositions = BattleUnitPathfinder.GetReachablePositions(ActingUnit);
+            _gridManager.MarkPositionsAs(_reachablePositions.Keys, ActionTileState.Available);
+        }
+
+        private void UnmarkReachablePositions()
+        {
+            if (_reachablePositions == null) return;
+            
+            _gridManager.MarkPositionsAs(_reachablePositions.Keys, ActionTileState.Placeholder);
+            _reachablePositions = null;
+        }
+
+        private void MarkPositionsInAttackRange()
+        {
+            _positionsInAttackRange = BattleUnitPathfinder.GetUnitsInAttackRangeFor(ActingUnit);
+            _gridManager.MarkPositionsAs(_positionsInAttackRange, ActionTileState.Attack);
+        }
+
+        private void UnmarkPositionsInAttackRange()
+        {
+            _gridManager.MarkPositionsAs(_positionsInAttackRange, ActionTileState.Placeholder);
+            _positionsInAttackRange = null;
+        }
+
         [TargetRpc]
         private void MarkPositionsInAttackRangeTargetRpc(NetworkConnection connection)
         {
             MarkPositionsInAttackRange();
         }
 
-        private void MarkPositionsInAttackRange()
+        [TargetRpc]
+        private void UnmarkMovementAndAttackPositionsTargetRpc(NetworkConnection connection)
         {
-            ISet<Vector3Int> positionsInAttackRange = BattleUnitPathfinder.GetUnitsInAttackRangeFor(ActingUnit);
-            _gridManager.MarkPositionsAs(positionsInAttackRange, ActionTileState.Attack);
-        }
-
-        private void UnmarkPositionsInAttackRange()
-        {
-            ISet<Vector3Int> positionsInAttackRange = BattleUnitPathfinder.GetUnitsInAttackRangeFor(ActingUnit);
-            _gridManager.MarkPositionsAs(positionsInAttackRange, ActionTileState.Placeholder);
+            UnmarkReachablePositions();
+            UnmarkPositionsInAttackRange();
         }
 
         [ServerRpc]
@@ -67,14 +88,6 @@ namespace Battle.Player
             }
         }
 
-        [TargetRpc]
-        private void UnmarkMovementAndAttackPositionsTargetRpc(NetworkConnection connection)
-        {
-            UnmarkPositionsInAttackRange();
-            _gridManager.MarkPositionsAs(_reachablePositions.Keys, ActionTileState.Placeholder);
-            _reachablePositions = null;
-        }
-
         [ServerRpc]
         private void AttackUnitAtPositionServerRpc(Vector3Int position)
         {
@@ -87,6 +100,7 @@ namespace Battle.Player
             
             // TODO math logic etc
 
+            UnmarkMovementAndAttackPositionsTargetRpc(Owner);
             Vector3 enemyUnitWorldPosition = _gridManager.CellPositionToWorld(enemyUnit.CellPosition);
             AnimationType animationType = distance == 1 ? AnimationType.AttackMelee : AnimationType.AttackRanged;
             ActingUnit.AttackUnitAtPosition(enemyUnitWorldPosition, animationType);
