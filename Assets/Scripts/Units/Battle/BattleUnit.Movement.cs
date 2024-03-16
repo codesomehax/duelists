@@ -74,46 +74,23 @@ namespace Units.Battle
 
         public void AttackUnitAtPosition(Vector3 unitPosition, AnimationType attackAnimationType)
         {
-            // _flatRotateDirection = new Vector3(unitPosition.x, 0f, unitPosition.z) 
-            //                        - FlatMovementTransformPosition;
-            // _attackAnimationType = attackAnimationType;
-            // _isRotatingTowardsPosition = true;
-            // _isAttacking = true;
+            StartCoroutine(AttackCoroutine(unitPosition, attackAnimationType));
         }
 
-        #region RotateTowardsPositionAndAttackUpdate
-        private bool _isRotatingTowardsPosition;
-        private Vector3 _flatRotateDirection;
-        private bool LookingAtPosition => Vector3.Angle(movementTransform.forward, _flatRotateDirection) < 0.1f;
-
-        private bool _isAttacking;
-        private AnimationType _attackAnimationType;
-        
-        private void RotateTowardsPositionAndAttackUpdate()
+        private IEnumerator AttackCoroutine(Vector3 unitPosition, AnimationType attackAnimationType)
         {
-            if (!_isRotatingTowardsPosition) return;
+            Vector3 flatUnitDirection = unitPosition - movementTransform.position;
+            flatUnitDirection.y = 0f;
+            Quaternion unitRotation = Quaternion.LookRotation(flatUnitDirection);
+            yield return StartCoroutine(SetRotationCoroutine(unitRotation));
             
-            Quaternion lookRotation = Quaternion.LookRotation(_flatRotateDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * RotationSpeed);
-
-            if (LookingAtPosition)
-            {
-                _isRotatingTowardsPosition = false;
-                if (_isAttacking)
-                {
-                    _isAttacking = false;
-                    Animate(_attackAnimationType);
-                }
-            }
+            Animate(attackAnimationType);
         }
         
         private void AnimatorEvent_AttackFinished()
         {
-            if (!IsOwner) return;
-            
-            // _isRotatingTowardsRotation = true;
-            // _rotationDestination = IsHost ? HostUnitsRotation : ClientUnitsRotation;
+            if (!IsHost) return;
+            StartCoroutine(SetRotationCoroutine(Owner.IsHost ? HostUnitsRotation : ClientUnitsRotation));
         }
-        #endregion
     }
 }
