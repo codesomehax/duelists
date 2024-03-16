@@ -10,6 +10,8 @@ namespace Units.Battle
 {
     public partial class BattleUnit
     {
+        public static event Action<BattleUnit> OnUnitDeath; 
+
         private static readonly Quaternion HostUnitsRotation = Quaternion.identity;
         private static readonly Quaternion ClientUnitsRotation = Quaternion.Euler(0, 180, 0);
 
@@ -127,12 +129,25 @@ namespace Units.Battle
             if (remainingCount > 0)
                 Animate(AnimationType.Hurt);
             else
-                Die();
+                Animate(AnimationType.Death);
         }
 
-        private void Die()
+        private void AnimationEvent_DyingStarted()
         {
-            Animate(AnimationType.Death);
+            canvasTransform.gameObject.SetActive(false);
+            Destroy(UnitIcon.gameObject);
+        }
+
+        private void AnimationEvent_DyingEnded()
+        {
+            if (!IsServer) return;
+            StartCoroutine(DeathCoroutine());
+        }
+
+        private IEnumerator DeathCoroutine()
+        {
+            yield return new WaitForSeconds(1f);
+            OnUnitDeath?.Invoke(this);
         }
     }
 }

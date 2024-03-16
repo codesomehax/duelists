@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Battle.Player;
-using FishNet.Connection;
 using FishNet.Object;
+using Units.Battle;
 using UnityEngine;
 
 namespace Battle
@@ -14,6 +14,13 @@ namespace Battle
         private void Awake()
         {
             PlayerManager.OnReady += SetPlayerReady;
+            BattleUnit.OnUnitDeath += DespawnUnit;
+        }
+
+        private void DespawnUnit(BattleUnit battleUnit)
+        {
+            _sortedTurnList.Remove(battleUnit);
+            Despawn(battleUnit.NetworkObject);
         }
 
         private void SetPlayerReady(PlayerManager playerManager)
@@ -36,6 +43,7 @@ namespace Battle
         private void OnDestroy()
         {
             PlayerManager.OnReady -= SetPlayerReady;
+            BattleUnit.OnUnitDeath -= DespawnUnit;
         }
     }
 }
