@@ -14,6 +14,7 @@ namespace Battle.Player
             _playerUI.PlaceUnitWindow.OnUnitPlaced += PlaceUnit;
             _playerUI.UnitRemovalConfirmationWindow.OnRemovalConfirmed += RemoveUnit;
             _playerUI.ReadyButton.onClick.AddListener(ReadyButtonHandler);
+            _playerUI.EndTurnButton.onClick.AddListener(EndTurnButtonHandler);
         }
 
         private void ShowPlaceUnitWindow(IDictionary<UnitType, PlaceUnitData> placeUnitData)
@@ -31,6 +32,19 @@ namespace Battle.Player
             _playerUI.ReadyButton.gameObject.SetActive(false);
             _gridManager.SetAllToPlaceholder();
             SetPlayerReadyServerRpc();
+        }
+
+        private void ShowEndTurnButton()
+        {
+            _playerUI.EndTurnButton.gameObject.SetActive(true);
+        }
+
+        private void EndTurnButtonHandler()
+        {
+            _playerUI.EndTurnButton.gameObject.SetActive(false);
+            UnmarkReachablePositions();
+            UnmarkPositionsInAttackRange();
+            EndTurnServerRpc();
         }
     }
 }

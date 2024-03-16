@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using FishNet.Object;
-using Units;
 using Units.Battle;
 using UnityEngine;
 
@@ -31,6 +30,14 @@ namespace Battle
                 BattleUnit battleUnit = battleUnits.First(unit => unit.CellPosition == sortedCellPositions[i]);
                 battleUnit.UnitIcon.transform.SetSiblingIndex(i);
             }
+        }
+
+        [ObserversRpc]
+        private void ArrangeUnitIconObserversRpc(Vector3Int cellPosition, int siblingIndex)
+        {
+            BattleUnit[] battleUnits = FindObjectsOfType<BattleUnit>();
+            BattleUnit battleUnit = battleUnits.First(unit => unit.CellPosition == cellPosition);
+            battleUnit.UnitIcon.transform.SetSiblingIndex(siblingIndex);
         }
     }
 }

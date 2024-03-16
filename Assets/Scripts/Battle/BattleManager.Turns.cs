@@ -2,9 +2,7 @@
 using System.Linq;
 using Battle.Player;
 using FishNet.Component.Observing;
-using Units;
 using Units.Battle;
-using UnityEngine;
 
 namespace Battle
 {
@@ -31,8 +29,23 @@ namespace Battle
         {
             BattleUnit battleUnit = _sortedTurnList.Values[0];
             PlayerManager playerManager = _playerManagers.First(pm => pm.Owner == battleUnit.Owner);
+            playerManager.OnTurnEnded += EndTurn;
             playerManager.ActingUnit = battleUnit;
             playerManager.PlayerState = PlayerState.Acting;
+        }
+
+        private void EndTurn(PlayerManager playerManager)
+        {
+            playerManager.OnTurnEnded -= EndTurn;
+            
+            _sortedTurnList.RemoveAt(0);
+            playerManager.ActingUnit.IncrementTimelinePosition();
+            _sortedTurnList.Add(playerManager.ActingUnit, playerManager.ActingUnit);
+            int siblingIndex = _sortedTurnList.IndexOfValue(playerManager.ActingUnit);
+            ArrangeUnitIconObserversRpc(playerManager.ActingUnit.CellPosition, siblingIndex);
+
+            playerManager.PlayerState = PlayerState.Waiting;
+            NextTurn();
         }
     }
 

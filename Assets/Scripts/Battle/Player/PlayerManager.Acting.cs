@@ -11,6 +11,8 @@ namespace Battle.Player
 {
     public partial class PlayerManager
     {
+        public event Action<PlayerManager> OnTurnEnded;
+        
         private IDictionary<Vector3Int, IList<Vector3Int>> _reachablePositions;
         private ISet<Vector3Int> _positionsInAttackRange;
 
@@ -27,6 +29,7 @@ namespace Battle.Player
 
             MarkReachablePositions();
             MarkPositionsInAttackRange();
+            ShowEndTurnButton();
         }
 
         private void SetPlayerMoved(NetworkConnection connection)
@@ -101,6 +104,16 @@ namespace Battle.Player
             Vector3 enemyUnitWorldPosition = _gridManager.CellPositionToWorld(enemyUnit.CellPosition);
             AnimationType animationType = distance == 1 ? AnimationType.AttackMelee : AnimationType.AttackRanged;
             ActingUnit.AttackUnitAtPosition(enemyUnit, enemyUnitWorldPosition, animationType);
+        }
+
+        [ServerRpc]
+        private void EndTurnServerRpc()
+        {
+            _playerMoved = false;
+            ActingUnit.OnDestinationReached -= SetPlayerMoved;
+            ActingUnit.OnDestinationReached -= MarkPositionsInAttackRangeTargetRpc;
+            
+            OnTurnEnded?.Invoke(this);
         }
     }
 }
