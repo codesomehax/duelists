@@ -22,4 +22,4 @@ MonoBehaviour:
   magicDefense: 0
   speed: 20
   movementSpeed: 3
-  attackRange: 1
+  attackRange: 20

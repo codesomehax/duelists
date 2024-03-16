@@ -20,5 +20,6 @@ MonoBehaviour:
   intelligence: 0
   physicalDefense: 0
   magicDefense: 0
-  speed: 5
+  speed: 20
   movementSpeed: 3
+  attackRange: 20

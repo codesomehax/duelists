@@ -1,5 +1,6 @@
 ﻿using System;
 using Factions;
+using FishNet.Component.Animating;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UnityEngine;
@@ -49,13 +50,13 @@ namespace Units.Battle
         private void Awake()
         {
             _cameraTransform = FindObjectOfType<Camera>().transform;
-            _animator = GetComponent<Animator>();
+            _networkAnimator = GetComponent<NetworkAnimator>();
         }
 
         public override void OnStartServer()
         {
             DisableClientCanvasOnHost();
-            RotateTowardsEnemy();
+            RotateTowardsEnemySide();
             IncrementTimelinePosition();
         }
 
@@ -71,6 +72,8 @@ namespace Units.Battle
         {
             RotateCanvasToCamera();
             MoveUpdate();
+            RotateTowardsPositionAndAttackUpdate();
+            RotateTowardsRotationUpdate();
         }
 
         public void IncrementTimelinePosition() => TimelinePosition += Period;

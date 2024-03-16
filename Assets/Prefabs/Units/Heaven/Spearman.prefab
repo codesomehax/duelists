@@ -971,8 +971,8 @@ MonoBehaviour:
   _animator: {fileID: 5444806423651164101}
   _smoothFloats: 1
   _interpolation: 2
-  _clientAuthoritative: 1
-  _sendToOwner: 0
+  _clientAuthoritative: 0
+  _sendToOwner: 1
 --- !u!4 &2121189156876174783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}

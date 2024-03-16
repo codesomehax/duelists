@@ -1,4 +1,5 @@
 ﻿using System;
+using FishNet.Component.Animating;
 using UnityEngine;
 
 namespace Units.Battle
@@ -12,29 +13,29 @@ namespace Units.Battle
         private static readonly int HurtAnimatorParamHash = Animator.StringToHash("Hurt");
         private static readonly int DeadAnimatorParamHash = Animator.StringToHash("Dead");
         
-        private Animator _animator;
+        private NetworkAnimator _networkAnimator;
 
         private void Animate(AnimationType animationType)
         {
             switch (animationType)
             {
                 case AnimationType.Idle:
-                    _animator.SetBool(RunningAnimatorParamHash, false);
+                    _networkAnimator.Animator.SetBool(RunningAnimatorParamHash, false);
                     break;
                 case AnimationType.Run:
-                    _animator.SetBool(RunningAnimatorParamHash, true);
+                    _networkAnimator.Animator.SetBool(RunningAnimatorParamHash, true);
                     break;
                 case AnimationType.AttackMelee:
-                    _animator.SetTrigger(AttackingMeleeAnimatorParamHash);
+                    _networkAnimator.SetTrigger(AttackingMeleeAnimatorParamHash);
                     break;
                 case AnimationType.AttackRanged:
-                    _animator.SetTrigger(AttackingRangedAnimatorParamHash);
+                    _networkAnimator.SetTrigger(AttackingRangedAnimatorParamHash);
                     break;
                 case AnimationType.Hurt:
-                    _animator.SetTrigger(HurtAnimatorParamHash);
+                    _networkAnimator.SetTrigger(HurtAnimatorParamHash);
                     break;
                 case AnimationType.Death:
-                    _animator.SetTrigger(DeadAnimatorParamHash);
+                    _networkAnimator.Animator.SetBool(DeadAnimatorParamHash, true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(animationType), animationType, null);

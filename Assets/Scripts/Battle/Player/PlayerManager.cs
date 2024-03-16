@@ -26,6 +26,10 @@ namespace Battle.Player
             .NotNull()
             .AsReadOnlyCollection();
 
+        public ICollection<BattleUnit> EnemyUnitsCollection => FindObjectsOfType<BattleUnit>()
+            .Where(unit => unit.Owner != Owner)
+            .AsReadOnlyCollection();
+
         #region RuntimeDependencies
         private GridManager _gridManager;
         private UnitsManager _unitsManager;
@@ -64,6 +68,8 @@ namespace Battle.Player
                 case PlayerState.Acting:
                     if (actionTile.ActionTileState == ActionTileState.Available)
                         MoveActingUnitToPositionServerRpc(actionTile.CellPosition);
+                    if (actionTile.ActionTileState == ActionTileState.Attack)
+                        AttackUnitAtPositionServerRpc(actionTile.CellPosition);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

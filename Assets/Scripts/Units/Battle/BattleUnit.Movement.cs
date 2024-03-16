@@ -20,14 +20,8 @@ namespace Units.Battle
         [Header("Movement")]
         [SerializeField] private Transform movementTransform;
 
-        private bool _isMoving;
-        private Vector3 _flatMovementDestination;
-        private Queue<Vector3> _movementPath = new();
-        private Vector3 FlatMovementTransformPosition => new(movementTransform.position.x, 0f, movementTransform.position.z);
-        private bool CurrentDestinationReached => (FlatMovementTransformPosition - _flatMovementDestination).magnitude < 0.1f;
-
         [Server]
-        private void RotateTowardsEnemy()
+        private void RotateTowardsEnemySide()
         {
             transform.rotation = Owner.IsHost ? HostUnitsRotation : ClientUnitsRotation;
         }
@@ -45,6 +39,22 @@ namespace Units.Battle
             _flatMovementDestination = _movementPath.Dequeue();
             _flatMovementDestination.y = 0f;
         }
+
+        public void AttackUnitAtPosition(Vector3 unitPosition, AnimationType attackAnimationType)
+        {
+            _flatRotateDirection = new Vector3(unitPosition.x, 0f, unitPosition.z) 
+                                   - FlatMovementTransformPosition;
+            _attackAnimationType = attackAnimationType;
+            _isRotatingTowardsPosition = true;
+            _isAttacking = true;
+        }
+
+        #region MoveUpdate
+        private bool _isMoving;
+        private Vector3 _flatMovementDestination;
+        private Queue<Vector3> _movementPath = new();
+        private Vector3 FlatMovementTransformPosition => new(movementTransform.position.x, 0f, movementTransform.position.z);
+        private bool CurrentDestinationReached => (FlatMovementTransformPosition - _flatMovementDestination).magnitude < 0.1f;
 
         private void MoveUpdate()
         {
@@ -65,8 +75,63 @@ namespace Units.Battle
             {
                 _isMoving = false;
                 Animate(AnimationType.Idle);
+                
+                _isRotatingTowardsRotation = true;
+                _rotationDestination = IsHost ? HostUnitsRotation : ClientUnitsRotation;
+                
                 OnDestinationReached?.Invoke(Owner);
             }
         }
+        #endregion
+
+        #region RotateTowardsPositionAndAttackUpdate
+        private bool _isRotatingTowardsPosition;
+        private Vector3 _flatRotateDirection;
+        private bool LookingAtPosition => Vector3.Angle(movementTransform.forward, _flatRotateDirection) < 0.1f;
+
+        private bool _isAttacking;
+        private AnimationType _attackAnimationType;
+        
+        private void RotateTowardsPositionAndAttackUpdate()
+        {
+            if (!_isRotatingTowardsPosition) return;
+            
+            Quaternion lookRotation = Quaternion.LookRotation(_flatRotateDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * RotationSpeed);
+
+            if (LookingAtPosition)
+            {
+                _isRotatingTowardsPosition = false;
+                if (_isAttacking)
+                {
+                    _isAttacking = false;
+                    Animate(_attackAnimationType);
+                }
+            }
+        }
+        
+        private void AnimatorEvent_AttackFinished()
+        {
+            if (!IsOwner) return;
+            
+            _isRotatingTowardsRotation = true;
+            _rotationDestination = IsHost ? HostUnitsRotation : ClientUnitsRotation;
+        }
+        #endregion
+        
+        #region RotateTowardsRotationUpdate
+        private bool _isRotatingTowardsRotation;
+        private Quaternion _rotationDestination;
+        
+        private bool LookingAtRotation => Quaternion.Angle(transform.rotation, _rotationDestination) < 0.1f;
+
+        private void RotateTowardsRotationUpdate()
+        {
+            if (!_isRotatingTowardsRotation) return;
+            transform.rotation = Quaternion.Slerp(transform.rotation, _rotationDestination, Time.deltaTime * RotationSpeed);
+
+            if (LookingAtRotation) _isRotatingTowardsRotation = false;
+        }
+        #endregion
     }
 }
