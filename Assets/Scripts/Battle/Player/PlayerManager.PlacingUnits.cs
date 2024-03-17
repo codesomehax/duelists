@@ -83,6 +83,8 @@ namespace Battle.Player
             
             BattleUnit unitPrefab = _unitsManager.GetUnitPrefabByFactionAndType(Faction, unitType);
             BattleUnit unit = Instantiate(unitPrefab);
+            unit.HeroType = HeroType;
+            unit.AbilityType = AbilityType;
             unit.Count = unitCount;
             unit.CellPosition = cellPosition;
             _gridManager.PlaceUnit(unit, cellPosition);

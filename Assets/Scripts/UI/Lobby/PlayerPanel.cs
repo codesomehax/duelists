@@ -6,6 +6,7 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using UI.Lobby.Settings;
 using Units;
+using Units.Hero;
 using UnityEngine;
 
 namespace UI.Lobby
@@ -19,9 +20,13 @@ namespace UI.Lobby
         [SyncVar(OnChange = nameof(SetUsernameText))] [NonSerialized] public string Username;
         public int Gold => goldCountIndicator.AvailableGold;
         public Faction Faction => factionDropdown.Faction;
+        public HeroType HeroType => heroDropdown.HeroType;
+        public AbilityType AbilityType => abilityDropdown.AbilityType;
         public IDictionary<UnitType, int> UnitCounts => GetUnitCounts();
 
         [SerializeField] private FactionDropdown factionDropdown;
+        [SerializeField] private HeroDropdown heroDropdown;
+        [SerializeField] private AbilityDropdown abilityDropdown;
         [SerializeField] private GoldCountIndicator goldCountIndicator;
         private UnitInputPanel[] _unitInputPanels;
         private LobbySettingsMenu _lobbySettingsMenu;

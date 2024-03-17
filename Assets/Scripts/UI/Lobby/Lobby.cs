@@ -85,10 +85,12 @@ namespace UI.Lobby
             // }
             
             NetworkConnection[] connections = playerPanels.Select(playerPanel => playerPanel.Owner).ToArray();
-            Army[] armies = playerPanels.Select(playerPanel => new Army()
+            Army[] armies = playerPanels.Select(playerPanel => new Army
             {
                 Connection = playerPanel.Owner,
                 Faction = playerPanel.Faction,
+                HeroType = playerPanel.HeroType,
+                AbilityType = playerPanel.AbilityType,
                 UnitCounts = new Dictionary<UnitType, int>(playerPanel.UnitCounts)
             }).ToArray();
             SceneLoadData sld = new SceneLoadData(BattlefieldSceneName)
@@ -114,6 +116,8 @@ namespace UI.Lobby
                 {
                     PlayerManager playerManager = Instantiate(playerManagerPrefab);
                     playerManager.Faction = army.Faction;
+                    playerManager.HeroType = army.HeroType;
+                    playerManager.AbilityType = army.AbilityType;
                     playerManager.AvailableUnits.AddRange(army.UnitCounts);
                     InstanceFinder.ServerManager.Spawn(playerManager.NetworkObject, army.Connection);
                 }

@@ -7,6 +7,7 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Units;
 using Units.Battle;
+using Units.Hero;
 using Unity.VisualScripting;
 
 namespace Battle.Player
@@ -16,6 +17,8 @@ namespace Battle.Player
         private const int MaxBattleUnitsCount = 10;
 
         [SyncVar] [NonSerialized] public Faction Faction;
+        [SyncVar] [NonSerialized] public HeroType HeroType;
+        [SyncVar] [NonSerialized] public AbilityType AbilityType;
         [SyncObject] public readonly SyncDictionary<UnitType, int> AvailableUnits = new();
         [SyncVar(OnChange = nameof(StartTurn))] [NonSerialized] public PlayerState PlayerState = PlayerState.PlacingUnits;
         [SyncVar] [NonSerialized] public BattleUnit ActingUnit;

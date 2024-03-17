@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Factions;
 using FishNet.Component.Animating;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
+using Units.Hero;
 using UnityEngine;
 
 namespace Units.Battle
@@ -15,7 +17,9 @@ namespace Units.Battle
         #region Synchronized
         [SyncVar(OnChange = nameof(SyncUnitCount))] [NonSerialized] public int Count;
         [SyncVar] [NonSerialized] public Vector3Int CellPosition;
-        [field: SyncVar] [field: NonSerialized] public ulong TimelinePosition { get; private set; }
+        [SyncVar] [NonSerialized] public ulong TimelinePosition;
+        [SyncVar] [NonSerialized] public HeroType HeroType;
+        [SyncVar] [NonSerialized] public AbilityType AbilityType;
         #endregion
 
         #region General
@@ -25,12 +29,36 @@ namespace Units.Battle
         #endregion
 
         #region Stats
+
+        private static readonly IDictionary<HeroType, int> StrengthPerHeroType = new Dictionary<HeroType, int>
+        {
+            { HeroType.Warrior, 30 },
+            { HeroType.Rogue, 15 },
+            { HeroType.Mage, 10 }
+        };
+        private static readonly IDictionary<HeroType, uint> AgilityPerHeroType = new Dictionary<HeroType, uint>
+        {
+            { HeroType.Warrior, 20 },
+            { HeroType.Rogue, 30 },
+            { HeroType.Mage, 20 }
+        };
+        private static readonly IDictionary<HeroType, int> IntelligencePerHeroType = new Dictionary<HeroType, int>
+        {
+            { HeroType.Warrior, 10 },
+            { HeroType.Rogue, 15 },
+            { HeroType.Mage, 30 }
+        };
+
+        private int AbilityStrengthIncrease => AbilityType == AbilityType.StrengthIncrease ? 10 : 0;
+        private uint AbilityAgilityIncrease => (uint)(AbilityType == AbilityType.AgilityIncrease ? 10 : 0);
+        private int AbilityIntelligenceIncrease => AbilityType == AbilityType.IntelligenceIncrease ? 10 : 0;
         
         public int SingleUnitHealth => battleUnitData.SingleUnitHealth;
         public int BaseDamage => battleUnitData.BaseDamage;
-        public int Strength => battleUnitData.Strength;
-        public uint Agility => battleUnitData.Agility;
-        public int Intelligence => battleUnitData.Intelligence;
+        public int Strength => battleUnitData.Strength + StrengthPerHeroType[HeroType] + AbilityStrengthIncrease;
+        public uint Agility => battleUnitData.Agility + AgilityPerHeroType[HeroType] + AbilityAgilityIncrease;
+        public int Intelligence => battleUnitData.Intelligence + IntelligencePerHeroType[HeroType] 
+                                                               + AbilityIntelligenceIncrease;
         public int PhysicalDefense => battleUnitData.PhysicalDefense;
         public int MagicDefense => battleUnitData.MagicDefense;
         public int Speed => battleUnitData.Speed;
