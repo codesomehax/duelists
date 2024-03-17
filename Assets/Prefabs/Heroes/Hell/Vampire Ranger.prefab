@@ -689,7 +689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3296132410448674964}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: Vampire Ranger Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2346,7 +2346,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.024086
+      value: 38.507004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2354,7 +2354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.431866
+      value: 33.379917
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2386,7 +2386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_Name
-      value: Hell Hero Rogue
+      value: Vampire Ranger
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_Controller
@@ -2418,6 +2418,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cf941972034f9e443b0704b849663173, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4567094651841484673}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cf941972034f9e443b0704b849663173, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1257783689036675713}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cf941972034f9e443b0704b849663173, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6288990137822169594}
@@ -2477,6 +2480,20 @@ MonoBehaviour:
   unitCountText: {fileID: 1874227439575697383}
   battleUnitData: {fileID: 11400000, guid: 5fadaa8ffae51bb4988da3c1f0c354ef, type: 2}
   unitIcon: {fileID: 504637755268800610}
+--- !u!114 &1257783689036675713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959297733370804192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1508e7858c6543c798b912a3e9b8a0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileInHand: {fileID: 3296132410448674964}
+  projectilePrefab: {fileID: 3529700205716804088, guid: 19743abfa4661f948b4e4e20a747d0be, type: 3}
 --- !u!114 &6288990137822169594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2499,7 +2516,7 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 40.024086, y: -0.00000047683716, z: 30.431866}
+    Position: {x: 38.507004, y: -0.00000047683716, z: 33.379917}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1, y: 1, z: 1}
   _isNetworked: 1

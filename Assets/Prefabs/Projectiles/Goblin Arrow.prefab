@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6699268116264959458
+--- !u!1 &8340173218247654878
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7191015681891058518}
-  - component: {fileID: 2677185940510343814}
-  - component: {fileID: 777992713483543996}
-  - component: {fileID: 2489461860277395642}
-  - component: {fileID: 1318285788171452544}
-  - component: {fileID: 6118488586064098468}
+  - component: {fileID: 8336906236387204444}
+  - component: {fileID: 1972495109866054946}
+  - component: {fileID: 7941740583328168348}
+  - component: {fileID: 6414175704454774566}
+  - component: {fileID: 2147412596415506077}
+  - component: {fileID: 5159507858956474453}
   m_Layer: 0
-  m_Name: Heaven Arrow
+  m_Name: Goblin Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7191015681891058518
+--- !u!4 &8336906236387204444
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699268116264959458}
+  m_GameObject: {fileID: 8340173218247654878}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000074751554, y: -0.68655664, z: -0.000000028875407, w: 0.7270764}
-  m_LocalPosition: {x: 43.045662, y: 1.5782324, z: 39.12627}
-  m_LocalScale: {x: 4.9940014, y: 4.994, z: 4.9940014}
+  m_LocalRotation: {x: -0.006639769, y: 0.7077031, z: 0.6946636, w: -0.12866628}
+  m_LocalPosition: {x: 41.23896, y: 1.0879053, z: 44.502956}
+  m_LocalScale: {x: 10.00001, y: 10.00001, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 93.645996, y: -105.87799, z: 73.335}
---- !u!33 &2677185940510343814
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!33 &1972495109866054946
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699268116264959458}
-  m_Mesh: {fileID: 4019234525060620036, guid: 5ca5a1d0ff9862b44b10c8e18253ca1c, type: 3}
---- !u!23 &777992713483543996
+  m_GameObject: {fileID: 8340173218247654878}
+  m_Mesh: {fileID: -8456603592688089960, guid: cbe7e5171df32124dba0ac6011a3ce94, type: 3}
+--- !u!23 &7941740583328168348
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699268116264959458}
+  m_GameObject: {fileID: 8340173218247654878}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,8 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9aba40c31dfdd8e47bafc0d0ae4f4cd8, type: 2}
-  - {fileID: 2100000, guid: 1ac9b9415e2aaa54187d2d3d0d97186a, type: 2}
+  - {fileID: 2100000, guid: bc81629979741f14795d6d2a559b04ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,29 +86,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2489461860277395642
+--- !u!114 &6414175704454774566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699268116264959458}
+  m_GameObject: {fileID: 8340173218247654878}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 300c6920c1e64fc3ab513d7a29f32e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 0
-  _addedNetworkObject: {fileID: 1318285788171452544}
-  _networkObjectCache: {fileID: 1318285788171452544}
+  _addedNetworkObject: {fileID: 2147412596415506077}
+  _networkObjectCache: {fileID: 2147412596415506077}
   speed: 15
---- !u!114 &1318285788171452544
+--- !u!114 &2147412596415506077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699268116264959458}
+  m_GameObject: {fileID: 8340173218247654878}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
@@ -119,13 +118,13 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
-  - {fileID: 2489461860277395642}
+  - {fileID: 6414175704454774566}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 43.045662, y: 1.5782324, z: 39.12627}
-    Rotation: {x: -0.000000074751554, y: -0.68655664, z: -0.000000028875407, w: 0.7270764}
-    LocalScale: {x: 4.9940014, y: 4.994, z: 4.9940014}
+    Position: {x: 41.23896, y: 1.0879053, z: 44.502956}
+    Rotation: {x: -0.006639769, y: 0.7077031, z: 0.6946636, w: -0.12866628}
+    LocalScale: {x: 10.00001, y: 10.00001, z: 10}
   _isNetworked: 1
   _isGlobal: 0
   _initializeOrder: 0
@@ -135,21 +134,21 @@ MonoBehaviour:
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 3991001759
   <SceneId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 6453430295405650286
---- !u!114 &6118488586064098468
+  <AssetPathHash>k__BackingField: 6906034929223973830
+--- !u!114 &5159507858956474453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699268116264959458}
+  m_GameObject: {fileID: 8340173218247654878}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _componentIndexCache: 255
-  _addedNetworkObject: {fileID: 1318285788171452544}
+  _addedNetworkObject: {fileID: 2147412596415506077}
   _networkObjectCache: {fileID: 0}
   _componentConfiguration: 0
   _synchronizeParent: 0
