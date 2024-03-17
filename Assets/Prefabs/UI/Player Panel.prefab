@@ -532,7 +532,7 @@ MonoBehaviour:
     m_Options:
     - m_Text: Warrior
       m_Image: {fileID: 0}
-    - m_Text: Rogue
+    - m_Text: Ranger
       m_Image: {fileID: 0}
     - m_Text: Mage
       m_Image: {fileID: 0}
@@ -2423,8 +2423,8 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 3959884820327966340}
   _networkObjectCache: {fileID: 3959884820327966340}
   factionDropdown: {fileID: 1831790618905289483}
-  heroDropdown: {fileID: 0}
-  abilityDropdown: {fileID: 0}
+  heroDropdown: {fileID: 6573762033633745844}
+  abilityDropdown: {fileID: 3519743462831876434}
   goldCountIndicator: {fileID: 693692154577092528}
   usernameText: {fileID: 1416595512481006379}
 --- !u!114 &6632257688744901792

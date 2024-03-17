@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cardinal
   faction: 0
-  unitType: 7
+  unitType: 5
   singleUnitHealth: 800
   baseDamage: 200
   strength: 10

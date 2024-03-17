@@ -61,7 +61,7 @@ namespace UI.Lobby
         
         public void StartGame()
         {
-            PlayerPanel[] playerPanels = FindObjectsByType<PlayerPanel>(FindObjectsSortMode.None);
+            PlayerPanel[] playerPanels = FindObjectsOfType<PlayerPanel>();
             
             // if (NotEnoughPlayers(playerPanels))
             // {

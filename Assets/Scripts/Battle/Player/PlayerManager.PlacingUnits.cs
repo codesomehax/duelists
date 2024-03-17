@@ -37,6 +37,9 @@ namespace Battle.Player
             }
             
             ICollection<BattleUnitData> units = _unitsManager.GetUnitsInfoByFaction(Faction);
+            BattleUnitData hero = _unitsManager.GetHeroInfoByFactionAndType(Faction, HeroType);
+            units.Add(hero);
+            
             IDictionary<UnitType, PlaceUnitData> placeUnitData = units.ToDictionary(
                 unit => unit.UnitType,
                 unit => new PlaceUnitData()
@@ -80,8 +83,10 @@ namespace Battle.Player
                 return;
             }
 
-            
-            BattleUnit unitPrefab = _unitsManager.GetUnitPrefabByFactionAndType(Faction, unitType);
+
+            BattleUnit unitPrefab = unitType == UnitType.Hero
+                ? _unitsManager.GetHeroByFactionAndType(Faction, HeroType)
+                : _unitsManager.GetUnitPrefabByFactionAndType(Faction, unitType);
             BattleUnit unit = Instantiate(unitPrefab);
             unit.HeroType = HeroType;
             unit.AbilityType = AbilityType;

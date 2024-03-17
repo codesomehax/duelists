@@ -26,6 +26,7 @@ namespace Units.Battle
         public string Name => battleUnitData.Name;
         public Faction Faction => battleUnitData.Faction;
         public UnitType UnitType => battleUnitData.UnitType;
+        public BattleUnitData BattleUnitData => battleUnitData;
         #endregion
 
         #region Stats
@@ -33,19 +34,19 @@ namespace Units.Battle
         private static readonly IDictionary<HeroType, int> StrengthPerHeroType = new Dictionary<HeroType, int>
         {
             { HeroType.Warrior, 30 },
-            { HeroType.Rogue, 15 },
+            { HeroType.Ranger, 15 },
             { HeroType.Mage, 10 }
         };
         private static readonly IDictionary<HeroType, uint> AgilityPerHeroType = new Dictionary<HeroType, uint>
         {
             { HeroType.Warrior, 20 },
-            { HeroType.Rogue, 30 },
+            { HeroType.Ranger, 30 },
             { HeroType.Mage, 20 }
         };
         private static readonly IDictionary<HeroType, int> IntelligencePerHeroType = new Dictionary<HeroType, int>
         {
             { HeroType.Warrior, 10 },
-            { HeroType.Rogue, 15 },
+            { HeroType.Ranger, 15 },
             { HeroType.Mage, 30 }
         };
 

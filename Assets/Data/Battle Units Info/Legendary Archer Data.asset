@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Legendary Archer
   faction: 0
-  unitType: 6
+  unitType: 5
   singleUnitHealth: 800
   baseDamage: 130
   strength: 50

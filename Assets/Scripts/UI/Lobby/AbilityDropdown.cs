@@ -8,7 +8,8 @@ namespace UI.Lobby
 {
     public partial class AbilityDropdown : NetworkBehaviour
     {
-        [SyncVar(OnChange = nameof(SyncAbilityType))] [NonSerialized] public AbilityType AbilityType;
+        [SyncVar(OnChange = nameof(SyncAbilityType))] [NonSerialized]
+        public AbilityType AbilityType;
         
         [ServerRpc]
         private void SetAbilityTypeServerRpc(AbilityType abilityType)

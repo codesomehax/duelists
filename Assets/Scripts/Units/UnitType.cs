@@ -7,8 +7,6 @@
         Defender,
         Mage,
         AssaultUnit,
-        HeroWarrior,
-        HeroRanger,
-        HeroMage
+        Hero
     }
 }

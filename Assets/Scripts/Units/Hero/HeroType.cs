@@ -3,7 +3,7 @@
     public enum HeroType
     {
         Warrior,
-        Rogue,
+        Ranger,
         Mage
     }
 }

@@ -779,7 +779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e17445d04c3615f4abfa337cda20dd21, type: 3}
       propertyPath: m_Name
-      value: Hell Hero Warrior
+      value: Demon Warrior
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -907,7 +907,7 @@ MonoBehaviour:
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 3991001759
   <SceneId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 6469013197284042940
+  <AssetPathHash>k__BackingField: 7988781508437374496
 --- !u!114 &2399382818213022249
 MonoBehaviour:
   m_ObjectHideFlags: 0

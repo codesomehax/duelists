@@ -33,9 +33,11 @@ namespace UI.Lobby
 
         private IDictionary<UnitType, int> GetUnitCounts()
         {
-            return _unitInputPanels.ToDictionary(
+            IDictionary<UnitType, int> unitCounts = _unitInputPanels.ToDictionary(
                 unitInputPanel => unitInputPanel.UnitType,
                 unitInputPanel => unitInputPanel.Count);
+            unitCounts[UnitType.Hero] = 1;
+            return unitCounts;
         }
         
         private void Awake()

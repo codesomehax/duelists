@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Witch
   faction: 1
-  unitType: 7
+  unitType: 5
   singleUnitHealth: 1000
   baseDamage: 200
   strength: 0
