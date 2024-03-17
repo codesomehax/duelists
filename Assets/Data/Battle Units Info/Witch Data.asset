@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ab56ce9fe3494f91eded1ad4cf09f1, type: 3}
+  m_Name: Witch Data
+  m_EditorClassIdentifier: 
+  name: Witch
+  faction: 1
+  unitType: 7
+  singleUnitHealth: 1000
+  baseDamage: 200
+  strength: 0
+  agility: 25
+  intelligence: 50
+  physicalDefense: 20
+  magicDefense: 60
+  speed: 4
+  movementSpeed: 5
+  attackRange: 6
+  meleeAttackType: 1
+  rangedAttackType: 1

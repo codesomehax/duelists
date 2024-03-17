@@ -6,6 +6,9 @@
         Marksman,
         Defender,
         Mage,
-        AssaultUnit
+        AssaultUnit,
+        HeroWarrior,
+        HeroRanger,
+        HeroMage
     }
 }
