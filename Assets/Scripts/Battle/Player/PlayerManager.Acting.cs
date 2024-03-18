@@ -22,13 +22,16 @@ namespace Battle.Player
             {
                 ActingUnit.OnDestinationReached += SetPlayerMoved;
                 ActingUnit.OnDestinationReached += MarkPositionsInAttackRangeTargetRpc;
-                return;
             }
-            
-            if (asServer || !IsOwner || next != PlayerState.Acting) return;
+        }
 
-            MarkReachablePositions();
-            MarkPositionsInAttackRange();
+        [TargetRpc]
+        public void StartTurnLocallyTargetRpc(NetworkConnection connection, Vector3Int unitPosition)
+        {
+            BattleUnit actingUnit = BattleUnitsCollection.First(unit => unit.CellPosition == unitPosition);
+            
+            MarkReachablePositions(actingUnit);
+            MarkPositionsInAttackRange(actingUnit);
             ShowEndTurnButton();
         }
 
@@ -37,9 +40,9 @@ namespace Battle.Player
             _playerMoved = true;
         }
 
-        private void MarkReachablePositions()
+        private void MarkReachablePositions(BattleUnit battleUnit)
         {
-            _reachablePositions = BattleUnitPathfinder.GetReachablePositions(ActingUnit);
+            _reachablePositions = BattleUnitPathfinder.GetReachablePositions(battleUnit);
             _gridManager.MarkPositionsAs(_reachablePositions.Keys, ActionTileState.Available);
         }
 
@@ -51,9 +54,9 @@ namespace Battle.Player
             _reachablePositions = null;
         }
 
-        private void MarkPositionsInAttackRange()
+        private void MarkPositionsInAttackRange(BattleUnit battleUnit)
         {
-            _positionsInAttackRange = BattleUnitPathfinder.GetUnitsInAttackRangeFor(ActingUnit);
+            _positionsInAttackRange = BattleUnitPathfinder.GetUnitsInAttackRangeFor(battleUnit);
             _gridManager.MarkPositionsAs(_positionsInAttackRange, ActionTileState.Attack);
         }
 
@@ -68,7 +71,7 @@ namespace Battle.Player
         [TargetRpc]
         private void MarkPositionsInAttackRangeTargetRpc(NetworkConnection connection)
         {
-            MarkPositionsInAttackRange();
+            MarkPositionsInAttackRange(ActingUnit);
         }
 
         [TargetRpc]

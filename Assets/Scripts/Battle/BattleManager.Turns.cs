@@ -32,6 +32,7 @@ namespace Battle
             playerManager.OnTurnEnded += EndTurn;
             playerManager.ActingUnit = battleUnit;
             playerManager.PlayerState = PlayerState.Acting;
+            playerManager.StartTurnLocallyTargetRpc(playerManager.Owner, battleUnit.CellPosition);
         }
 
         private void EndTurn(PlayerManager playerManager)
