@@ -964,6 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileInHand: {fileID: 1511819310020044400}
+  deactivateProjectileAfterShooting: 1
   projectilePrefab: {fileID: 2489461860277395642, guid: 710bfe12b737f8549b1010a3c2a9c7df, type: 3}
 --- !u!114 &8305528847810249943
 MonoBehaviour:

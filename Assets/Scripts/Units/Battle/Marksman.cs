@@ -6,6 +6,7 @@ namespace Units.Battle
     public class Marksman : MonoBehaviour
     {
         [SerializeField] private Transform projectileInHand;
+        [SerializeField] private bool deactivateProjectileAfterShooting;
         [SerializeField] private Projectile projectilePrefab;
 
         private BattleUnit _battleUnit;
@@ -29,7 +30,9 @@ namespace Units.Battle
             Projectile shotProjectile = Instantiate(projectilePrefab, projectileInHand.position, rotation);
             _battleUnit.Spawn(shotProjectile.NetworkObject, _battleUnit.Owner);
             shotProjectile.ShootAs(_battleUnit);
-            projectileInHand.gameObject.SetActive(false);
+            
+            if (deactivateProjectileAfterShooting)
+                projectileInHand.gameObject.SetActive(false);
         }
     }
 }
