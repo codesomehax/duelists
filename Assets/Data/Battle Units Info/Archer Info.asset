@@ -18,7 +18,7 @@ MonoBehaviour:
   singleUnitHealth: 25
   baseDamage: 10
   strength: 50
-  agility: 80
+  agility: 25
   intelligence: 0
   physicalDefense: 20
   magicDefense: 40
