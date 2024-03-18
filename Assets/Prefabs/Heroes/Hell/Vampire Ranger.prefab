@@ -2346,15 +2346,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.507004
+      value: 37.6381
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000047683716
+      value: 0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 33.379917
+      value: 47.591045
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf941972034f9e443b0704b849663173, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2492,9 +2492,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1508e7858c6543c798b912a3e9b8a0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 6288990137822169594}
+  _networkObjectCache: {fileID: 6288990137822169594}
   projectileInHand: {fileID: 3296132410448674964}
   deactivateProjectileAfterShooting: 1
-  projectilePrefab: {fileID: 3529700205716804088, guid: 19743abfa4661f948b4e4e20a747d0be, type: 3}
+  projectilePrefab: {fileID: 6053858596361171715, guid: 710bfe12b737f8549b1010a3c2a9c7df, type: 3}
 --- !u!114 &6288990137822169594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2512,12 +2515,13 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   _networkBehaviours:
   - {fileID: 4567094651841484673}
+  - {fileID: 1257783689036675713}
   - {fileID: 802221340934618101}
   - {fileID: 8096691427098484377}
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 38.507004, y: -0.00000047683716, z: 33.379917}
+    Position: {x: 37.6381, y: 0.0000009536743, z: 47.591045}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1, y: 1, z: 1}
   _isNetworked: 1
@@ -2525,7 +2529,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _defaultDespawnType: 0
   NetworkObserver: {fileID: 0}
-  <PrefabId>k__BackingField: 0
+  <PrefabId>k__BackingField: 18
   <SpawnableCollectionId>k__BackingField: 0
   _scenePathHash: 3991001759
   <SceneId>k__BackingField: 0
@@ -2542,7 +2546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2836e36774ca1c4bbbee976e17b649c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 1
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: 6288990137822169594}
   _networkObjectCache: {fileID: 6288990137822169594}
   _componentConfiguration: 0
@@ -2603,7 +2607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: 6288990137822169594}
   _networkObjectCache: {fileID: 6288990137822169594}
   IgnoredParameters: []

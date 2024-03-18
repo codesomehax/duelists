@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using FishNet;
 using FishNet.Object;
 using UnityEngine;
 
@@ -21,6 +20,7 @@ namespace Units.Battle
             bool ReachedTarget() => Distance().magnitude < 0.1f;
 
             Vector3 direction = Distance().normalized;
+            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
             while (!ReachedTarget())
             {
                 transform.position += direction * (speed * Time.deltaTime);

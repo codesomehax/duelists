@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using FishNet.Object;
+using UnityEngine;
 
 namespace Units.Battle
 {
     [RequireComponent(typeof(BattleUnit))]
-    public class Marksman : MonoBehaviour
+    public class Marksman : NetworkBehaviour
     {
         [SerializeField] private Transform projectileInHand;
         [SerializeField] private bool deactivateProjectileAfterShooting;
@@ -23,16 +24,20 @@ namespace Units.Battle
         
         private void AnimationEvent_ProjectileShot()
         {
-            if (!_battleUnit.IsServer) return;
+            if (!IsServer) return;
             
-            Vector3 directionVector = _battleUnit.EnemyUnit.MovementTransform.position - projectileInHand.position;
-            Quaternion rotation = Quaternion.LookRotation(directionVector);
-            Projectile shotProjectile = Instantiate(projectilePrefab, projectileInHand.position, rotation);
-            _battleUnit.Spawn(shotProjectile.NetworkObject, _battleUnit.Owner);
+            Projectile shotProjectile = Instantiate(projectilePrefab, projectileInHand.position, projectileInHand.rotation);
+            Spawn(shotProjectile.NetworkObject, Owner);
             shotProjectile.ShootAs(_battleUnit);
             
             if (deactivateProjectileAfterShooting)
-                projectileInHand.gameObject.SetActive(false);
+                DeactivateProjectileObserversRpc();
+        }
+
+        [ObserversRpc]
+        private void DeactivateProjectileObserversRpc()
+        {
+            projectileInHand.gameObject.SetActive(false);
         }
     }
 }
