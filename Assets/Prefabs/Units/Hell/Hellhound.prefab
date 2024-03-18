@@ -773,12 +773,12 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 2121879379709302366}
   _networkObjectCache: {fileID: 2121879379709302366}
+  movementTransform: {fileID: 3915984840656499206}
   canvasTransform: {fileID: 6002034502954257789}
   image: {fileID: 6529973444660272613}
   unitCountText: {fileID: 4132053106259366153}
   battleUnitData: {fileID: 11400000, guid: e967d42955cd4924abcfbb5280c21299, type: 2}
   unitIcon: {fileID: 3131662088668382513}
-  movementTransform: {fileID: 3915984840656499206}
 --- !u!114 &2121879379709302366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,5 +894,5 @@ MonoBehaviour:
   _animator: {fileID: 4946938542753579918}
   _smoothFloats: 1
   _interpolation: 2
-  _clientAuthoritative: 1
-  _sendToOwner: 0
+  _clientAuthoritative: 0
+  _sendToOwner: 1
