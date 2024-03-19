@@ -15,6 +15,7 @@ namespace Battle.Player
             _playerUI.UnitRemovalConfirmationWindow.OnRemovalConfirmed += RemoveUnit;
             _playerUI.ReadyButton.onClick.AddListener(ReadyButtonHandler);
             _playerUI.EndTurnButton.onClick.AddListener(EndTurnButtonHandler);
+            _playerUI.OnCastSpellButtonClick += CastSpell;
         }
 
         private void ShowPlaceUnitWindow(IDictionary<UnitType, PlaceUnitData> placeUnitData)
@@ -44,7 +45,24 @@ namespace Battle.Player
             _playerUI.EndTurnButton.gameObject.SetActive(false);
             UnmarkReachablePositions();
             UnmarkPositionsInAttackRange();
+            HideCastSpellButton();
             EndTurnServerRpc();
+        }
+
+        private void ShowCastSpellButton()
+        {
+            _playerUI.CastSpellButton.gameObject.SetActive(true);
+        }
+
+        private void HideCastSpellButton()
+        {
+            _playerUI.CastSpellButton.gameObject.SetActive(false);
+        }
+
+        private void CastSpell()
+        {
+            HideCastSpellButton();
+            ActingUnit.TryCastSpell();
         }
     }
 }

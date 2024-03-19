@@ -4,6 +4,7 @@ using Factions;
 using FishNet.Component.Animating;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
+using Units.Battle.Specialists.SpellCaster;
 using Units.Hero;
 using UnityEngine;
 
@@ -27,6 +28,8 @@ namespace Units.Battle
         public Faction Faction => battleUnitData.Faction;
         public UnitType UnitType => battleUnitData.UnitType;
         public BattleUnitData BattleUnitData => battleUnitData;
+        public bool IsSpellCaster => _spellCaster != null;
+        public bool HasCastedSpell => _spellCaster.IsSpellCasted;
         #endregion
 
         #region Stats
@@ -77,6 +80,7 @@ namespace Units.Battle
 
         #region Internal
         private uint Period => BattleUnitData.MaxAgility + 1 - Agility;
+        private SpellCaster _spellCaster;
         #endregion
 
         #region Serialized
@@ -88,6 +92,7 @@ namespace Units.Battle
         {
             _cameraTransform = FindObjectOfType<Camera>().transform;
             _networkAnimator = GetComponent<NetworkAnimator>();
+            _spellCaster = GetComponent<SpellCaster>();
         }
 
         public override void OnStartServer()

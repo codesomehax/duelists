@@ -33,6 +33,8 @@ namespace Battle.Player
             MarkReachablePositions(actingUnit);
             MarkPositionsInAttackRange(actingUnit);
             ShowEndTurnButton();
+            if (actingUnit.IsSpellCaster && !actingUnit.HasCastedSpell)
+                ShowCastSpellButton();
         }
 
         private void SetPlayerMoved(NetworkConnection connection)

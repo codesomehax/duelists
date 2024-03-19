@@ -119,7 +119,7 @@ namespace Units.Battle
             DealDamage();
         }
         
-        private void TakeDamage(int damage, AttackType attackType)
+        public void TakeDamage(int damage, AttackType attackType)
         {
             int reducedDamage;
             if (attackType == AttackType.Physical)
@@ -153,6 +153,12 @@ namespace Units.Battle
         {
             yield return new WaitForSeconds(1f);
             OnUnitDeath?.Invoke(this);
+        }
+
+        public void TryCastSpell()
+        {
+            if (IsSpellCaster && !HasCastedSpell)
+                _spellCaster.CastServerRpc();
         }
     }
 }
