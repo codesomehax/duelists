@@ -93,6 +93,8 @@ namespace Battle.Player
                 ActingUnit.CellPosition = position;
                 IList<Vector3> worldPath = tilePath.Select(tile => _gridManager.CellPositionToWorld(tile)).ToList();
                 ActingUnit.FollowPath(worldPath);
+                if (!IsOwner)
+                    _reachablePositions = null;
             }
         }
 
