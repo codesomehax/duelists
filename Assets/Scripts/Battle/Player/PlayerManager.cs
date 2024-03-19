@@ -14,6 +14,7 @@ namespace Battle.Player
 {
     public partial class PlayerManager : NetworkBehaviour
     {
+        private const string StartMenuSceneName = "Start Menu";
         private const int MaxBattleUnitsCount = 10;
 
         [SyncVar] [NonSerialized] public Faction Faction;
@@ -76,6 +77,17 @@ namespace Battle.Player
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public override void OnStopClient()
+        {
+            if (IsOwner)
+                UnityEngine.SceneManagement.SceneManager.LoadScene(StartMenuSceneName);
+            else if (IsServer)
+            {
+                ClientManager.StopConnection();
+                ServerManager.StopConnection(true);
             }
         }
 

@@ -24,6 +24,6 @@ MonoBehaviour:
   magicDefense: 60
   speed: 4
   movementSpeed: 5
-  attackRange: 6
+  attackRange: 7
   meleeAttackType: 1
   rangedAttackType: 1

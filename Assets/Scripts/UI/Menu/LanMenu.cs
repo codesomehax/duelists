@@ -1,4 +1,5 @@
-﻿using FishNet;
+﻿using System;
+using FishNet;
 using Network;
 using TMPro;
 using UI.Lobby.Settings;
@@ -53,6 +54,11 @@ namespace UI.Menu
         {
             gameObject.SetActive(false);
             startMenu.gameObject.SetActive(true);
+        }
+
+        private void OnDestroy()
+        {
+            InstanceFinder.ClientManager.OnAuthenticated -= OnClientAuthenticated;
         }
     }
 }
