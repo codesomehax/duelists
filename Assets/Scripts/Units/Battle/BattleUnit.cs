@@ -119,7 +119,8 @@ namespace Units.Battle
 
         public override void OnStopClient()
         {
-            OnUnitRemoval?.Invoke(CellPosition);
+            if (Count > 0)
+                OnUnitRemoval?.Invoke(CellPosition);
         }
     }
 }

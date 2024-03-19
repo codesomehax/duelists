@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Battle.Player;
+using FishNet.Connection;
 using FishNet.Object;
 using Units.Battle;
 using UnityEngine;
@@ -15,12 +16,6 @@ namespace Battle
         {
             PlayerManager.OnReady += SetPlayerReady;
             BattleUnit.OnUnitDeath += DespawnUnit;
-        }
-
-        private void DespawnUnit(BattleUnit battleUnit)
-        {
-            _sortedTurnList.Remove(battleUnit);
-            Despawn(battleUnit.NetworkObject);
         }
 
         private void SetPlayerReady(PlayerManager playerManager)
@@ -38,6 +33,36 @@ namespace Battle
             Vector3Int[] sortedCellPositions = _sortedTurnList.Values.Select(battleUnit => battleUnit.CellPosition).ToArray();
             ArrangeUnitIconsObserversRpc(sortedCellPositions);
             NextTurn();
+        }
+
+        private void DespawnUnit(BattleUnit battleUnit)
+        {
+            _sortedTurnList.Remove(battleUnit);
+            
+            NetworkConnection owner = battleUnit.Owner;
+            
+            Despawn(battleUnit.NetworkObject);
+            
+            PlayerManager playerManager = _playerManagers.First(pm => pm.Owner == owner);
+            ICollection<BattleUnit> battleUnits = playerManager.BattleUnitsCollection;
+            if (battleUnits.Count == 0 || battleUnits.Count == 1 && battleUnits.Contains(battleUnit))
+            {
+                LoseGameTargetRpc(owner);
+                NetworkConnection winner = ServerManager.Clients.Values.First(conn => conn != owner);
+                WinGameTargetRpc(winner);
+            }
+        }
+
+        [TargetRpc]
+        private void WinGameTargetRpc(NetworkConnection connection)
+        {
+            inGameMenu.ShowWinnerMenu();
+        }
+
+        [TargetRpc]
+        private void LoseGameTargetRpc(NetworkConnection connection)
+        {
+            inGameMenu.ShowLoserMenu();
         }
 
         private void OnDestroy()

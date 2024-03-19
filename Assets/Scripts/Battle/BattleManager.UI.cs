@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Battle.UI;
 using FishNet.Object;
 using Units.Battle;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Battle
     public partial class BattleManager
     {
         [SerializeField] private RectTransform turnBarContent;
+        [SerializeField] private InGameMenu inGameMenu;
 
         [ObserversRpc]
         private void SetupIconsTransformObserversRpc()

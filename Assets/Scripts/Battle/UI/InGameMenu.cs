@@ -7,6 +7,8 @@ namespace Battle.UI
     public class InGameMenu : NetworkBehaviour
     {
         [SerializeField] private GameObject background;
+        [SerializeField] private GameObject winnerMenu;
+        [SerializeField] private GameObject loserMenu;
         
         private void Update()
         {
@@ -24,6 +26,18 @@ namespace Battle.UI
             InstanceFinder.ClientManager.StopConnection();
             if (InstanceFinder.IsServer)
                 InstanceFinder.ServerManager.StopConnection(true);
+        }
+
+        public void ShowWinnerMenu()
+        {
+            background.SetActive(true);
+            winnerMenu.SetActive(true);
+        }
+
+        public void ShowLoserMenu()
+        {
+            background.SetActive(true);
+            loserMenu.SetActive(true);
         }
     }
 }
