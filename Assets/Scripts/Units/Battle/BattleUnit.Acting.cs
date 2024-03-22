@@ -101,8 +101,8 @@ namespace Units.Battle
 
         private void AnimationEvent_HitMelee()
         {
-            if (IsOwner)
-                DealDamageServerRpc();
+            if (IsServer)
+                DealDamage();
         }
 
         public void DealDamage()
@@ -111,12 +111,6 @@ namespace Units.Battle
             AttackType attackType = distance == 1 ? MeleeAttackType : RangedAttackType;
             int damage = attackType == AttackType.Physical ? PhysicalDamage : MagicDamage;
             EnemyUnit.TakeDamage(damage, attackType);
-        }
-
-        [ServerRpc]
-        public void DealDamageServerRpc()
-        {
-            DealDamage();
         }
         
         public void TakeDamage(int damage, AttackType attackType)

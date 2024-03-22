@@ -59,6 +59,8 @@ namespace Battle.Player
         [ServerRpc]
         private void PlaceUnitServerRpc(Vector3Int cellPosition, UnitType unitType, int unitCount)
         {
+            if (PlayerState != PlayerState.PlacingUnits) return;
+            
             if (unitCount > AvailableUnits[unitType])
             {
                 Debug.LogWarning("Unit cannot be placed: provided unitCount is higher than AvailableCount");
@@ -105,6 +107,8 @@ namespace Battle.Player
         [ServerRpc]
         private void RemoveUnitServerRpc(Vector3Int cellPosition)
         {
+            if (PlayerState != PlayerState.PlacingUnits) return;
+            
             BattleUnit battleUnit = BattleUnitsCollection.First(unit => unit.CellPosition == cellPosition);
             AvailableUnits[battleUnit.UnitType] += battleUnit.Count;
             Despawn(battleUnit.NetworkObject);
@@ -113,6 +117,7 @@ namespace Battle.Player
         [ServerRpc]
         private void SetPlayerReadyServerRpc()
         {
+            if (PlayerState != PlayerState.PlacingUnits) return;
             OnReady?.Invoke(this);
         }
     }
