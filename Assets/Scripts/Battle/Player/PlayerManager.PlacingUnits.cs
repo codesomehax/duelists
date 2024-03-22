@@ -73,6 +73,13 @@ namespace Battle.Player
                 return;
             }
 
+            BoundsInt bounds = Owner.IsHost ? GridManager.HostUnitsSpotsBounds : GridManager.ClientUnitsSpotsBounds;
+            if (!bounds.Contains(cellPosition))
+            {
+                Debug.LogWarning("Unit cannot be place: not within the range of assigned bounds");
+                return;
+            }
+
             if (BattleUnitsCollection.Count == MaxBattleUnitsCount)
             {
                 Debug.LogWarning($"Unit cannot be placed: already {MaxBattleUnitsCount} units present");

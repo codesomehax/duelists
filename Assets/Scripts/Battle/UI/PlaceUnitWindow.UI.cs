@@ -13,6 +13,8 @@ namespace Battle.UI
         
         public void Cancel()
         {
+            readyButton.interactable = true;
+            background.SetActive(false);
             gameObject.SetActive(false);
         }
 
@@ -40,6 +42,9 @@ namespace Battle.UI
             }
             
             OnUnitPlaced?.Invoke(selectedUnit.UnitType, selectedCount);
+            
+            readyButton.interactable = true;
+            background.SetActive(false);
             gameObject.SetActive(false);
         }
     }

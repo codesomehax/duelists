@@ -19,6 +19,8 @@ namespace Battle
         private const int BattlefieldLength = 12;
         private static readonly Vector3Int BattlefieldSize = new(BattlefieldLength, BattlefieldWidth, 1);
         public static BoundsInt BattlefieldBounds = new(LeftTop, BattlefieldSize);
+        public static BoundsInt HostUnitsSpotsBounds = GetAvailablePlacingSpots(true);
+        public static BoundsInt ClientUnitsSpotsBounds = GetAvailablePlacingSpots(false);
 
         [Header("Tiles")] 
         [SerializeField] private ActionTile3D tileTemplate;

@@ -20,11 +20,15 @@ namespace Battle.Player
 
         private void ShowPlaceUnitWindow(IDictionary<UnitType, PlaceUnitData> placeUnitData)
         {
+            _playerUI.Background.SetActive(true);
+            _playerUI.ReadyButton.interactable = false;
             _playerUI.PlaceUnitWindow.Activate(placeUnitData);
         }
 
         private void AskRemoveUnitWindow()
         {
+            _playerUI.Background.SetActive(true);
+            _playerUI.ReadyButton.interactable = false;
             _playerUI.UnitRemovalConfirmationWindow.gameObject.SetActive(true);
         }
 
