@@ -3,6 +3,8 @@ using FishNet.Authenticating;
 using FishNet.Connection;
 using FishNet.Managing;
 using FishNet.Transporting;
+using UI;
+using UnityEngine;
 
 namespace Network.Authentication
 {
@@ -17,6 +19,8 @@ namespace Network.Authentication
         public string Password { private get; set; }
         public int PlayerCount { get; set; }
 
+        [SerializeField] private PopupManager popupManager;
+
         public override void InitializeOnce(NetworkManager networkManager)
         {
             base.InitializeOnce(networkManager);
@@ -27,6 +31,8 @@ namespace Network.Authentication
                 .RegisterBroadcast<BasicCredentialsBroadcast>(OnServerCredentialsBroadcast, false);
             networkManager.ServerManager.OnServerConnectionState += ResetSettings;
             networkManager.ServerManager.OnRemoteConnectionState += DecreasePlayerCount;
+            networkManager.ClientManager
+                .RegisterBroadcast<AuthenticationFailedMessageBroadcast>(OnAuthenticationFailedBroadcast);
         }
 
         private void ResetSettings(ServerConnectionStateArgs stateArgs)
@@ -50,8 +56,11 @@ namespace Network.Authentication
         public override void OnRemoteConnection(NetworkConnection connection)
         {
             if (PlayerCount == 2)
-                // TODO send some reason message
-                connection.Disconnect(true);
+            {
+                AuthenticationFailedMessageBroadcast broadcast = new() { Message = "The lobby is full" };
+                NetworkManager.ServerManager.Broadcast(broadcast);
+                connection.Disconnect(false);
+            }
         }
 
         private void OnServerCredentialsBroadcast(
@@ -78,8 +87,18 @@ namespace Network.Authentication
                 else
                     Username2 = basicCredentialsBroadcast.Username;
             }
+            else
+            {
+                AuthenticationFailedMessageBroadcast broadcast = new() { Message = "Authentication failed" };
+                NetworkManager.ServerManager.Broadcast(connection, broadcast, false);
+            }
             
             OnAuthenticationResult?.Invoke(connection, authenticated);
+        }
+
+        private void OnAuthenticationFailedBroadcast(AuthenticationFailedMessageBroadcast broadcast)
+        {
+            popupManager.ShowPopupWithMessage(broadcast.Message);
         }
     }
 }

@@ -23,12 +23,12 @@ namespace UI.Lobby
 
         [SerializeField] private PlayerManager playerManagerPrefab;
         
-        private LanMenu _lanMenu;
+        private PlayMenu _playMenu;
         private NetworkSetupManager _networkSetupManager;
 
         private void Awake()
         {
-            _lanMenu = FindObjectOfType<LanMenu>(true);
+            _playMenu = FindObjectOfType<PlayMenu>(true);
             _networkSetupManager = FindObjectOfType<NetworkSetupManager>();
         }
 
@@ -56,7 +56,7 @@ namespace UI.Lobby
         public override void OnStopClient()
         {
             gameObject.SetActive(false);
-            _lanMenu.gameObject.SetActive(true);
+            _playMenu.gameObject.SetActive(true);
         }
         
         public void StartGame()

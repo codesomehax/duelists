@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace UI.Menu
 {
-    public class LanMenu : MonoBehaviour
+    public class PlayMenu : MonoBehaviour
     {
         [SerializeField] private TMP_InputField usernameInputField;
         [SerializeField] private TMP_InputField ipAddressInputField;

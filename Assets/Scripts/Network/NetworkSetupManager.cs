@@ -2,6 +2,7 @@
 using FishNet.Connection;
 using FishNet.Transporting;
 using Network.Authentication;
+using UI;
 using UI.Lobby;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace Network
 {
     public class NetworkSetupManager : MonoBehaviour
     {
+        [SerializeField] private PopupManager popupManager;
         [SerializeField] private Lobby lobbyPrefab;
         [SerializeField] private PlayerPanel playerPanelPrefab;
         
@@ -30,13 +32,39 @@ namespace Network
         
         public void HostGame(string username, string password)
         {
-            if (username.Length is 0 or > MaxUsernameLength) return;
-            if (password.Length is 0 or > MaxPasswordLength) return;
+            if (!ValidateUsernameAndPassword(username, password)) return;
             
             _username = username;
             _password = password;
 
             InstanceFinder.ServerManager.StartConnection();
+        }
+
+        private bool ValidateUsernameAndPassword(string username, string password)
+        {
+            if (username.Length == 0)
+            {
+                popupManager.ShowPopupWithMessage("Username cannot be empty.");
+                return false;
+            }
+            if (username.Length > MaxUsernameLength)
+            {
+                popupManager.ShowPopupWithMessage($"Username cannot be longer than {MaxUsernameLength} characters.");
+                return false;
+            }
+            
+            if (password.Length == 0)
+            {
+                popupManager.ShowPopupWithMessage("Password cannot be empty.");
+                return false;
+            }
+            if (username.Length > MaxPasswordLength)
+            {
+                popupManager.ShowPopupWithMessage($"Password cannot be longer than {MaxPasswordLength} characters.");
+                return false;
+            }
+
+            return true;
         }
 
         private void SetupAuthenticatorAndConnectAsHost(ServerConnectionStateArgs stateArgs)
@@ -68,8 +96,7 @@ namespace Network
 
         public void JoinGame(string username, string ipAddress, string password)
         {
-            if (username.Length is 0 or > MaxUsernameLength) return;
-            if (password.Length is 0 or > MaxPasswordLength) return;
+            if (!ValidateUsernameAndPassword(username, password)) return;
             
             _username = username;
             _password = password;

@@ -70,10 +70,16 @@ namespace Battle.Player
                 case PlayerState.Waiting:
                     break;
                 case PlayerState.Acting:
-                    if (actionTile.ActionTileState == ActionTileState.Available)
-                        MoveActingUnitToPositionServerRpc(actionTile.CellPosition);
-                    if (actionTile.ActionTileState == ActionTileState.Attack)
-                        AttackUnitAtPositionServerRpc(actionTile.CellPosition);
+                    switch (actionTile.ActionTileState)
+                    {
+                        case ActionTileState.Available:
+                            MoveActingUnitToPositionServerRpc(actionTile.CellPosition);
+                            break;
+                        case ActionTileState.Attack:
+                            AttackUnitAtPositionServerRpc(actionTile.CellPosition);
+                            break;
+                    }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

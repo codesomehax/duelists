@@ -86,7 +86,7 @@ namespace Battle.Player
         [ServerRpc]
         private void MoveActingUnitToPositionServerRpc(Vector3Int position)
         {
-            if (_playerMoved) return;
+            if (_playerMoved || PlayerState != PlayerState.Acting) return;
             
             _reachablePositions ??= BattleUnitPathfinder.GetReachablePositions(ActingUnit);
             if (_reachablePositions.TryGetValue(position, out IList<Vector3Int> tilePath))
@@ -103,6 +103,8 @@ namespace Battle.Player
         [ServerRpc]
         private void AttackUnitAtPositionServerRpc(Vector3Int position)
         {
+            if (PlayerState != PlayerState.Acting) return;
+            
             int distance = GridManager.DistanceBetweenPositions(position, ActingUnit.CellPosition);
             if (distance > ActingUnit.AttackRange) return;
 
@@ -118,6 +120,8 @@ namespace Battle.Player
         [ServerRpc]
         private void EndTurnServerRpc()
         {
+            if (PlayerState != PlayerState.Acting) return;
+
             _playerMoved = false;
             ActingUnit.OnDestinationReached -= SetPlayerMoved;
             ActingUnit.OnDestinationReached -= MarkPositionsInAttackRangeTargetRpc;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab34c925749046b396f4f656baac9911, type: 3}
   m_Name: Heaven Defender
   m_EditorClassIdentifier: 
-  name: Heaven Defender
+  name: Knights
   unitType: 2
   faction: 0
   defaultMaxCount: 100

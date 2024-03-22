@@ -17,7 +17,7 @@ namespace Units.Battle.Specialists.Marksman
         {
             Vector3 target = battleUnit.EnemyUnit.MovementTransform.position;
             Vector3 Distance() => target - transform.position;
-            bool ReachedTarget() => Distance().magnitude < 0.1f;
+            bool ReachedTarget() => Distance().magnitude < 0.5f;
 
             Vector3 direction = Distance().normalized;
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);

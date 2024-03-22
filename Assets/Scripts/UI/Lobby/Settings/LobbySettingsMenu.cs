@@ -9,7 +9,7 @@ namespace UI.Lobby.Settings
 {
     public class LobbySettingsMenu : MonoBehaviour
     {
-        [SerializeField] private LanMenu lanMenu;
+        [SerializeField] private PlayMenu playMenu;
         [SerializeField] private GeneralSettingsPanel generalSettingsPanel;
         [SerializeField] private List<FactionSettingsPanel> factionSettingsList;
 
@@ -25,7 +25,7 @@ namespace UI.Lobby.Settings
         public void GoBack()
         {
             gameObject.SetActive(false);
-            lanMenu.gameObject.SetActive(true);
+            playMenu.gameObject.SetActive(true);
         }
     }
 }
