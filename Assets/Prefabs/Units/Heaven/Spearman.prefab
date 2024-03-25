@@ -743,15 +743,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.18257
+      value: 38.255985
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0000009536743
+      value: 0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 43.543762
+      value: 46.485794
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c29d628a3c2573542a260a66270fbb41, type: 3}
       propertyPath: m_LocalRotation.w
@@ -878,7 +878,7 @@ MonoBehaviour:
   <ParentNetworkObject>k__BackingField: {fileID: 0}
   <ChildNetworkObjects>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 37.18257, y: -0.0000009536743, z: 43.543762}
+    Position: {x: 38.255985, y: 0.0000009536743, z: 46.485794}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   _isNetworked: 1
