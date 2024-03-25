@@ -16,7 +16,7 @@ MonoBehaviour:
   faction: 0
   unitType: 5
   singleUnitHealth: 800
-  baseDamage: 200
+  baseDamage: 150
   strength: 10
   agility: 25
   intelligence: 50

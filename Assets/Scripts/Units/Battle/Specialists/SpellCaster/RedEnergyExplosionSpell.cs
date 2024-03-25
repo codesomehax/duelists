@@ -16,8 +16,7 @@ namespace Units.Battle.Specialists.SpellCaster
                 .ToArray();
             int damage = Mathf.CeilToInt(battleUnit.BaseDamage 
                                          * battleUnit.Count 
-                                         * ((float)(100 + battleUnit.Intelligence * 10) / 100));
-            
+                                         * ((float)(100 + battleUnit.Intelligence * 6) / 100));
             foreach (BattleUnit enemyUnit in enemyUnits)
             {
                 RedEnergyExplosion redEnergyExplosion = 

@@ -25,11 +25,13 @@ namespace UI.Lobby
         
         private PlayMenu _playMenu;
         private NetworkSetupManager _networkSetupManager;
+        private PopupManager _popupManager;
 
         private void Awake()
         {
             _playMenu = FindObjectOfType<PlayMenu>(true);
             _networkSetupManager = FindObjectOfType<NetworkSetupManager>();
+            _popupManager = FindObjectOfType<PopupManager>();
         }
 
         public override void OnStartClient()
@@ -63,26 +65,23 @@ namespace UI.Lobby
         {
             PlayerPanel[] playerPanels = FindObjectsOfType<PlayerPanel>();
             
-            // if (NotEnoughPlayers(playerPanels))
-            // {
-            //     // TODO Popup
-            //     Debug.Log("Popup message: Only a game with 2 players can be started");
-            //     return;
-            // }
-            //
-            // if (AnyTooMuchGoldSpent(playerPanels))
-            // {
-            //     // TODO popup
-            //     Debug.Log("Popup message: There is a player that has spent too much gold");
-            //     return;
-            // }
-            //
-            // if (AnyNoUnitsSelected(playerPanels))
-            // {
-            //     // TODO group
-            //     Debug.Log("Popup message: There is a player that has not selected a single unit");
-            //     return;
-            // }
+            if (NotEnoughPlayers(playerPanels))
+            {
+                _popupManager.ShowPopupWithMessage("Popup message: Only a game with 2 players can be started");
+                return;
+            }
+            
+            if (AnyTooMuchGoldSpent(playerPanels))
+            {
+                _popupManager.ShowPopupWithMessage("Popup message: There is a player that has spent too much gold");
+                return;
+            }
+            
+            if (AnyNoUnitsSelected(playerPanels))
+            {
+                _popupManager.ShowPopupWithMessage("Popup message: There is a player that has not selected a single unit");
+                return;
+            }
             
             NetworkConnection[] connections = playerPanels.Select(playerPanel => playerPanel.Owner).ToArray();
             Army[] armies = playerPanels.Select(playerPanel => new Army
@@ -133,6 +132,6 @@ namespace UI.Lobby
         private static bool AnyTooMuchGoldSpent(PlayerPanel[] playerPanels) =>
             playerPanels.Any(playerPanel => playerPanel.Gold < 0);
         private static bool AnyNoUnitsSelected(PlayerPanel[] playerPanels) =>
-            playerPanels.Any(playerPanel => playerPanel.UnitCounts.Values.Sum() == 0);
+            playerPanels.Any(playerPanel => playerPanel.UnitCounts.Values.Sum() == 1);
     }
 }

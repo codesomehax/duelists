@@ -45,7 +45,11 @@ namespace Units.Battle
 
         private void SyncUnitCount(int prev, int next, bool asServer)
         {
-            if (asServer) return;
+            if (asServer && prev == 0 && next > 0)
+            {
+                Health = Count * SingleUnitHealth;
+                return;
+            }
             unitCountText.text = next.ToString();
             UnitIcon.UnitCount = next;
         }
