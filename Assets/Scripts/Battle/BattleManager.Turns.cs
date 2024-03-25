@@ -3,6 +3,7 @@ using System.Linq;
 using Battle.Player;
 using FishNet.Component.Observing;
 using Units.Battle;
+using UnityEngine;
 
 namespace Battle
 {
@@ -28,7 +29,10 @@ namespace Battle
         private void NextTurn()
         {
             BattleUnit battleUnit = _sortedTurnList.Values[0];
-            PlayerManager playerManager = _playerManagers.First(pm => pm.Owner == battleUnit.Owner);
+            Debug.Log(battleUnit.Owner);
+            foreach (var pm in _playerManagers)
+                Debug.Log(pm);
+            PlayerManager playerManager = _playerManagers.First(pm => pm.OwnerMatches(battleUnit.Owner));
             playerManager.OnTurnEnded += EndTurn;
             playerManager.ActingUnit = battleUnit;
             playerManager.PlayerState = PlayerState.Acting;

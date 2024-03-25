@@ -37,7 +37,7 @@ namespace Battle
 
         private void DespawnUnit(BattleUnit battleUnit)
         {
-            _sortedTurnList.Remove(battleUnit);
+            _sortedTurnList.RemoveAt(_sortedTurnList.IndexOfValue(battleUnit));
             
             NetworkConnection owner = battleUnit.Owner;
             
